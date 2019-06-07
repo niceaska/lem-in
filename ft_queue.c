@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 11:55:11 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/07 12:37:47 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/07 13:19:39 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@ t_queue		*init_queue(void)
 {
 	t_queue *q;
 
-	q = (t_queue *)malloc(sizeof(t_queue));
+	if (!(q = (t_queue *)malloc(sizeof(t_queue))))
+		return (0);
 	q->first = NULL;
 	q->last = NULL;
 	return (q);
 }
 
-void		ft_enqueue(t_queue *queue, void *content)
+void		ft_enqueue(t_queue *queue, int data)
 {
 	t_node *temp;
 
 	if (!(temp = (t_node *)malloc(sizeof(t_node))))
 		return ;
-	temp->data = content;
+	temp->data = data;
 	temp->next = NULL;
 	if (!queue->first)
 		queue->first = temp;
@@ -37,7 +38,7 @@ void		ft_enqueue(t_queue *queue, void *content)
 	queue->last = temp;
 }
 
-int		ft_dequeue(t_queue *queue)
+int			ft_dequeue(t_queue *queue)
 {
 	int		ret;
 	t_node	*temp;
