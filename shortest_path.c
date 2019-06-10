@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/07 19:19:41 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/10 18:26:37 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 static int		process_bfs(t_bfs **bs, int *v, t_node **arr, t_queue *queue)
 {
-
 	t_node	*list;
 	int		u;
 	
@@ -24,13 +23,13 @@ static int		process_bfs(t_bfs **bs, int *v, t_node **arr, t_queue *queue)
 	list = arr[u];
 	while (list)
 	{ 
-		if (v[list->data] == 0)
+		if ((*bs)->v[list->data] == 0)
 		{ 
-			v[list->data] = 1; 
+			(*bs)->v[list->data] = 1; 
 			(*bs)->d[list->data] = (*bs)->d[u] + 1; 
 			(*bs)->p[list->data] = u; 
 			ft_enqueue(queue, list->data);  
-			if (list->data == (*bs)->end) 
+			if (list->data == (*bs)->end)
 				return (1); 
 		} 
 		list = list->next;
@@ -42,42 +41,74 @@ int				bfs(t_node **arr, t_bfs *bs)
 { 
 	t_queue		*queue;
 	int			u;
-	int			*v;
 
-	v = init_bfs_arr(&bs);
+	(bs->v == NULL) ? init_bfs_arr(&bs) : 0;
 	queue = init_queue_bfs(bs->start);
 	while (!is_empty_q(queue))
-		if (process_bfs(&bs, v, arr, queue))
+	{
+		if (process_bfs(&bs, bs->v, arr, queue))
+		{
+			free_queue(queue);
 			return (1);
+		}
+	}
+	free_queue(queue);
 	return (0); 
-} 
+}
 
 
-
+/*
 void	print_shortest_dist(t_node **arr, t_bfs *bs) 
 {
 	t_node	*path;
 	int		crawl;
 
 	path = 0;
+
 	if (bfs(arr, bs) == 0) 
 	{ 
 		printf("path not foind");
 		return ; 
-	} 
+	}
 	crawl = bs->end; 
 	push_back(&path, crawl);
 	while (bs->p[crawl] != -1)
 	{ 
 		list_push(&path, bs->p[crawl]); 
 		crawl = bs->p[crawl]; 
-	} 
+	}
+
 	printf( "Shortest path length is : %d\n", bs->d[bs->end]); 
 	printf("\nPath is::\n"); 
 	while (!list_empty(path))
-		printf("%d\n", list_pop(&path));
-} 
+	{
+		int pop =  list_pop(&path);
+		bs->v[pop] = 1;;
+		printf("%d\n", pop);
+	}
 
+	if (bfs(arr, bs) == 0) 
+	{ 
+		printf("path not foind");
+		return ; 
+	}
+		crawl = bs->end; 
+	push_back(&path, crawl);
+	while (bs->p[crawl] != -1)
+	{ 
+		list_push(&path, bs->p[crawl]); 
+		crawl = bs->p[crawl]; 
+	}
+	printf( "Shortest path length is : %d\n", bs->d[bs->end]); 
+	printf("\nPath is::\n"); 
+	while (!list_empty(path))
+	{
+		int pop =  list_pop(&path);
+		bs->v[pop] = 1;
+		printf("%d\n",pop);
+	}
+} 
+*/
 
 
 void ft_addedge(t_node **arr, int start, int end) 
@@ -91,11 +122,23 @@ int main()
 	t_node **arr;
 	t_bfs *bs;
 	
-	bs = init_bfs(0, 1, 4);
-	arr = (t_node **)malloc(sizeof(t_node *) * bs->vrt);
-	ft_addedge(arr, 0, 2); 
-	ft_addedge(arr, 2, 3); 
-	ft_addedge(arr, 3, 1); 
-	print_shortest_dist(arr, bs); 
-	return 0; 
+	arr = 0;
+	bs = init_bfs(0, 7, 8);
+	arr = init_nodes_arr(bs->vrt);
+
+	ft_addedge(arr, 0, 1); 
+	ft_addedge(arr, 3, 4); 
+	ft_addedge(arr, 2, 4); 
+	ft_addedge(arr, 1, 5); 
+	ft_addedge(arr, 6, 5); 
+	ft_addedge(arr, 7, 6); 
+	ft_addedge(arr, 1, 2); 
+	ft_addedge(arr, 2, 7);
+	ft_addedge(arr, 3, 0);
+
+	t_node **p_arr = get_paths_controller(arr, bs, 2);
+	free_bfs(bs);
+	free_list_arr(arr);
+	free_list_arr(p_arr);
+	return 0;
 } 
