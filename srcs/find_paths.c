@@ -6,12 +6,11 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:26:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/10 18:46:15 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
-#include "bfs.h"
 
 void	refresh_bfs(t_node **p_arr, t_bfs **bs)
 {

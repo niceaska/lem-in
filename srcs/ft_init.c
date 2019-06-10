@@ -6,12 +6,11 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:26:56 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/10 18:46:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
-# include "bfs.h"
 
 static int		*set_start_val(int *ar, char c, int vert)
 {

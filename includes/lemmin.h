@@ -6,14 +6,14 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:27:31 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/10 18:37:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LEMMIN_H
 # define FT_LEMMIN_H
 
-# include "libft/includes/libft.h"
+# include <libft.h>
 # include <stdlib.h>
 # include <limits.h>
 
@@ -49,7 +49,6 @@ t_node			**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs);
 t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int ants);
 void			free_bfs(t_bfs *bs);
 int				bfs(t_node **arr, t_bfs *bs);
-
 void			ft_enqueue(t_queue *queue, int data);
 int				ft_dequeue(t_queue *queue);
 int				ft_peek_q(t_queue *queue);

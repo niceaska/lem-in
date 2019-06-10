@@ -6,15 +6,14 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:26:37 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/10 18:47:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "lemmin.h"
-#include "bfs.h"
 
-static int		process_bfs(t_bfs **bs, int *v, t_node **arr, t_queue *queue)
+static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
 	t_node	*list;
 	int		u;
@@ -40,13 +39,12 @@ static int		process_bfs(t_bfs **bs, int *v, t_node **arr, t_queue *queue)
 int				bfs(t_node **arr, t_bfs *bs) 
 { 
 	t_queue		*queue;
-	int			u;
 
 	(bs->v == NULL) ? init_bfs_arr(&bs) : 0;
 	queue = init_queue_bfs(bs->start);
 	while (!is_empty_q(queue))
 	{
-		if (process_bfs(&bs, bs->v, arr, queue))
+		if (process_bfs(&bs, arr, queue))
 		{
 			free_queue(queue);
 			return (1);
@@ -123,10 +121,10 @@ int main()
 	t_bfs *bs;
 	
 	arr = 0;
-	bs = init_bfs(0, 7, 8);
+	bs = init_bfs(0, 4, 5);
 	arr = init_nodes_arr(bs->vrt);
 
-	ft_addedge(arr, 0, 1); 
+	/*ft_addedge(arr, 0, 1); 
 	ft_addedge(arr, 3, 4); 
 	ft_addedge(arr, 2, 4); 
 	ft_addedge(arr, 1, 5); 
@@ -135,6 +133,12 @@ int main()
 	ft_addedge(arr, 1, 2); 
 	ft_addedge(arr, 2, 7);
 	ft_addedge(arr, 3, 0);
+*/
+ft_addedge(arr, 0, 1); 
+	ft_addedge(arr, 0, 2); 
+	ft_addedge(arr, 2, 3); 
+	ft_addedge(arr, 3, 4); 
+	ft_addedge(arr, 4, 1); 
 
 	t_node **p_arr = get_paths_controller(arr, bs, 2);
 	free_bfs(bs);
