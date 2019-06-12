@@ -43,6 +43,7 @@ int			ft_dequeue(t_queue *queue)
 	int		ret;
 	t_node	*temp;
 
+	ret = -1;
 	if (queue->first)
 	{
 		ret = queue->first->data;
@@ -58,6 +59,7 @@ int			ft_peek_q(t_queue *queue)
 {
 	int ret;
 
+	ret = -1;
 	if (queue->first)
 		ret = queue->first->data;
 	return (ret);
