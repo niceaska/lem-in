@@ -78,6 +78,8 @@ t_node	**get_paths_controller(t_node **arr, t_bfs *bs, int ants)
 			bs->v[p_arr[j]->next->data] = 1;
 		if (!bfs(arr, bs))
 			break ;
+		if (bs->d[bs->end] > (int)list_size(p_arr[0]) + 1)
+			break ;
 		ft_find_path(p_arr, bs, i);
 		i++;
 	}
