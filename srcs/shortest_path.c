@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:47:20 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 16:20:22 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,35 +114,30 @@ void ft_addedge(t_node **arr, int start, int end)
 	push_back(&(arr[start]), end); 
 	push_back(&(arr[end]), start); 
 }
-
+/*
 int main() 
 { 
 	t_node **arr;
 	t_bfs *bs;
 	
 	arr = 0;
-	bs = init_bfs(0, 4, 5);
+	bs = init_bfs(1, 2, 8);
 	arr = init_nodes_arr(bs->vrt);
 
-	/*ft_addedge(arr, 0, 1); 
-	ft_addedge(arr, 3, 4); 
-	ft_addedge(arr, 2, 4); 
-	ft_addedge(arr, 1, 5); 
-	ft_addedge(arr, 6, 5); 
+	ft_addedge(arr, 1, 4); 
+	ft_addedge(arr, 0, 3); 
+	ft_addedge(arr, 5, 3); 
+	ft_addedge(arr, 4, 6); 
 	ft_addedge(arr, 7, 6); 
-	ft_addedge(arr, 1, 2); 
-	ft_addedge(arr, 2, 7);
-	ft_addedge(arr, 3, 0);
-*/
-ft_addedge(arr, 0, 1); 
-	ft_addedge(arr, 0, 2); 
-	ft_addedge(arr, 2, 3); 
-	ft_addedge(arr, 3, 4); 
-	ft_addedge(arr, 4, 1); 
+	ft_addedge(arr, 2, 7); 
+	ft_addedge(arr, 4, 5); 
+	ft_addedge(arr, 5, 2);
+	ft_addedge(arr, 0, 1);
+
 
 	t_node **p_arr = get_paths_controller(arr, bs, 2);
 	free_bfs(bs);
 	free_list_arr(arr);
 	free_list_arr(p_arr);
 	return 0;
-} 
+} */

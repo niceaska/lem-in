@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:37:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 18:17:13 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ typedef struct	s_bfs
 	int			*p;
 	int			*d;
 }				t_bfs;
+
+typedef struct		s_entry
+{
+	char			*key;
+	int				index;
+	struct s_entry	*next;
+}					t_entry;
+
+typedef struct		s_hashtable
+{
+	size_t			size;
+	struct s_entry	**tab;	
+}					t_hashtable;
 
 t_bfs			*init_bfs(int start, int end, int v);
 int				*init_arr(int vert, char c);
