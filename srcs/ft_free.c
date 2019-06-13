@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:20:13 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:46:24 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 18:32:18 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,30 @@ void	free_queue(t_queue *q)
 	while (!is_empty_q(q))
 		ft_dequeue(q);
 	free(q);
+}
+
+void	free_hashtab(t_hashtable *map)
+{
+	t_entry		*entry;
+	t_entry		*tmp;
+	size_t		i;
+
+	i = 0;
+	while (i < map->size)
+	{
+		if (map->tab[i] != NULL)
+		{
+			entry = map->tab[i];
+			while (entry)
+			{
+				tmp = entry;
+				entry = entry->next;
+				free(tmp->key);
+				free(tmp);
+			}
+		}
+		i++;
+	}
+	free(map->tab);
+	free(map);
 }

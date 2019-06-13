@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 18:17:51 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 18:31:30 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_hashtable		*init_hashtab(size_t size)
 ** http://www.partow.net/programming/hashfunctions/#PJWHashFunction
 */
 
-unsigned int	get_hash(t_hashtable *hash_tab, const char *key)
+static unsigned int		get_hash(t_hashtable *hash_tab, const char *key)
 {
 	size_t	hash;
 	char	*str;
@@ -63,7 +63,7 @@ unsigned int	get_hash(t_hashtable *hash_tab, const char *key)
 ** Create and insert a new key-value into table.
 */
 
-void	set_value(t_entry **entry, t_entry *new_entry)
+static void		set_value(t_entry **entry, t_entry *new_entry)
 {
 	t_entry *traverse;
 
@@ -116,7 +116,7 @@ int		get_entry(t_hashtable *hash_tab, const char *key)
 /*
 ** utility printing function
 */
-/*
+
 #include <stdio.h>
 
 
@@ -154,6 +154,6 @@ int main()
 		test[0]++;
 	}
 	print_hash_val(hash);
+	free_hashtab(hash);
 }
-*/
 
