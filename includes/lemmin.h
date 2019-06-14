@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/14 14:40:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/14 17:49:02 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_bfs
 	t_data		*start;
 	t_data		*end;
 	int			vrt;
+	int			ants;
 	int			*v;
 	t_data		**p;
 	int			*d;
@@ -58,14 +59,14 @@ typedef struct		s_hashtable
 	struct s_entry	**tab;	
 }					t_hashtable;
 
-t_bfs			*init_bfs(t_data *start, t_data *end, int v);
+t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants);
 int				*init_arr(int vert, char c);
 void			init_bfs_arr(t_bfs **bs);
 t_node			**init_nodes_arr(int size);
 void			refresh_bfs(t_node **p_arr, t_bfs **bs);
 void			ft_find_path(t_node **p_arr, t_bfs *bs, int i);
 t_node			**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs);
-t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int ants);
+t_node			**get_paths_controller(t_node **arr, t_bfs *bs);
 void			free_bfs(t_bfs *bs);
 int				bfs(t_node **arr, t_bfs *bs);
 void			ft_enqueue(t_queue *queue, t_data *data);

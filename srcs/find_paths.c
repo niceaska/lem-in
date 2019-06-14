@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/14 14:41:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/14 17:49:43 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ t_node	**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 }
 
 #include <stdio.h>
-t_node	**get_paths_controller(t_node **arr, t_bfs *bs, int ants) 
+t_node	**get_paths_controller(t_node **arr, t_bfs *bs) 
 {
 	t_node **p_arr;
 	int i;
 	int j;
 
 	i = 0;
-	p_arr = init_nodes_arr(ants);
+	p_arr = init_nodes_arr(bs->ants);
 	p_arr = get_all_paths(p_arr, 0, arr, bs);
 	while (p_arr[i])
 		i++;
-	while (list_size(arr[bs->start->index]) > 1 && i < ants)
+	while (list_size(arr[bs->start->index]) > 1 && i < bs->ants)
 	{
 		j = -1;
 		init_bfs_arr(&bs);
