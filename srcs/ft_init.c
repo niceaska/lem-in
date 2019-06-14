@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:46:21 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/14 13:58:55 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static int		*set_start_val(int *ar, char c, int vert)
 	if (c == 'v')
 		while (i < vert)
 			ar[i++] = 0;
-	else if (c == 'p')
-		while (i < vert)
-			ar[i++] = -1;
 	else if (c == 'd')
 		while (i < vert)
 			ar[i++] = INT_MAX;
@@ -31,11 +28,15 @@ static int		*set_start_val(int *ar, char c, int vert)
 
 void	init_bfs_arr(t_bfs **bs)
 {
+	int i;
+
+	i = 0;
 	if (!(*bs)->v)
 		if (!((*bs)->v = (int *)malloc(sizeof(int) * (*bs)->vrt)))
 			return ;
 	if (!(*bs)->p)
-		if (!((*bs)->p = (int *)malloc(sizeof(int) * (*bs)->vrt)))
+		if (!((*bs)->p = (t_data **)malloc(sizeof(t_data *)\
+											* (*bs)->vrt)))
 			return ;
 	if (!(*bs)->d)
 		if (!((*bs)->d = (int *)malloc(sizeof(int) * (*bs)->vrt)))
@@ -43,15 +44,16 @@ void	init_bfs_arr(t_bfs **bs)
 	if ((*bs)->v != NULL)
 		(*bs)->v = set_start_val((*bs)->v, 'v', (*bs)->vrt);
 	if ((*bs)->p != NULL)
-		(*bs)->p = set_start_val((*bs)->p, 'p', (*bs)->vrt);
+		while (i < (*bs)->vrt)
+			(*bs)->p[i++] = NULL; 
 	if ((*bs)->d != NULL)
 		(*bs)->d = set_start_val((*bs)->d, 'd', (*bs)->vrt);
-	(*bs)->v[(*bs)->start] = 1;
-	(*bs)->v[(*bs)->end] = 0;
-	(*bs)->d[(*bs)->start] = 0;
+	(*bs)->v[(*bs)->start->index] = 1;
+	(*bs)->v[(*bs)->end->index] = 0;
+	(*bs)->d[(*bs)->start->index] = 0;
 }
 
-t_queue	*init_queue_bfs(int start)
+t_queue	*init_queue_bfs(t_data *start)
 {
 	t_queue *q;
 
@@ -61,7 +63,7 @@ t_queue	*init_queue_bfs(int start)
 	return (q);
 }
 
-t_bfs	*init_bfs(int start, int end, int v)
+t_bfs	*init_bfs(t_data *start, t_data *end, int v)
 {
 	t_bfs *bfs;
 

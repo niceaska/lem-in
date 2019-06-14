@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 18:31:30 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 22:36:11 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int		get_entry(t_hashtable *hash_tab, const char *key)
 /*
 ** utility printing function
 */
-
+/*
 #include <stdio.h>
 
 
@@ -156,4 +156,4 @@ int main()
 	print_hash_val(hash);
 	free_hashtab(hash);
 }
-
+*/

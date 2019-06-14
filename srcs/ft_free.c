@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:20:13 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 18:32:18 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/14 14:39:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_list(t_node *list)
 	{
 		tmp = list;
 		list = list->next;
-		free(tmp);
+		(tmp) ? free(tmp) : 0;
 		tmp = 0;
 	}
 }
@@ -45,7 +45,7 @@ void	free_bfs(t_bfs *bs)
 	if (bs->v)
 		free(bs->v);
 	if (bs->p)
-		free(bs->p);
+		ft_memdel((void *)&bs->p);
 	if (bs->d)
 		free(bs->d);
 	free(bs);

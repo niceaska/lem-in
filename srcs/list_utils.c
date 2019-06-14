@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 17:27:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/10 18:06:40 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 22:33:10 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ unsigned int	list_size(t_node *list)
 	return (i);
 }
 
-void	push_back(t_node **node, int data)
+void	push_back(t_node **node, t_data *data)
 {
 	t_node *list;
 	t_node *new;
@@ -51,7 +51,7 @@ void	push_back(t_node **node, int data)
 	list->next = new;
 }
 
-void	list_push(t_node **node, int data)
+void	list_push(t_node **node, t_data *data)
 {
 	t_node *new;
 
@@ -65,9 +65,9 @@ void	list_push(t_node **node, int data)
 	*node = new;
 }
 
-int		list_pop(t_node **list)
+t_data		*list_pop(t_node **list)
 {
-	int		ret;
+	t_data	*ret;
 	t_node	*tmp;
 
 	ret = (*list)->data;

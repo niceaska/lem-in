@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 11:55:11 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/07 13:19:39 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/13 22:46:47 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_queue		*init_queue(void)
 	return (q);
 }
 
-void		ft_enqueue(t_queue *queue, int data)
+void		ft_enqueue(t_queue *queue, t_data *data)
 {
 	t_node *temp;
 
@@ -38,12 +38,12 @@ void		ft_enqueue(t_queue *queue, int data)
 	queue->last = temp;
 }
 
-int			ft_dequeue(t_queue *queue)
+t_data			*ft_dequeue(t_queue *queue)
 {
-	int		ret;
+	t_data	*ret;
 	t_node	*temp;
 
-	ret = -1;
+	ret = NULL;
 	if (queue->first)
 	{
 		ret = queue->first->data;
@@ -55,11 +55,11 @@ int			ft_dequeue(t_queue *queue)
 	return (ret);
 }
 
-int			ft_peek_q(t_queue *queue)
+t_data			*ft_peek_q(t_queue *queue)
 {
-	int ret;
+	t_data *ret;
 
-	ret = -1;
+	ret = 0;
 	if (queue->first)
 		ret = queue->first->data;
 	return (ret);
