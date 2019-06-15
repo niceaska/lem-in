@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/14 20:04:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/15 15:24:29 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,47 +126,6 @@ t_data	*init_data(char *name, int index)
 	return (data);
 }
 
-void	print_moves(t_node **p_arr, t_bfs *bs)
-{
-	int		*rooms;
-	int		i;
-	//t_node	*list;
-	t_node	**ants;
-
-	i = 0;
-	if (!(rooms = (int *)malloc(sizeof(int) * bs->vrt)))
-		return ;
-	while (i < bs->vrt)
-		rooms[i++] = 0;
-	rooms[bs->start->index] = bs->ants;
-	ants = init_nodes_arr(bs->ants);
-	ants[0] = p_arr[0];
-	ants[1] = p_arr[1];
-	ants[2] = p_arr[0];
-	ants[3] = p_arr[1];
-	while (rooms[bs->end->index] != bs->ants)
-	{
-		ft_printf("\n");
-		i = rooms[bs->end->index];
-		while (i < bs->ants)
-		{
-			if (rooms[ants[i]->data->index] && \
-				(!rooms[ants[i]->next->data->index] \
-				|| ants[i]->next->data->index == bs->end->index))
-			{
-				rooms[ants[i]->data->index]--;
-				ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
-				rooms[ants[i]->next->data->index]++;
-				ants[i] = ants[i]->next;
-				if (ants[i + 1] && (!rooms[ants[i + 1]->next->data->index] \
-				|| ants[i + 1]->next->data->index == bs->end->index))
-					ft_printf(" ");
-			}
-			i++;
-		}
-	}
-}
-
 int main() 
 { 
 	t_node **arr;
@@ -179,7 +138,7 @@ int main()
 
 
 	arr = 0;
-	bs = init_bfs(start, end, 5, 4);
+	bs = init_bfs(start, end, 5, 7);
 	arr = init_nodes_arr(bs->vrt);
 
 	t_data **all_d = malloc(sizeof(t_data *) * bs->vrt);

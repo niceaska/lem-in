@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/14 17:49:02 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/15 15:00:59 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ void			free_hashtab(t_hashtable *map);
 int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
 t_hashtable		*init_hashtab(size_t size);
 int				get_entry(t_hashtable *hash_tab, const char *key);
+
+void			print_moves(t_node **p_arr, t_bfs *bs);
 
 #endif
