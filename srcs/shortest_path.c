@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 15:24:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/15 15:53:39 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int main()
 
 
 	arr = 0;
-	bs = init_bfs(start, end, 5, 7);
+	bs = init_bfs(start, end, 5, 5);
 	arr = init_nodes_arr(bs->vrt);
 
 	t_data **all_d = malloc(sizeof(t_data *) * bs->vrt);

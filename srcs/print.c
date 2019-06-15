@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 15:27:06 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/15 15:59:53 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ static t_node	**init_ants_arr(t_node **p_arr, int ants)
 	{
 		if (p_arr[j])
 		{
-			ants_arr[i] = p_arr[j];
-			j += (p_arr[j + 1]) ? 1 : 0;
+			ants_arr[i] = p_arr[j++];
 		}
 		else
 		{
-			ants_arr[i] = p_arr[j];
-			j = 0;	
+			j = 0;
+			ants_arr[i] = p_arr[j++];
 		}
 		i++;
 	}
@@ -78,6 +77,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs)
 			i++;
 		}
 	}
+	ft_printf("\n");
 	free(ants);
 	free(rooms);
 }
