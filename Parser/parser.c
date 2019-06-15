@@ -6,7 +6,7 @@
 /*   By: jschille <jschille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/15 20:20:47 by jschille         ###   ########.fr       */
+/*   Updated: 2019/06/15 21:39:03 by jschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,8 @@ static void		read_data(int fd, t_env *env)
 	while (get_next_line(fd, &line) > 0)
 	{
 		check_line(line, env);
-		printf("line = %s Ants = %u\n", line, (env)->ants);
 		free(line);
-		printf("READ_DATA\n");
 	}
-	printf("Eline = %s Ants = %u\n", line, (env)->ants);
 }
 
 static t_env	*env_init(void)
@@ -106,6 +103,5 @@ t_env			*parser(char *file)
 	// 	err_out(1);
 	read_data(0, env);
 	// close(fd);
-	printf("PAnts = %u\n", env->ants);
 	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: jschille <jschille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 19:09:47 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/15 20:37:18 by jschille         ###   ########.fr       */
+/*   Updated: 2019/06/15 21:46:10 by jschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int		main(void)
 
 	env = parser("lll");
 	printf("Ants = %d\n", env->ants);
+	printf("Rooms\n");
 	while (env->list)
 	{
-		printf("Rooms\n");
-		printf("RIndex: %u\t\tIndex: %zu\n", ((t_room*)(env->list->content))->index, env->list->content_size);
+		printf("Name: %s\t\tIndex: %u\n", ((t_room*)env->list->content)->name, ((t_room*)env->list->content)->index);
+		printf("Start Name: %s\t\tStart Index: %u\n", ((t_room*)env->start->content)->name, ((t_room*)env->start->content)->index);
+		printf("End Name: %s\t\tEnd Index: %u\n", ((t_room*)env->end->content)->name, ((t_room*)env->end->content)->index);		
 		env->list = env->list->next;
 	}
 	printf("END\n");
