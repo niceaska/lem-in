@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 20:44:48 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 22:34:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			free_list_arr(t_node **arr);
 void			free_queue(t_queue *q);
 void			free_hashtab(t_hashtable *map);
 
-
+void			ft_addedge(t_node **arr, t_data *start, t_data *end);
 t_data			*init_data(char *name, int index);
 
 int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);

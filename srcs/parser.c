@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 20:43:06 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 22:35:53 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		check_line(char *line, t_env *env)
 {
 	static unint	count = 0;
 
-	if (count == 0 && line[0] != '#' && (count == 1))
+	if (count == 0 && line[0] != '#' && (count = 1))
 		set_ants(line, env);
 	else if (line[0] == '#')
 		parser_comment(line, env);

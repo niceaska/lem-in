@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 20:30:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 22:33:29 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,6 @@ int				bfs(t_node **arr, t_bfs *bs)
 	}
 	free_queue(queue);
 	return (0); 
-}
-
-void ft_addedge(t_node **arr, t_data *start, t_data *end) 
-{ 
-	push_back(&(arr[start->index]), end); 
-	push_back(&(arr[end->index]), start); 
-}
-
-t_data	*init_data(char *name, int index)
-{
-	t_data *data;
-
-	if (!(data = (t_data *)malloc(sizeof(t_data))))
-		return (NULL);
-	data->name = ft_strdup(name);
-	data->index = index;
-	return (data);
 }
 
 static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
