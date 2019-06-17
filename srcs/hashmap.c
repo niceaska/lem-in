@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 22:36:11 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 14:05:57 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_hashtable		*init_hashtab(size_t size)
 	while (i < size)
 		hash_tab->tab[i++] = NULL;
 	hash_tab->size = size;
+	hash_tab->curr_size = 0;
 	return (hash_tab);
 }
 
@@ -88,10 +89,12 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
 	hash_id = get_hash(hash_tab, key);
 	if (!(new_entry = (t_entry *)malloc(sizeof(t_entry))))
 		return (0);
+	if (!(new_entry->data = init_data((char *)key, val)))
+		return (0);
 	new_entry->key = ft_strdup(key);
-	new_entry->index = val;
 	new_entry->next = NULL;
 	set_value(&hash_tab->tab[hash_id], new_entry);
+	hash_tab->curr_size++;
 	return (1);
 }
 
@@ -99,24 +102,24 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
 ** Get entry from table
 */
 
-int		get_entry(t_hashtable *hash_tab, const char *key)
+t_data		*get_entry(t_hashtable *hash_tab, const char *key)
 {
 	t_entry			*entry;
 
 	if (!key)
-		return (-1);
+		return (0);
 	entry = hash_tab->tab[get_hash(hash_tab, key)];
 	if (!entry || !entry->key)
-		return (-1);
+		return (0);
 	while (entry && ft_strcmp(entry->key, key))
 		entry = entry->next;
-	return ((entry) ? entry->index : -1);
+	return ((entry) ? entry->data : NULL);
 }
 
 /*
 ** utility printing function
 */
-/*
+
 #include <stdio.h>
 
 
@@ -134,7 +137,8 @@ void	print_hash_val(t_hashtable *hash)
 			t_entry *entr = hash->tab[i];
 			while (entr)
 			{
-				printf("list value - %d\n", entr->index);
+				printf("list name - %s\n", entr->data->name);
+				printf("list value - %d\n", entr->data->index);
 				entr = entr->next;
 			}
 		}
@@ -142,6 +146,7 @@ void	print_hash_val(t_hashtable *hash)
 	}
 }
 
+/*
 int main()
 {
 	int i = 0;

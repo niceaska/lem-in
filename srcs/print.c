@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 15:59:53 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 16:03:17 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,56 @@ static t_node	**init_ants_arr(t_node **p_arr, int ants)
 	return (ants_arr);
 }
 
-static void		print_ant_move(int *rooms, t_bfs *bs, t_node **ants, int i)
+static void		print_ant_move(int *rooms, t_node **ants, int i, int j)
 {
-	if (rooms[ants[i]->data->index] && \
-		(!rooms[ants[i]->next->data->index] \
-		|| ants[i]->next->data->index == bs->end->index))
-	{
-		rooms[ants[i]->data->index]--;
-		ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
-		rooms[ants[i]->next->data->index]++;
-		ants[i] = ants[i]->next;
-		if (ants[i + 1] && (!rooms[ants[i + 1]->next->data->index]\
-		|| ants[i + 1]->next->data->index == bs->end->index))
-			ft_printf(" ");
-	}
+	if (i - 1 >= j)
+		ft_printf(" ");
+	rooms[ants[i]->data->index]--;
+	ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
+	rooms[ants[i]->next->data->index]++;
+	ants[i] = ants[i]->next;
+}
+
+static int		*init_rooms(int vrt, int start_index, int ants)
+{
+	int		i;
+	int		*rooms;
+
+	i = 0;
+	if (!(rooms = (int *)malloc(sizeof(int) * vrt)))
+		return (NULL);
+	while (i < vrt)
+		rooms[i++] = 0;
+	rooms[start_index] = ants;
+	return (rooms);
 }
 
 void			print_moves(t_node **p_arr, t_bfs *bs)
 {
 	int		*rooms;
 	int		i;
+	int		j;
 	t_node	**ants;
 
-	i = 0;
-	if (!(rooms = (int *)malloc(sizeof(int) * bs->vrt)))
-		return ;
-	while (i < bs->vrt)
-		rooms[i++] = 0;
-	rooms[bs->start->index] = bs->ants;
+	rooms = init_rooms(bs->vrt, bs->start->index, bs->ants);
 	ants = init_ants_arr(p_arr, bs->ants);
+	ft_printf("\n");
 	while (rooms[bs->end->index] != bs->ants)
 	{
-		ft_printf("\n");
-		i = rooms[bs->end->index];
+		j = 0;
+		while (!ants[j]->next)
+			j++;
+		i = j;
 		while (i < bs->ants)
 		{
-			print_ant_move(rooms, bs, ants, i);
+			if (ants[i] && ants[i]->next && rooms[ants[i]->data->index] && \
+			(!rooms[ants[i]->next->data->index] \
+			|| (ants[i]->next->data->index == bs->end->index)))
+				print_ant_move(rooms, ants, i, j);
 			i++;
 		}
+		ft_printf("\n");
 	}
-	ft_printf("\n");
 	free(ants);
 	free(rooms);
 }

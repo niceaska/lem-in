@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 15:00:59 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 14:19:59 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,54 @@ typedef struct	s_bfs
 typedef struct		s_entry
 {
 	char			*key;
-	int				index;
+	t_data			*data;
 	struct s_entry	*next;
 }					t_entry;
 
 typedef struct		s_hashtable
 {
 	size_t			size;
+	size_t			curr_size;
 	struct s_entry	**tab;	
 }					t_hashtable;
+
+#define unint unsigned int
+
+// typedef struct	s_list t_list;
+
+// struct			s_list
+// {
+// 	void	*data;
+// 	size_t	size;
+// 	t_list	*next;
+// };
+
+typedef struct	s_room
+{
+	char	*name;
+	unint	index;
+}				t_room;
+
+typedef struct  s_env
+{
+	unint	ants;
+	t_list	*list;
+	t_list	*start;
+	t_list	*end;
+	t_list	*links;
+	t_hashtable *ht;
+}				t_env;
+
+void			err_out(int e);
+
+/*	Parser */
+t_env			*parser(char *file);
+void			set_rooms(char *line, t_env *env);
+void			parser_comment(char *line, t_env *env);
+void			set_ants(char *line, t_env *env);
+void			set_links(char *line, t_env **env);
+t_room	*get_room(char *line, t_env **env);
+
 
 t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants);
 int				*init_arr(int vert, char c);
@@ -86,10 +125,16 @@ void			free_queue(t_queue *q);
 void			free_hashtab(t_hashtable *map);
 
 
+t_data			*init_data(char *name, int index);
+
 int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
 t_hashtable		*init_hashtab(size_t size);
-int				get_entry(t_hashtable *hash_tab, const char *key);
+t_data		*get_entry(t_hashtable *hash_tab, const char *key);
 
 void			print_moves(t_node **p_arr, t_bfs *bs);
+
+
+void	print_hash_val(t_hashtable *hash);
+void	bfs_controller(t_env *e);
 
 #endif

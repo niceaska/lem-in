@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 16:51:46 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 14:21:29 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,33 @@ t_data	*init_data(char *name, int index)
 	return (data);
 }
 
+void	bfs_controller(t_env *e)
+{
+	t_node **arr;
+	t_bfs *bs;
+	char	*link1;
+	char	*link2;
+
+
+	arr = 0;
+	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
+					get_entry(e->ht, ((t_room*)e->end->content)->name),
+													e->ht->curr_size, e->ants);
+	arr = init_nodes_arr(bs->vrt);
+	while (e->links)
+	{
+		link2 = ft_strdup(ft_strchr(e->links->content, '-') + 1);
+		link1 = e->links->content;
+		*(ft_strchr(link1, '-')) = '\0';
+		ft_addedge(arr, get_entry(e->ht, link1), 
+							get_entry(e->ht, link2));
+		free(link2);
+		e->links = e->links->next; 
+	}
+	t_node **p_arr = get_paths_controller(arr, bs);
+	print_moves(p_arr, bs);
+}
+/*
 int main() 
 { 
 	t_node **arr;
@@ -174,4 +201,4 @@ int main()
 	free_list_arr(p_arr);
 
 	return 0;
-}
+}*/
