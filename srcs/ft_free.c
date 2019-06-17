@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:20:13 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 14:50:09 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 18:43:27 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	free_hashtab(t_hashtable *map)
 				tmp = entry;
 				entry = entry->next;
 				free(tmp->key);
+				free(tmp->data);
 				free(tmp);
 			}
 		}

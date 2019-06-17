@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 18:01:25 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 18:47:01 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		main(void)
 {
 	t_env	*env;
     clock_t time;
+	t_list *links;
     
 	time=clock();
 
@@ -128,12 +129,14 @@ int		main(void)
 		env->list = env->list->next;
 	}
 //	print_hash_val(env->ht);
-	/*while (env->links)
+	links = env->links;
+	while (links)
 	{
-		printf("Name: %s\n", (char *)env->links->content);
-		env->links = env->links->next;
-	}*/
+		printf("Name: %s\n", (char *)links->content);
+		links = links->next;
+	}
 	bfs_controller(env);
+	free_hashtab(env->ht);
 	printf("END\n");
 	  time = clock() - time;
     printf("%f", (double)time/CLOCKS_PER_SEC);

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 14:05:57 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 18:42:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
 		return (0);
 	if (!(new_entry->data = init_data((char *)key, val)))
 		return (0);
-	new_entry->key = ft_strdup(key);
+	new_entry->key = new_entry->data->name;
 	new_entry->next = NULL;
 	set_value(&hash_tab->tab[hash_id], new_entry);
 	hash_tab->curr_size++;
