@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 18:47:01 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:43:06 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "lemmin.h"
 #include <fcntl.h>
 
-void			err_out(int e)
+void			err_out(int e) // Not needed? We should print "ERROR" only
 {
 	if (e == 0)
-		write(1, "Error! Don't have memory\n", 25);
+		write(2, "Error! Don't have memory\n", 25);
 	if (e == 1)
-		write(1, "Error! Don't open file\n", 23);
+		write(2, "Error! Don't open file\n", 23);
 	if (e == 2)
-		write(1, "Error! Can not open file\n", 25);
+		write(2, "Error! Can not open file\n", 25);
 	if (e == 3)
-		write(1, "Error! Numbers of ants have invalid symbol\n", 44);
+		write(2, "Error! Numbers of ants have invalid symbol\n", 44);
 	if (e == 4)
-		write(1, "Error! Dublicate Start/End\n", 26);
+		write(2, "Error! Dublicate Start/End\n", 26);
 	if (e == 4)
-		write(1, "Error! Bad symbol\n", 18);
-	exit(0);
+		write(2, "Error! Bad symbol\n", 18);
+	exit(1);
 }
 /*
 static int		check_chr(char *line)
@@ -55,7 +55,7 @@ static void		check_line(char *line, t_env *env)
 {
 	static unint	count = 0;
 
-	if (count == 0 && line[0] != '#' && (count = 1))
+	if (count == 0 && line[0] != '#' && (count == 1))
 		set_ants(line, env);
 	else if (line[0] == '#')
 		parser_comment(line, env);
@@ -63,8 +63,6 @@ static void		check_line(char *line, t_env *env)
 		set_links(line, &env);
 	else if (count == 1)
 		set_rooms(line, env);
-	else if (line[0] == '\0')
-		++count;
 	else
 		err_out(2);
 }
@@ -72,11 +70,21 @@ static void		check_line(char *line, t_env *env)
 static void		read_data(int fd, t_env *env)
 {
 	char	*line;
+	int		rd;
 
 	while (get_next_line(fd, &line) > 0)
 	{
+		if (!*line)
+		{
+			free(line);
+			// error
+		}
 		check_line(line, env);
 		free(line);
+	}
+	if (rd < 0)
+	{
+		// free & error
 	}
 }
 

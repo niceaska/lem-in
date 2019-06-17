@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 14:19:59 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:44:48 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_room
 {
 	char	*name;
 	unint	index;
+	int		coords[2]; // need this for printing
 }				t_room;
 
 typedef struct  s_env
@@ -95,7 +96,7 @@ void			set_rooms(char *line, t_env *env);
 void			parser_comment(char *line, t_env *env);
 void			set_ants(char *line, t_env *env);
 void			set_links(char *line, t_env **env);
-t_room	*get_room(char *line, t_env **env);
+t_room			*get_room(char *line, t_env **env);
 
 
 t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants);

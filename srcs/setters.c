@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 20:31:32 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:38:40 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	set_links(char *line, t_env **env)
 {
 	t_list	*ptr;
 
+	if (!(*env)->start || !(*env)->end)
+	{
+		// error
+	}
 	if ((*env)->links == NULL)
 	{
 		(*env)->links = ft_lstnew(line, ft_strlen(line));
