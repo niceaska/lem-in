@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 17:03:43 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 17:07:11 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,61 +53,6 @@ int				bfs(t_node **arr, t_bfs *bs)
 	free_queue(queue);
 	return (0); 
 }
-
-
-/*
-void	print_shortest_dist(t_node **arr, t_bfs *bs) 
-{
-	t_node	*path;
-	int		crawl;
-
-	path = 0;
-
-	if (bfs(arr, bs) == 0) 
-	{ 
-		printf("path not foind");
-		return ; 
-	}
-	crawl = bs->end; 
-	push_back(&path, crawl);
-	while (bs->p[crawl] != -1)
-	{ 
-		list_push(&path, bs->p[crawl]); 
-		crawl = bs->p[crawl]; 
-	}
-
-	printf( "Shortest path length is : %d\n", bs->d[bs->end]); 
-	printf("\nPath is::\n"); 
-	while (!list_empty(path))
-	{
-		int pop =  list_pop(&path);
-		bs->v[pop] = 1;;
-		printf("%d\n", pop);
-	}
-
-	if (bfs(arr, bs) == 0) 
-	{ 
-		printf("path not foind");
-		return ; 
-	}
-		crawl = bs->end; 
-	push_back(&path, crawl);
-	while (bs->p[crawl] != -1)
-	{ 
-		list_push(&path, bs->p[crawl]); 
-		crawl = bs->p[crawl]; 
-	}
-	printf( "Shortest path length is : %d\n", bs->d[bs->end]); 
-	printf("\nPath is::\n"); 
-	while (!list_empty(path))
-	{
-		int pop =  list_pop(&path);
-		bs->v[pop] = 1;
-		printf("%d\n",pop);
-	}
-} 
-*/
-
 
 void ft_addedge(t_node **arr, t_data *start, t_data *end) 
 { 
@@ -160,7 +105,7 @@ void	bfs_controller(t_env *e)
 	arr = 0;
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
-													e->ht->curr_size, e->ants);
+											e->ht->curr_size, e->ants);
 	arr = init_nodes_arr(bs->vrt);
 	if ((process_links(arr, e->links, e->ht)) <= 0)
 	{
