@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 14:21:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 17:03:43 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,31 +126,52 @@ t_data	*init_data(char *name, int index)
 	return (data);
 }
 
-void	bfs_controller(t_env *e)
+static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 {
-	t_node **arr;
-	t_bfs *bs;
 	char	*link1;
 	char	*link2;
+	t_data	*l1;
+	t_data	*l2;
 
+	while (links)
+	{
+		link2 = ft_strdup(ft_strchr(links->content, '-') + 1);
+		link1 = ft_strdup(links->content);
+		*(ft_strchr(link1, '-')) = '\0';
+		if (!(l1 = get_entry(ht, link1)))
+			return (-1);
+		if (!(l2 = get_entry(ht, link2)))
+			return (-1);
+		if (!ft_strcmp(l1->name, l2->name))
+			return (0);
+		ft_addedge(arr, l1, l2);
+		free(link2);
+		free(link1);
+		links = links->next; 
+	}
+	return (1);
+}
+void	bfs_controller(t_env *e)
+{
+	t_node	**arr;
+	t_bfs	*bs;
+	t_node 	**p_arr;
 
 	arr = 0;
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
 													e->ht->curr_size, e->ants);
 	arr = init_nodes_arr(bs->vrt);
-	while (e->links)
+	if ((process_links(arr, e->links, e->ht)) <= 0)
 	{
-		link2 = ft_strdup(ft_strchr(e->links->content, '-') + 1);
-		link1 = e->links->content;
-		*(ft_strchr(link1, '-')) = '\0';
-		ft_addedge(arr, get_entry(e->ht, link1), 
-							get_entry(e->ht, link2));
-		free(link2);
-		e->links = e->links->next; 
+		// error
+		exit(1);
 	}
-	t_node **p_arr = get_paths_controller(arr, bs);
+	p_arr = get_paths_controller(arr, bs);
 	print_moves(p_arr, bs);
+	free_bfs(bs);
+	free_list_arr(arr);
+	free_list_arr(p_arr);
 }
 /*
 int main() 
