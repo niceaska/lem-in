@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 18:42:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:19:01 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,24 @@ static unsigned int		get_hash(t_hashtable *hash_tab, const char *key)
 ** Create and insert a new key-value into table.
 */
 
-static void		set_value(t_entry **entry, t_entry *new_entry)
+static int		set_value(t_entry **entry, t_entry *new_entry)
 {
 	t_entry *traverse;
 
 	if (!*entry)
 	{
 		*entry = new_entry;
-		return ;
+		return (1);
 	}
 	traverse = *entry;
 	while (traverse->next)
+	{
+		if (!ft_strcmp(traverse->key, new_entry->key))
+			return (0);
 		traverse = traverse->next;
+	}
 	traverse->next = new_entry;
+	return (1);
 }
 
 int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
@@ -93,7 +98,8 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
 		return (0);
 	new_entry->key = new_entry->data->name;
 	new_entry->next = NULL;
-	set_value(&hash_tab->tab[hash_id], new_entry);
+	if (!set_value(&hash_tab->tab[hash_id], new_entry))
+		return (0);
 	hash_tab->curr_size++;
 	return (1);
 }

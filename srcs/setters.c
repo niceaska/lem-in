@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 18:05:04 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:31:32 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static void	set_soe(t_env *env, char c)
 		if (env->start)
 			err_out(4);
 		env->start = ft_lstnew(get_room(line, &env), sizeof(t_room));
+		free(line);
 	}
 	else if (c == 'e')
 	{
 		if (env->end)
 			err_out(4);
 		env->end = ft_lstnew(get_room(line, &env), sizeof(t_room));
+		free(line);
 	}
 }
 

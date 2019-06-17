@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 18:06:02 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 20:30:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ void	bfs_controller(t_env *e)
 		// error
 		exit(1);
 	}
-	p_arr = get_paths_controller(arr, bs);
+	if (!(p_arr = get_paths_controller(arr, bs)) || !p_arr[0])
+	{
+		//error
+	}
 	print_moves(p_arr, bs);
 	free_bfs(bs);
 	free_list_arr(arr);
