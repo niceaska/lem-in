@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 14:39:30 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 18:05:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	set_links(char *line, t_env **env)
 
 	if ((*env)->links == NULL)
 	{
-		(*env)->links = ft_lstnew(line, sizeof(line));
+		(*env)->links = ft_lstnew(line, ft_strlen(line));
 		return ;
 	}
 	ptr = (*env)->links;
 	while (ptr->next)
 		ptr = ptr->next;
-	ptr->next = ft_lstnew(line, sizeof(line));
+	ptr->next = ft_lstnew(line, ft_strlen(line));
 }

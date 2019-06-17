@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 16:15:15 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/17 18:01:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ int		main(void)
 		printf("End Name: %s\t\tEnd Index: %u\n", ((t_room*)env->end->content)->name, ((t_room*)env->end->content)->index);		
 		env->list = env->list->next;
 	}
-	/*print_hash_val(env->ht);
-	while (env->links)
+//	print_hash_val(env->ht);
+	/*while (env->links)
 	{
 		printf("Name: %s\n", (char *)env->links->content);
 		env->links = env->links->next;
