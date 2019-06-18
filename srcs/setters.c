@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 18:36:33 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:09:59 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	set_soe(t_env **env, char c)
 	{
 		if ((*env)->start != NULL)
 			err_out(4, line, *env);
-		room = get_room(line, env);
+		room = get_room(line, env, 0);
 		(*env)->start = ft_lstnew(room, sizeof(*room));
 		free(room);
 	}
@@ -46,7 +46,7 @@ static void	set_soe(t_env **env, char c)
 	{
 		if ((*env)->end != NULL)
 			err_out(4, line, *env);
-		room = get_room(line, env);
+		room = get_room(line, env, 0);
 		(*env)->end = ft_lstnew(room, sizeof(*room));
 		free(room);
 	}
@@ -59,9 +59,12 @@ void	parser_comment(char *line, t_env **env)
 		set_soe(env, 's');
 	else if (line && !ft_strcmp(line, "##end"))
 		set_soe(env, 'e');
+	else
+		set_rooms(line, env, 1);
+
 }
 
-void	set_rooms(char *line, t_env **env)
+void	set_rooms(char *line, t_env **env, short fl)
 {
 	t_list	*ptr;
 	t_room	*room;
@@ -69,7 +72,7 @@ void	set_rooms(char *line, t_env **env)
 
 	if ((*env)->list == NULL)
 	{
-		room = get_room(line, env);
+		room = get_room(line, env, fl);
 		(*env)->list = ft_lstnew(room, sizeof(*room));
 		free(room);
 		return ;
@@ -77,7 +80,7 @@ void	set_rooms(char *line, t_env **env)
 	ptr = (*env)->list;
 	while (ptr->next)
 		ptr = ptr->next;
-	room = get_room(line, env);
+	room = get_room(line, env, fl);
 	ptr->next = ft_lstnew(room, sizeof(*room));
 	free(room);
 	++i;

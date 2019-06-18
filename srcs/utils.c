@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 18:28:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:14:45 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static t_room		*get_room_coord(char *line, t_room *room,
 	return (room);
 }
 
-t_room	*get_room(char *line, t_env **env)
+t_room	*get_room(char *line, t_env **env, short comm)
 {
 	t_room			*room;
 	static unint	index = 0;
@@ -85,11 +85,12 @@ t_room	*get_room(char *line, t_env **env)
 	if (!(room = (t_room*)malloc(sizeof(t_room))))
 		err_out(0, line, *env);
 	room->name = 0;
-	room = get_room_coord(line, room, env, 0);
-	*(ft_strchr(line, ' ')) = '\0';
+	room = (!comm) ? get_room_coord(line, room, env, 0) : room;
+	(!comm) ? *(ft_strchr(line, ' ')) = '\0' : 0;
 	room->name = ft_strdup(line);
 	room->index = index;
-	if (!(ft_set_htval((*env)->ht, line, index)))
+	room->comment = comm;
+	if (!comm && !(ft_set_htval((*env)->ht, line, index)))
 	{
 		free(line);
 		free(room->name);

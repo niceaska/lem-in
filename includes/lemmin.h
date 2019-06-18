@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 17:54:51 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:13:26 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_room
 	char	*name;
 	unint	index;
 	int		coords[2]; // need this for printing
+	short	comment; //is it comment?
 }				t_room;
 
 typedef struct  s_env
@@ -94,11 +95,11 @@ void			err_out(int e, char *line, t_env *env);
 
 /*	Parser */
 t_env			*parser(char *file);
-void			set_rooms(char *line, t_env **env);
+void			set_rooms(char *line, t_env **env, short fl);
 void			parser_comment(char *line, t_env **env);
 void			set_ants(char *line, t_env **env);
 void			set_links(char *line, t_env **env);
-t_room			*get_room(char *line, t_env **env);
+t_room			*get_room(char *line, t_env **env, short comm);
 
 
 t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants);

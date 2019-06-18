@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 18:31:23 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:10:49 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void		check_line(char *line, t_env **env)
 	else if (line && ft_strchr(line, '-'))
 		set_links(line, env);
 	else if (line && count == 1)
-		set_rooms(line, env);
+		set_rooms(line, env, 0);
 	else
 		err_out(2, line, *env);
 }

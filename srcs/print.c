@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:52:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:16:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,12 @@ static void		print_rooms_links(t_list *rooms, t_list *links)
 	{
 		ft_putstr(((t_room *)rooms->content)->name);
 		write(1, " ", 1);
-		ft_putnbr(((t_room *)rooms->content)->coords[0]);
-		write(1, " ", 1);
-		ft_putnbr(((t_room *)rooms->content)->coords[1]);
+		if (!((t_room *)rooms->content)->comment)
+		{
+			ft_putnbr(((t_room *)rooms->content)->coords[0]);
+			write(1, " ", 1);
+			ft_putnbr(((t_room *)rooms->content)->coords[1]);
+		}
 		write(1, "\n", 1);
 		rooms = rooms->next;
 	}

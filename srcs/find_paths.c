@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:54:16 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 18:58:46 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_node	**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 {
 	if (!bfs(arr, bs) || i >= bs->ants) 
 		return (p_arr); 
-	if (i != 0 && bs->d[bs->end->index] > (int)(list_size(p_arr[0]) * 2))
+	if (i != 0 && (bs->d[bs->end->index] > (int)(list_size(p_arr[0]) * 2)))
 		return (p_arr);
 	ft_find_path(p_arr, bs, i);
 	refresh_bfs(p_arr, &bs);
