@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 17:41:17 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:56:06 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "lemmin.h"
 #include <fcntl.h>
 
-void			err_out(int e, t_env *env)
+void			err_out(int e, char *line, t_env *env)
 {
+	(line) ? free(line) : 0;
 	if (e == 0)
 		write(2, "Error! Don't have memory\n", 25);
 	if (e == 1)
@@ -64,7 +65,7 @@ static void		check_line(char *line, t_env **env)
 	else if (line && count == 1)
 		set_rooms(line, env);
 	else
-		err_out(2, *env);
+		err_out(2, line, *env);
 }
 
 static void		read_data(int fd, t_env **env)
@@ -92,12 +93,11 @@ static t_env	*env_init(void)
 	t_env	*env;
 
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
-		err_out(0, 0);
+		err_out(0, 0, 0);
 	env->start = NULL;
 	env->end = NULL;
 	env->list = NULL;
 	env->links = NULL;
-
 	if (!(env->ht = init_hashtab(HT_SIZE)))
 		ft_error(env);
 	return (env);

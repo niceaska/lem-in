@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 17:41:05 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:54:51 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct  s_env
 	t_hashtable *ht;
 }				t_env;
 
-void			err_out(int e, t_env *env);
+void			err_out(int e, char *line, t_env *env);
 
 /*	Parser */
 t_env			*parser(char *file);

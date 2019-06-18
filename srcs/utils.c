@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 17:02:38 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 18:17:05 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	check_coords(char *coords)
 	spaces = 0; 
 	if (!coords)
 		return (0);
+	if (*coords == '#')
+		return (0);
 	while (*coords)
 	{
 		if (!ft_isspace(*coords)\
@@ -49,16 +51,16 @@ static int	check_coords(char *coords)
 }
 
 static t_room		*get_room_coord(char *line, t_room *room,
-												t_env **env)
+									t_env **env, int i)
 {
 	char	*parse;
-	int		i;
 
-	i = 0;
 	parse = ft_strchr(line, ' ');
-	if (!parse || !(check_coords(parse + 1)))
+	if (!parse || !*(parse + 1) \
+		|| !(check_coords(parse + 1)))
 	{
 		free(room);
+		(line) ? free(line) : 0;
 		ft_error(*env);
 	}
 	while (i < 2)
@@ -66,6 +68,7 @@ static t_room		*get_room_coord(char *line, t_room *room,
 		if ((room->coords[i] = ft_atoi(parse)) < 0)
 		{
 			free(room);
+			(line) ? free(line) : 0;
 			ft_error(*env);
 		}
 		parse = ft_strchr(parse, ' ');
@@ -79,10 +82,10 @@ t_room	*get_room(char *line, t_env **env)
 	t_room			*room;
 	static unint	index = 0;
 
-
 	if (!(room = (t_room*)malloc(sizeof(t_room))))
-		err_out(0, *env);
-	room = get_room_coord(line, room, env);
+		err_out(0, line, *env);
+	room->name = 0;
+	room = get_room_coord(line, room, env, 0);
 	*(ft_strchr(line, ' ')) = '\0';
 	room->name = ft_strdup(line);
 	room->index = index;

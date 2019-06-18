@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 17:01:53 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:54:33 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_ants(char *line, t_env **env)
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]))
-			err_out(3, *env);
+			err_out(3, line, *env);
 		++i;
 	}
 	(*env)->ants = ft_atoi(line);
@@ -36,7 +36,7 @@ static void	set_soe(t_env **env, char c)
 	if (c == 's')
 	{
 		if ((*env)->start != NULL)
-			err_out(4, *env);
+			err_out(4, line, *env);
 		room = get_room(line, env);
 		(*env)->start = ft_lstnew(room, sizeof(*room));
 		free(room);
@@ -44,7 +44,7 @@ static void	set_soe(t_env **env, char c)
 	else if (c == 'e')
 	{
 		if ((*env)->end != NULL)
-			err_out(4, *env);
+			err_out(4, line, *env);
 		room = get_room(line, env);
 		(*env)->end = ft_lstnew(room, sizeof(*room));
 		free(room);
