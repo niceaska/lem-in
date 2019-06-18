@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 19:16:25 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 21:29:26 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,22 @@ static t_node	**init_ants_arr(t_node **p_arr, int ants)
 	return (ants_arr);
 }
 
-static void		print_ant_move(int *rooms, t_node **ants, int i, int j)
+static int		print_ant_move(int *rooms, t_node **ants, int i, int j)
 {
+	int ret;
+
+	ret = 0;
 	if (i - 1 >= j)
 		ft_printf(" ");
+	if (ants[i]->next && ants[i + 1] && ants[i + 1]->next
+		&& ants[i + 1]->next->data->index == ants[i]->next->data->index\
+		&& ants[i]->data->index == ants[i + 1]->data->index )
+		ret = 1;
 	rooms[ants[i]->data->index]--;
 	ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
 	rooms[ants[i]->next->data->index]++;
 	ants[i] = ants[i]->next;
+	return (ret);
 }
 
 void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
@@ -66,8 +74,10 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 			if (ants[i] && ants[i]->next && rooms[ants[i]->data->index] && \
 			(!rooms[ants[i]->next->data->index] \
 			|| (ants[i]->next->data->index == bs->end->index)))
-				print_ant_move(rooms, ants, i, j);
-			i++;
+				if (print_ant_move(rooms, ants, i, j)&& ants[i] && !ants[i]->next \
+					&& ants[i + 1]->next->data->index == bs->end->index)
+					break;
+			i++;	
 		}
 		ft_printf("\n");
 	}
