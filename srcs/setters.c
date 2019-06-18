@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 20:38:40 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 13:39:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,32 @@ void	set_ants(char *line, t_env *env)
 
 static void	set_soe(t_env *env, char c)
 {
-	char *line;
+	char	*line;
+	t_room	*room;
+	t_room *new_r;
 
 	get_next_line(0, &line);
-	printf("line = %s\n", line);
+	if (!(new_r = (t_room*)malloc(sizeof(t_room))))
+		err_out(0);
 	if (c == 's')
 	{
 		if (env->start)
 			err_out(4);
-		env->start = ft_lstnew(get_room(line, &env), sizeof(t_room));
-		free(line);
+		room = get_room(line, &env);
+		env->start = ft_lstnew(room, sizeof(*room));
+		((t_room *)(env->start->content))->name = ft_strdup(line);
+		free(room);
 	}
 	else if (c == 'e')
 	{
 		if (env->end)
 			err_out(4);
-		env->end = ft_lstnew(get_room(line, &env), sizeof(t_room));
-		free(line);
+		room = get_room(line, &env);
+		env->end = ft_lstnew(room, sizeof(*room));
+		((t_room *)(env->end->content))->name = ft_strdup(line);
+		free(room);
 	}
+	(line) ? free(line) : 0;
 }
 
 void	parser_comment(char *line, t_env *env)
@@ -66,7 +74,7 @@ t_room	*get_room(char *line, t_env **env)
 		err_out(0);
 	if (*line)
 		*(ft_strchr(line, ' ')) = '\0';
-	room->name = ft_strdup(line);
+	room->name = 0;
 	room->index = index;
 	if (*line)
 		ft_set_htval((*env)->ht, line, index);
@@ -78,16 +86,23 @@ void	set_rooms(char *line, t_env *env)
 {
 	static size_t	i = 2;
 	t_list	*ptr;
+	t_room *room;
 
 	if (env->list == NULL)
 	{
-		env->list = ft_lstnew(get_room(line, &env), sizeof(t_room));
+		room = get_room(line, &env);
+		env->list = ft_lstnew((void *)room, sizeof(*room));
+		((t_room *)(env->list->content))->name = ft_strdup(line);
+		free(room);
 		return ;
 	}
 	ptr = env->list;
 	while (ptr->next)
 		ptr = ptr->next;
-	ptr->next = ft_lstnew(get_room(line, &env), sizeof(t_room));
+	room = get_room(line, &env);
+	ptr->next = ft_lstnew((void *)room, sizeof(*room));
+	((t_room *)(ptr->next->content))->name = ft_strdup(line);
+	free(room);
 	++i;
 }
 
@@ -101,11 +116,11 @@ void	set_links(char *line, t_env **env)
 	}
 	if ((*env)->links == NULL)
 	{
-		(*env)->links = ft_lstnew(line, ft_strlen(line));
+		(*env)->links = ft_lstnew(line, ft_strlen(line) + 1);
 		return ;
 	}
 	ptr = (*env)->links;
 	while (ptr->next)
 		ptr = ptr->next;
-	ptr->next = ft_lstnew(line, ft_strlen(line));
+	ptr->next = ft_lstnew(line, ft_strlen(line) + 1);
 }

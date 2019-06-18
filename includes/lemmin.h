@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 22:34:42 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 12:32:18 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,11 @@ t_data			*init_data(char *name, int index);
 
 int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
 t_hashtable		*init_hashtab(size_t size);
-t_data		*get_entry(t_hashtable *hash_tab, const char *key);
+t_data			*get_entry(t_hashtable *hash_tab, const char *key);
 
 void			print_moves(t_node **p_arr, t_bfs *bs);
+void			free_env(t_env *e);
+void			ft_error(t_env *e);
 
 
 void	print_hash_val(t_hashtable *hash);

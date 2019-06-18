@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/17 22:35:53 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 12:57:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void		read_data(int fd, t_env *env)
 	char	*line;
 	int		rd;
 
-	while (get_next_line(fd, &line) > 0)
+	while ((rd = get_next_line(fd, &line)) > 0)
 	{
 		if (!*line)
 		{
@@ -82,6 +82,7 @@ static void		read_data(int fd, t_env *env)
 		check_line(line, env);
 		free(line);
 	}
+	(line) ? free(line) : 0;
 	if (rd < 0)
 	{
 		// free & error
@@ -144,8 +145,8 @@ int		main(void)
 		links = links->next;
 	}
 	bfs_controller(env);
-	free_hashtab(env->ht);
 	printf("END\n");
-	  time = clock() - time;
+	time = clock() - time;
     printf("%f", (double)time/CLOCKS_PER_SEC);
+	free_env(env);
 }
