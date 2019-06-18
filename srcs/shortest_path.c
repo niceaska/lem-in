@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 22:33:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:22:24 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 	}
 	return (1);
 }
+
 void	bfs_controller(t_env *e)
 {
 	t_node	**arr;
@@ -86,23 +87,24 @@ void	bfs_controller(t_env *e)
 	t_node 	**p_arr;
 
 	arr = 0;
+	p_arr = 0;
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
 											e->ht->curr_size, e->ants);
 	arr = init_nodes_arr(bs->vrt);
 	if ((process_links(arr, e->links, e->ht)) <= 0)
 	{
-		// error
-		exit(1);
+		free_bfs(bs);
+		free_list_arr(arr);
+		ft_error(e);
 	}
-	if (!(p_arr = get_paths_controller(arr, bs)) || !p_arr[0])
-	{
-		//error
-	}
-	print_moves(p_arr, bs);
+	p_arr = get_paths_controller(arr, bs);
+	if (p_arr && p_arr[0])
+		print_moves(p_arr, bs, 0, 0);
 	free_bfs(bs);
 	free_list_arr(arr);
-	free_list_arr(p_arr);
+	(p_arr) ? free_list_arr(p_arr) : 0;
+	(!p_arr) ? ft_error(e) : 0;
 }
 /*
 int main() 

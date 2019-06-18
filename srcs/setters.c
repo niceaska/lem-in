@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 14:07:47 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:24:10 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_ants(char *line, t_env *env)
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]))
-			err_out(3);
+			err_out(3, env);
 		++i;
 	}
 	env->ants = ft_atoi(line);
@@ -36,7 +36,7 @@ static void	set_soe(t_env *env, char c)
 	if (c == 's')
 	{
 		if (env->start)
-			err_out(4);
+			err_out(4, env);
 		room = get_room(line, &env);
 		env->start = ft_lstnew(room, sizeof(*room));
 		free(room);
@@ -44,7 +44,7 @@ static void	set_soe(t_env *env, char c)
 	else if (c == 'e')
 	{
 		if (env->end)
-			err_out(4);
+			err_out(4, env);
 		room = get_room(line, &env);
 		env->end = ft_lstnew(room, sizeof(*room));
 		free(room);
@@ -58,23 +58,6 @@ void	parser_comment(char *line, t_env *env)
 		set_soe(env, 's');
 	else if (ft_strcmp(line, "##end") == 0)
 		set_soe(env, 'e');
-}
-
-t_room	*get_room(char *line, t_env **env)
-{
-	t_room			*room;
-	static unint	index = 0;
-
-	if (!(room = (t_room*)malloc(sizeof(t_room))))
-		err_out(0);
-	if (*line)
-		*(ft_strchr(line, ' ')) = '\0';
-	room->name = ft_strdup(line);
-	room->index = index;
-	if (*line)
-		ft_set_htval((*env)->ht, line, index);
-	++index;
-	return (room);
 }
 
 void	set_rooms(char *line, t_env *env)
@@ -105,7 +88,8 @@ void	set_links(char *line, t_env **env)
 
 	if (!(*env)->start || !(*env)->end)
 	{
-		// error
+		free(line);
+		ft_error(*env);
 	}
 	if ((*env)->links == NULL)
 	{

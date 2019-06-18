@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 16:03:17 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 14:33:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,13 @@ static int		*init_rooms(int vrt, int start_index, int ants)
 	return (rooms);
 }
 
-void			print_moves(t_node **p_arr, t_bfs *bs)
+void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	int		*rooms;
-	int		i;
-	int		j;
 	t_node	**ants;
 
 	rooms = init_rooms(bs->vrt, bs->start->index, bs->ants);
 	ants = init_ants_arr(p_arr, bs->ants);
-	ft_printf("\n");
 	while (rooms[bs->end->index] != bs->ants)
 	{
 		j = 0;

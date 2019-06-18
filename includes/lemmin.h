@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 14:21:15 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:13:32 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct  s_env
 	t_hashtable *ht;
 }				t_env;
 
-void			err_out(int e);
+void			err_out(int e, t_env *env);
 
 /*	Parser */
 t_env			*parser(char *file);
@@ -132,7 +132,7 @@ int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
 t_hashtable		*init_hashtab(size_t size);
 t_data			*get_entry(t_hashtable *hash_tab, const char *key);
 
-void			print_moves(t_node **p_arr, t_bfs *bs);
+void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j);
 void			free_env(t_env *e);
 void			ft_error(t_env *e);
 

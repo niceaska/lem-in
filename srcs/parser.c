@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 14:20:04 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:13:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lemmin.h"
 #include <fcntl.h>
 
-void			err_out(int e) // Not needed? We should print "ERROR" only
+void			err_out(int e, t_env *env)
 {
 	if (e == 0)
 		write(2, "Error! Don't have memory\n", 25);
@@ -28,7 +28,7 @@ void			err_out(int e) // Not needed? We should print "ERROR" only
 		write(2, "Error! Dublicate Start/End\n", 26);
 	if (e == 4)
 		write(2, "Error! Bad symbol\n", 18);
-	exit(1);
+	return (ft_error(env));
 }
 /*
 static int		check_chr(char *line)
@@ -64,7 +64,7 @@ static void		check_line(char *line, t_env *env)
 	else if (count == 1)
 		set_rooms(line, env);
 	else
-		err_out(2);
+		err_out(2, env);
 }
 
 static void		read_data(int fd, t_env *env)
@@ -77,29 +77,29 @@ static void		read_data(int fd, t_env *env)
 		if (!*line)
 		{
 			free(line);
-			// error
+			ft_error(env);
 		}
 		check_line(line, env);
 		free(line);
 	}
 	(line) ? free(line) : 0;
 	if (rd < 0)
-	{
-		// free & error
-	}
+		ft_error(env);
 }
 
 static t_env	*env_init(void)
 {
 	t_env	*env;
 
+	env = NULL;
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
-		err_out(0);
+		err_out(0, env);
 	env->list = NULL;
 	env->links = NULL;
 	env->start = NULL;
 	env->end = NULL;
-	env->ht = init_hashtab(10000);
+	if (!(env->ht = init_hashtab(10000)))
+		ft_error(env);
 	return (env);
 }
 
@@ -126,4 +126,5 @@ int		main(void)
 	env = parser("lll");;
 	bfs_controller(env);
 	free_env(env);
+	exit(EXIT_SUCCESS);
 }
