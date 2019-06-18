@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 19:10:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 20:10:46 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int		main(void)
 	t_env	*env;
 
 	env = parser("lll");;
-	bfs_controller(env, 0);
+	bfs_controller(env, NULL, NULL, 0);
 	free_env(env);
 	exit(EXIT_SUCCESS);
 }

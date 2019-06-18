@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 19:13:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 20:11:30 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,6 @@ void			ft_error(t_env *e);
 
 
 void	print_hash_val(t_hashtable *hash);
-void	bfs_controller(t_env *e, int size);
-
+void	bfs_controller(t_env *e, t_node **arr,
+						t_node **p_arr, int size);
 #endif

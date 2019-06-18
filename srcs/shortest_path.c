@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 19:30:42 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 20:12:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,13 @@ static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 	return (1);
 }
 
-void	bfs_controller(t_env *e, int size)
+void	bfs_controller(t_env *e, t_node **arr,
+						t_node **p_arr, int size)
 {
-	t_node	**arr;
 	t_bfs	*bs;
-	t_node 	**p_arr;
 
-	arr = 0;
-	p_arr = 0;
+	if (!(e->start) || !(e->end))
+		ft_error(e);
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
 											e->ht->curr_size, e->ants);
