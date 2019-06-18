@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:07:40 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 12:34:04 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 13:52:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void 	free_env_list(t_list *list)
 		list = list->next;
 		tmp = ((t_room *)temp->content)->name;
 		(tmp) ? free(tmp) : 0;
+		free((void *)temp->content);
+		free(temp);
 	}
 }
 
@@ -37,9 +39,9 @@ void			free_env(t_env *e)
 	if (e->start)
 		free_env_list(e->start);
 	if (e->end)
-		free(e->end);
+		free_env_list(e->end);
 	if (e->list)
-		free(e->list);
+		free_env_list(e->list);
 	if (e->links)
 		ft_lstdel(&(e->links), list_del);
 	if (e->ht)

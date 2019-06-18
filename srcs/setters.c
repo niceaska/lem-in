@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 13:39:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 13:49:26 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,14 @@ static void	set_soe(t_env *env, char c)
 {
 	char	*line;
 	t_room	*room;
-	t_room *new_r;
 
 	get_next_line(0, &line);
-	if (!(new_r = (t_room*)malloc(sizeof(t_room))))
-		err_out(0);
 	if (c == 's')
 	{
 		if (env->start)
 			err_out(4);
 		room = get_room(line, &env);
 		env->start = ft_lstnew(room, sizeof(*room));
-		((t_room *)(env->start->content))->name = ft_strdup(line);
 		free(room);
 	}
 	else if (c == 'e')
@@ -51,7 +47,6 @@ static void	set_soe(t_env *env, char c)
 			err_out(4);
 		room = get_room(line, &env);
 		env->end = ft_lstnew(room, sizeof(*room));
-		((t_room *)(env->end->content))->name = ft_strdup(line);
 		free(room);
 	}
 	(line) ? free(line) : 0;
@@ -74,7 +69,7 @@ t_room	*get_room(char *line, t_env **env)
 		err_out(0);
 	if (*line)
 		*(ft_strchr(line, ' ')) = '\0';
-	room->name = 0;
+	room->name = ft_strdup(line);
 	room->index = index;
 	if (*line)
 		ft_set_htval((*env)->ht, line, index);
@@ -92,7 +87,6 @@ void	set_rooms(char *line, t_env *env)
 	{
 		room = get_room(line, &env);
 		env->list = ft_lstnew((void *)room, sizeof(*room));
-		((t_room *)(env->list->content))->name = ft_strdup(line);
 		free(room);
 		return ;
 	}
@@ -101,7 +95,6 @@ void	set_rooms(char *line, t_env *env)
 		ptr = ptr->next;
 	room = get_room(line, &env);
 	ptr->next = ft_lstnew((void *)room, sizeof(*room));
-	((t_room *)(ptr->next->content))->name = ft_strdup(line);
 	free(room);
 	++i;
 }
