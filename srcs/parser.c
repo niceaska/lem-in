@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 12:57:20 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 14:20:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,8 @@ t_env			*parser(char *file)
 int		main(void)
 {
 	t_env	*env;
-    clock_t time;
-	t_list *links;
-    
-	time=clock();
 
-	env = parser("lll");
-	printf("Ants = %d\n", env->ants);
-	printf("Rooms\n");
-	while (env->list)
-	{
-		printf("Name: %s\t\tIndex: %u\n", ((t_room*)env->list->content)->name, ((t_room*)env->list->content)->index);
-		printf("Start Name: %s\t\tStart Index: %u\n", ((t_room*)env->start->content)->name, ((t_room*)env->start->content)->index);
-		printf("End Name: %s\t\tEnd Index: %u\n", ((t_room*)env->end->content)->name, ((t_room*)env->end->content)->index);		
-		env->list = env->list->next;
-	}
-//	print_hash_val(env->ht);
-	links = env->links;
-	while (links)
-	{
-		printf("Name: %s\n", (char *)links->content);
-		links = links->next;
-	}
+	env = parser("lll");;
 	bfs_controller(env);
-	printf("END\n");
-	time = clock() - time;
-    printf("%f", (double)time/CLOCKS_PER_SEC);
 	free_env(env);
 }

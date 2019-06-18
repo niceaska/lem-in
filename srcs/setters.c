@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 13:49:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 14:07:47 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	set_rooms(char *line, t_env *env)
 	if (env->list == NULL)
 	{
 		room = get_room(line, &env);
-		env->list = ft_lstnew((void *)room, sizeof(*room));
+		env->list = ft_lstnew(room, sizeof(*room));
 		free(room);
 		return ;
 	}
@@ -94,7 +94,7 @@ void	set_rooms(char *line, t_env *env)
 	while (ptr->next)
 		ptr = ptr->next;
 	room = get_room(line, &env);
-	ptr->next = ft_lstnew((void *)room, sizeof(*room));
+	ptr->next = ft_lstnew(room, sizeof(*room));
 	free(room);
 	++i;
 }
