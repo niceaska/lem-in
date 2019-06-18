@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 16:37:44 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:41:05 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_data			*list_pop(t_node **list);
 void			list_push(t_node **node, t_data *data);
 unsigned int	list_size(t_node *list);
 void			free_list(t_node *list);
-void			free_list_arr(t_node **arr);
+void			free_list_arr(t_node **arr, int size, short fl);
 void			free_queue(t_queue *q);
 void			free_hashtab(t_hashtable *map);
 
@@ -142,6 +142,6 @@ void			ft_error(t_env *e);
 
 
 void	print_hash_val(t_hashtable *hash);
-void	bfs_controller(t_env *e);
+void	bfs_controller(t_env *e, int size);
 
 #endif

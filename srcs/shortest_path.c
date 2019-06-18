@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:35:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:44:32 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 		if (!(l1 = get_entry(ht, link1)))
 			return (-1);
 		if (!(l2 = get_entry(ht, link2)))
+		{
+			(l1) ? free(l1) : 0;
 			return (-1);
+		}
 		if (!ft_strcmp(l1->name, l2->name))
 			return (0);
 		ft_addedge(arr, l1, l2);
@@ -80,7 +83,7 @@ static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 	return (1);
 }
 
-void	bfs_controller(t_env *e)
+void	bfs_controller(t_env *e, int size)
 {
 	t_node	**arr;
 	t_bfs	*bs;
@@ -91,19 +94,21 @@ void	bfs_controller(t_env *e)
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
 											e->ht->curr_size, e->ants);
+	size = bs->vrt;
 	arr = init_nodes_arr(bs->vrt);
-	if ((process_links(arr, e->links, e->ht)) <= 0)
+	if (((process_links(arr, e->links, e->ht)) <= 0)\
+		|| !arr[bs->end->index] || !arr[bs->start->index])
 	{
 		free_bfs(bs);
-		free_list_arr(arr);
+		free_list_arr(arr, size, 0);
 		ft_error(e);
 	}
 	p_arr = get_paths_controller(arr, bs);
 	if (p_arr && p_arr[0])
 		print_res(e, p_arr, bs);
 	free_bfs(bs);
-	free_list_arr(arr);
-	(p_arr) ? free_list_arr(p_arr) : 0;
+	free_list_arr(arr, size, 0);
+	(p_arr) ? free_list_arr(p_arr, size, 1) : 0;
 	(!p_arr) ? ft_error(e) : 0;
 }
 /*

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:20:13 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 18:43:27 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:42:56 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@ void	free_list(t_node *list)
 	}
 }
 
-void	free_list_arr(t_node **arr)
+void	free_list_arr(t_node **arr, int size, short fl)
 {
 	int i;
 
 	if (!arr)
 		return ;
-	i = 0;
-	while (arr[i])
-		free_list(arr[i++]);
+	i = -1;
+	if (fl)
+		while (arr[++i])
+			free_list(arr[i]);
+	else
+		while (++i < size)
+			if (arr[i])
+				free_list(arr[i]);
 	free(arr);
 }
 
