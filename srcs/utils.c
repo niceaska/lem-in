@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 18:17:05 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 18:28:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ t_room	*get_room(char *line, t_env **env)
 	room->index = index;
 	if (!(ft_set_htval((*env)->ht, line, index)))
 	{
+		free(line);
+		free(room->name);
 		free(room);
 		ft_error(*env);
 	}

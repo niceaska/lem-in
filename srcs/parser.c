@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 17:56:06 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 18:31:23 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static t_env	*env_init(void)
 {
 	t_env	*env;
 
-	if (!(env = (t_env*)malloc(sizeof(t_env))))
+	if (!(env = (t_env *)malloc(sizeof(t_env))))
 		err_out(0, 0, 0);
 	env->start = NULL;
 	env->end = NULL;

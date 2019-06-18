@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 17:54:33 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 18:36:33 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	set_ants(char *line, t_env **env)
 			err_out(3, line, *env);
 		++i;
 	}
-	(*env)->ants = ft_atoi(line);
+	if (!((*env)->ants = ft_atoi(line)))
+		err_out(3, line, *env);
 }
 
 static void	set_soe(t_env **env, char c)
