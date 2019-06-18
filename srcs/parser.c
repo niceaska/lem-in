@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 15:13:42 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:56:19 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static t_env	*env_init(void)
 	env->links = NULL;
 	env->start = NULL;
 	env->end = NULL;
-	if (!(env->ht = init_hashtab(10000)))
+	if (!(env->ht = init_hashtab(HT_SIZE)))
 		ft_error(env);
 	return (env);
 }

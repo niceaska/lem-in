@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 15:24:10 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:26:02 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	parser_comment(char *line, t_env *env)
 
 void	set_rooms(char *line, t_env *env)
 {
-	static size_t	i = 2;
 	t_list	*ptr;
-	t_room *room;
+	t_room	*room;
+	static size_t	i = 2;
 
 	if (env->list == NULL)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/15 16:51:16 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:54:16 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ void	refresh_bfs(t_node **p_arr, t_bfs **bs)
 		}
 		i++;
 	}
+}
+
+int		*init_rooms(int vrt, int start_index, int ants)
+{
+	int		i;
+	int		*rooms;
+
+	i = 0;
+	if (!(rooms = (int *)malloc(sizeof(int) * vrt)))
+		return (NULL);
+	while (i < vrt)
+		rooms[i++] = 0;
+	rooms[start_index] = ants;
+	return (rooms);
 }
 
 void	ft_find_path(t_node **p_arr, t_bfs *bs, int i)
@@ -61,6 +75,27 @@ t_node	**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 }
 
 #include <stdio.h>
+
+void print_paths(t_node **p_arr)
+{
+	t_node *list;
+	int i;
+
+	i = 0;
+	list = 0;
+	while (p_arr[i])
+	{
+		list = p_arr[i];
+		while (list)
+		{
+			printf("%s ", list->data->name);
+			list = list->next;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 t_node	**get_paths_controller(t_node **arr, t_bfs *bs) 
 {
 	t_node **p_arr;
@@ -85,19 +120,7 @@ t_node	**get_paths_controller(t_node **arr, t_bfs *bs)
 		ft_find_path(p_arr, bs, i);
 		i++;
 	}
-	t_node *list;
-	i = 0;
-	list = 0;
-	while (p_arr[i])
-	{
-		list = p_arr[i];
-		while (list)
-		{
-			printf("%s ", list->data->name);
-			list = list->next;
-		}
-		printf("\n");
-		i++;
-	}
+	//print_paths(p_arr);
 	return (p_arr);
 }
+

@@ -6,12 +6,14 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:13:32 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 15:56:09 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LEMMIN_H
 # define FT_LEMMIN_H
+
+# define HT_SIZE 10000
 
 # include <libft.h>
 # include <stdlib.h>
@@ -127,10 +129,12 @@ void			free_hashtab(t_hashtable *map);
 
 void			ft_addedge(t_node **arr, t_data *start, t_data *end);
 t_data			*init_data(char *name, int index);
+int				*init_rooms(int vrt, int start_index, int ants);
 
 int				ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
 t_hashtable		*init_hashtab(size_t size);
 t_data			*get_entry(t_hashtable *hash_tab, const char *key);
+void			print_res(t_env *e, t_node **p_arr, t_bfs *bs);
 
 void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j);
 void			free_env(t_env *e);
