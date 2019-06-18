@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 17:44:32 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 19:30:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ int				bfs(t_node **arr, t_bfs *bs)
 	return (0); 
 }
 
+static int		link_free_onerr(char *link1, char *link2)
+{
+	(link1) ? free(link1) : 0;
+	(link2) ? free(link2) : 0;
+	return (-1);
+}
+
 static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 {
 	char	*link1;
@@ -61,23 +68,21 @@ static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
 	t_data	*l1;
 	t_data	*l2;
 
+	link1 = NULL;
+	link2 = NULL;
 	while (links)
 	{
 		link2 = ft_strdup(ft_strchr(links->content, '-') + 1);
 		link1 = ft_strdup(links->content);
 		*(ft_strchr(link1, '-')) = '\0';
-		if (!(l1 = get_entry(ht, link1)))
-			return (-1);
-		if (!(l2 = get_entry(ht, link2)))
-		{
-			(l1) ? free(l1) : 0;
-			return (-1);
-		}
+		if (!(l1 = get_entry(ht, link1))\
+			|| !(l2 = get_entry(ht, link2)))
+			return (link_free_onerr(link1, link2));
 		if (!ft_strcmp(l1->name, l2->name))
 			return (0);
 		ft_addedge(arr, l1, l2);
-		free(link2);
-		free(link1);
+		ft_memdel((void *)&link2);
+		ft_memdel((void *)&link1);
 		links = links->next; 
 	}
 	return (1);
