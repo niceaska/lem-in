@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:56:09 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 16:37:44 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void			err_out(int e, t_env *env);
 
 /*	Parser */
 t_env			*parser(char *file);
-void			set_rooms(char *line, t_env *env);
-void			parser_comment(char *line, t_env *env);
-void			set_ants(char *line, t_env *env);
+void			set_rooms(char *line, t_env **env);
+void			parser_comment(char *line, t_env **env);
+void			set_ants(char *line, t_env **env);
 void			set_links(char *line, t_env **env);
 t_room			*get_room(char *line, t_env **env);
 

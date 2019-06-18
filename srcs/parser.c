@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 15:56:19 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 16:58:53 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void			err_out(int e, t_env *env)
 	if (e == 2)
 		write(2, "Error! Can not open file\n", 25);
 	if (e == 3)
-		write(2, "Error! Numbers of ants have invalid symbol\n", 44);
+		write(2, "Error! Numbers of ants have invalid symbol\n", 43);
 	if (e == 4)
-		write(2, "Error! Dublicate Start/End\n", 26);
+		write(2, "Error! Dublicate Start/End\n", 27);
 	if (e == 4)
 		write(2, "Error! Bad symbol\n", 18);
 	return (ft_error(env));
@@ -51,53 +51,53 @@ static int		check_chr(char *line)
 	return (f);
 }
 */
-static void		check_line(char *line, t_env *env)
+static void		check_line(char *line, t_env **env)
 {
 	static unint	count = 0;
 
-	if (count == 0 && line[0] != '#' && (count = 1))
+	if (line && count == 0 && line[0] != '#' && (count = 1))
 		set_ants(line, env);
-	else if (line[0] == '#')
+	else if (line && line[0] == '#')
 		parser_comment(line, env);
-	else if (ft_strchr(line, '-'))
-		set_links(line, &env);
-	else if (count == 1)
+	else if (line && ft_strchr(line, '-'))
+		set_links(line, env);
+	else if (line && count == 1)
 		set_rooms(line, env);
 	else
-		err_out(2, env);
+		err_out(2, *env);
 }
 
-static void		read_data(int fd, t_env *env)
+static void		read_data(int fd, t_env **env)
 {
 	char	*line;
 	int		rd;
 
 	while ((rd = get_next_line(fd, &line)) > 0)
 	{
-		if (!*line)
+		if (!line || !*line)
 		{
-			free(line);
-			ft_error(env);
+			(line) ? free(line) : 0;
+			ft_error(*env);
 		}
 		check_line(line, env);
 		free(line);
 	}
 	(line) ? free(line) : 0;
 	if (rd < 0)
-		ft_error(env);
+		ft_error(*env);
 }
 
 static t_env	*env_init(void)
 {
 	t_env	*env;
 
-	env = NULL;
 	if (!(env = (t_env*)malloc(sizeof(t_env))))
-		err_out(0, env);
-	env->list = NULL;
-	env->links = NULL;
+		err_out(0, 0);
 	env->start = NULL;
 	env->end = NULL;
+	env->list = NULL;
+	env->links = NULL;
+
 	if (!(env->ht = init_hashtab(HT_SIZE)))
 		ft_error(env);
 	return (env);
@@ -113,7 +113,7 @@ t_env			*parser(char *file)
 	env = env_init();
 	// if ((fd = open(file, O_RDONLY)) == -1)
 	// 	err_out(1);
-	read_data(0, env);
+	read_data(0, &env);
 	// close(fd);
 	return (env);
 }

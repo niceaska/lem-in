@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 15:24:03 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/18 17:02:38 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_room		*get_room_coord(char *line, t_room *room,
 
 	i = 0;
 	parse = ft_strchr(line, ' ');
-	if (!(check_coords(parse + 1)))
+	if (!parse || !(check_coords(parse + 1)))
 	{
 		free(room);
 		ft_error(*env);
