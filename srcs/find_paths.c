@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 20:26:14 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:38:19 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,27 @@ void print_paths(t_node **p_arr)
 		i++;
 	}
 }
+static short try_get_more_paths(t_node **p_arr, t_node **arr, t_bfs **bs)
+{
+	int j;
+
+	j = -1;
+	init_bfs_arr(bs);
+	while (p_arr[++j])
+		if (p_arr[j]->next->next)
+			(*bs)->v[p_arr[j]->next->next->data->index] = 1;
+	return (!bfs(arr, *bs) ? 1 : 0);
+}
 
 t_node	**get_paths_controller(t_node **arr, t_bfs *bs) 
 {
 	t_node **p_arr;
 	int i;
 	int j;
+	short fl;
 
 	i = 0;
+	fl = 0;
 	p_arr = init_nodes_arr(bs->ants);
 	p_arr = get_all_paths(p_arr, 0, arr, bs);
 	while (p_arr[i])
@@ -113,9 +126,9 @@ t_node	**get_paths_controller(t_node **arr, t_bfs *bs)
 		init_bfs_arr(&bs);
 		while (p_arr[++j])
 			bs->v[p_arr[j]->next->data->index] = 1;
-		if (!bfs(arr, bs))
-			break ;
-		if (bs->d[bs->end->index] > (int)list_size(p_arr[0]) + 1)
+		if (!bfs(arr, bs) && !fl)
+			fl = try_get_more_paths(p_arr, arr, &bs);
+		if (fl || bs->d[bs->end->index] > (int)list_size(p_arr[0]) + 1)
 			break ;
 		ft_find_path(p_arr, bs, i);
 		i++;

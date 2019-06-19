@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 21:29:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 13:49:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 		j = 0;
 		while (!ants[j]->next)
 			j++;
-		i = j;
-		while (i < bs->ants)
+		i = j - 1;
+		while (++i < bs->ants)
 		{
 			if (ants[i] && ants[i]->next && rooms[ants[i]->data->index] && \
 			(!rooms[ants[i]->next->data->index] \
 			|| (ants[i]->next->data->index == bs->end->index)))
-				if (print_ant_move(rooms, ants, i, j)&& ants[i] && !ants[i]->next \
+				if (print_ant_move(rooms, ants, i, j)\
+					&& ants[i] && !ants[i]->next \
 					&& ants[i + 1]->next->data->index == bs->end->index)
 					break;
-			i++;	
 		}
 		ft_printf("\n");
 	}
