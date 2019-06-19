@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 20:11:30 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:52:31 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void			set_ants(char *line, t_env **env);
 void			set_links(char *line, t_env **env);
 t_room			*get_room(char *line, t_env **env, short comm);
 
+t_env			*env_init(void);
 
 t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants);
 int				*init_arr(int vert, char c);

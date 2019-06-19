@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 14:38:19 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:55:51 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,6 @@ void	refresh_bfs(t_node **p_arr, t_bfs **bs)
 		}
 		i++;
 	}
-}
-
-int		*init_rooms(int vrt, int start_index, int ants)
-{
-	int		i;
-	int		*rooms;
-
-	i = 0;
-	if (!(rooms = (int *)malloc(sizeof(int) * vrt)))
-		return (NULL);
-	while (i < vrt)
-		rooms[i++] = 0;
-	rooms[start_index] = ants;
-	return (rooms);
 }
 
 void	ft_find_path(t_node **p_arr, t_bfs *bs, int i)

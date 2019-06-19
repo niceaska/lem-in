@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 20:10:46 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:52:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,7 @@ void			err_out(int e, char *line, t_env *env)
 		write(2, "Error! Bad symbol\n", 18);
 	return (ft_error(env));
 }
-/*
-static int		check_chr(char *line)
-{
-	unint	i;
-	unint	f;
 
-	i = 0;
-	f = 0;
-	while (line[i])
-	{
-		if (line[i] == '\n' && i != 0 && line[i + 1] != '\0')
-		{
-			if (f == 1)
-				err_out(5);
-			f = 1;
-		}
-		++i;
-	}
-	return (f);
-}
-*/
 static void		check_line(char *line, t_env **env)
 {
 	static unint	count = 0;
@@ -88,21 +68,6 @@ static void		read_data(int fd, t_env **env)
 		ft_error(*env);
 }
 
-static t_env	*env_init(void)
-{
-	t_env	*env;
-
-	if (!(env = (t_env *)malloc(sizeof(t_env))))
-		err_out(0, 0, 0);
-	env->start = NULL;
-	env->end = NULL;
-	env->list = NULL;
-	env->links = NULL;
-	if (!(env->ht = init_hashtab(HT_SIZE)))
-		ft_error(env);
-	return (env);
-}
-
 t_env			*parser(char *file)
 {
 	t_env   *env;
@@ -116,15 +81,4 @@ t_env			*parser(char *file)
 	read_data(0, &env);
 	// close(fd);
 	return (env);
-}
-#include <time.h>
-
-int		main(void)
-{
-	t_env	*env;
-
-	env = parser("lll");;
-	bfs_controller(env, NULL, NULL, 0);
-	free_env(env);
-	exit(EXIT_SUCCESS);
 }

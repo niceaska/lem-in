@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 13:49:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 14:48:49 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 	while (rooms[bs->end->index] != bs->ants)
 	{
 		j = 0;
-		while (!ants[j]->next)
+		while (!ants[j] || !ants[j]->next)
 			j++;
 		i = j - 1;
 		while (++i < bs->ants)

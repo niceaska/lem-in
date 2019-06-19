@@ -6,7 +6,7 @@
 #    By: lgigi <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 18:28:17 by lgigi             #+#    #+#              #
-#    Updated: 2019/06/18 12:33:38 by lgigi            ###   ########.fr        #
+#    Updated: 2019/06/19 14:56:38 by lgigi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT_DIR = ./libft/
 INC = includes/
 SRC_DIR = ./srcs/
-FILES = ft_exit.c utils.c parser.c setters.c print.c hashmap.c find_paths.c  ft_free.c  ft_init.c  ft_queue.c  list_utils.c  shortest_path.c
+FILES = main.c room_utils.c ft_exit.c utils.c parser.c setters.c print.c hashmap.c find_paths.c  ft_free.c  ft_init.c  ft_queue.c  list_utils.c  shortest_path.c
 SRCS = $(addprefix $(SRC_DIR), $(FILES))
 OBJS = $(FILES:.c=.o)
 
