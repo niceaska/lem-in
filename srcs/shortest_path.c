@@ -6,11 +6,10 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 20:12:42 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 15:02:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "lemmin.h"
 
 static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
@@ -107,7 +106,7 @@ void	bfs_controller(t_env *e, t_node **arr,
 		free_list_arr(arr, size, 0);
 		ft_error(e);
 	}
-	p_arr = get_paths_controller(arr, bs);
+	p_arr = get_paths_controller(arr, bs, 0, 0);
 	if (p_arr && p_arr[0])
 		print_res(e, p_arr, bs);
 	free_bfs(bs);
@@ -115,53 +114,3 @@ void	bfs_controller(t_env *e, t_node **arr,
 	(p_arr) ? free_list_arr(p_arr, size, 1) : 0;
 	(!p_arr) ? ft_error(e) : 0;
 }
-/*
-int main() 
-{ 
-	t_node **arr;
-	t_bfs *bs;
-	t_data *one = init_data("one", 0);
-	t_data *start = init_data("start", 1);
-	t_data	*end = init_data("end", 2);
-	t_data	*two = init_data("two", 3);
-	t_data	*tree = init_data("tree", 4);
-
-
-	arr = 0;
-	bs = init_bfs(start, end, 5, 6);
-	arr = init_nodes_arr(bs->vrt);
-
-	t_data **all_d = malloc(sizeof(t_data *) * bs->vrt);
-	all_d[0] = one;
-	all_d[1] = start;
-	all_d[2] = end;
-	all_d[3] = two;
-	all_d[4] = tree;
-	ft_addedge(arr, start,one);
-	ft_addedge(arr, start,two);
-	ft_addedge(arr, two, tree);
-	ft_addedge(arr, tree, end); 
-	ft_addedge(arr, end, one); 
-	//ft_addedge(arr, 5, 3); 
-	//ft_addedge(arr, 4, 6); 
-	//ft_addedge(arr, 7, 6); 
-	//ft_addedge(arr, 2, 7); 
-	//ft_addedge(arr, 4, 5); 
-	//ft_addedge(arr, 5, 2);
-	//ft_addedge(arr, 0, 1);
-
-
-	t_node **p_arr = get_paths_controller(arr, bs);
-	print_moves(p_arr, bs);
-	for(int i = 0; i < bs->vrt; i++)
-	{
-		free(all_d[i]->name);
-		free(all_d[i]);
-	}
-	free(all_d);
-	free_bfs(bs);
-	free_list_arr(arr);
-	free_list_arr(p_arr);
-
-	return 0;
-}*/

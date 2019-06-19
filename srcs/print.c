@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 14:48:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 15:32:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int		print_ant_move(int *rooms, t_node **ants, int i, int j)
 	if (i - 1 >= j)
 		ft_printf(" ");
 	if (ants[i]->next && ants[i + 1] && ants[i + 1]->next
-		&& ants[i + 1]->next->data->index == ants[i]->next->data->index\
-		&& ants[i]->data->index == ants[i + 1]->data->index )
+		&& NXTIND(ants[i + 1]) == NXTIND(ants[i])\
+		&& CURRIND(ants[i]) == CURRIND(ants[i + 1]))
 		ret = 1;
-	rooms[ants[i]->data->index]--;
+	rooms[CURRIND(ants[i])]--;
 	ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
-	rooms[ants[i]->next->data->index]++;
+	rooms[NXTIND(ants[i])]++;
 	ants[i] = ants[i]->next;
 	return (ret);
 }
@@ -61,24 +61,21 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 	int		*rooms;
 	t_node	**ants;
 
-	rooms = init_rooms(bs->vrt, bs->start->index, bs->ants);
+	rooms = init_rooms(bs->vrt, START, bs->ants);
 	ants = init_ants_arr(p_arr, bs->ants);
-	while (rooms[bs->end->index] != bs->ants)
+	while (rooms[END] != bs->ants)
 	{
 		j = 0;
-		while (!ants[j] || !ants[j]->next)
+		while (!ants[j]->next || (rooms[NXTIND(ants[j])]\
+		&& NXTIND(ants[j]) != END))
 			j++;
 		i = j - 1;
 		while (++i < bs->ants)
-		{
-			if (ants[i] && ants[i]->next && rooms[ants[i]->data->index] && \
-			(!rooms[ants[i]->next->data->index] \
-			|| (ants[i]->next->data->index == bs->end->index)))
-				if (print_ant_move(rooms, ants, i, j)\
-					&& ants[i] && !ants[i]->next \
-					&& ants[i + 1]->next->data->index == bs->end->index)
+			if (ants[i] && ants[i]->next && rooms[CURRIND(ants[i])] && \
+			(!rooms[NXTIND(ants[i])] || (NXTIND(ants[i]) == END)))
+				if (print_ant_move(rooms, ants, i, j) && ants[i]\
+				&& !ants[i]->next && NXTIND(ants[i + 1]) == END)
 					break;
-		}
 		ft_printf("\n");
 	}
 	free(ants);
