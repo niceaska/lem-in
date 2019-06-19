@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 15:03:08 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 15:40:44 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,6 @@ t_node	**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 	return (get_all_paths(p_arr, i + 1, arr, bs));
 }
 
-#include <stdio.h>
-
-void print_paths(t_node **p_arr)
-{
-	t_node *list;
-	int i;
-
-	i = 0;
-	list = 0;
-	while (p_arr[i])
-	{
-		list = p_arr[i];
-		while (list)
-		{
-			printf("%s ", list->data->name);
-			list = list->next;
-		}
-		printf("\n");
-		i++;
-	}
-}
 static short try_get_more_paths(t_node **p_arr, t_node **arr, t_bfs **bs)
 {
 	int j;

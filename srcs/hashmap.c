@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/17 20:19:01 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 15:41:55 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,50 +121,3 @@ t_data		*get_entry(t_hashtable *hash_tab, const char *key)
 		entry = entry->next;
 	return ((entry) ? entry->data : NULL);
 }
-
-/*
-** utility printing function
-*/
-
-#include <stdio.h>
-
-
-void	print_hash_val(t_hashtable *hash)
-{
-	int i;
-
-	i = 0;
-	while ((size_t)i < hash->size)
-	{
-		if (hash->tab[i])
-		{
-			printf("hashtab array index - %d\n", i);
-			printf("hashtab list\n");
-			t_entry *entr = hash->tab[i];
-			while (entr)
-			{
-				printf("list name - %s\n", entr->data->name);
-				printf("list value - %d\n", entr->data->index);
-				entr = entr->next;
-			}
-		}
-		i++;
-	}
-}
-
-/*
-int main()
-{
-	int i = 0;
-	char test[] = "AB";
-	t_hashtable *hash = init_hashtab(100);
-	while (i < 100)
-	{
-		ft_set_htval(hash, test, i);
-		i++;
-		test[0]++;
-	}
-	print_hash_val(hash);
-	free_hashtab(hash);
-}
-*/
