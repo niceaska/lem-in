@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:49:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 14:52:17 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 18:23:32 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		main(void)
 
 	env = parser("lll");;
 	bfs_controller(env, NULL, NULL, 0);
+	//print_hash_val(env->ht);
 	free_env(env);
 	exit(EXIT_SUCCESS);
 }

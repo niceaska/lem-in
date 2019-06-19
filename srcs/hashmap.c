@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 15:41:55 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 18:22:53 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,17 @@ static int		set_value(t_entry **entry, t_entry *new_entry)
 		return (1);
 	}
 	traverse = *entry;
+	if (!ft_strcmp(traverse->key, new_entry->key))
+		return (0);
+	if (traverse->coords[0] == new_entry->coords[0]\
+		&& traverse->coords[1] == new_entry->coords[1])
+		return (0);
 	while (traverse->next)
 	{
 		if (!ft_strcmp(traverse->key, new_entry->key))
+			return (0);
+		if (traverse->coords[0] == new_entry->coords[0]\
+			&& traverse->coords[1] == new_entry->coords[1])
 			return (0);
 		traverse = traverse->next;
 	}
@@ -84,7 +92,7 @@ static int		set_value(t_entry **entry, t_entry *new_entry)
 	return (1);
 }
 
-int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
+int		ft_set_htval(t_hashtable *hash_tab, const char *key, int *coor, int val)
 {
 	unsigned int	hash_id;
 	t_entry			*new_entry;
@@ -97,6 +105,8 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int val)
 	if (!(new_entry->data = init_data((char *)key, val)))
 		return (0);
 	new_entry->key = new_entry->data->name;
+	new_entry->coords[0] = coor[0];
+	new_entry->coords[1] = coor[1];
 	new_entry->next = NULL;
 	if (!set_value(&hash_tab->tab[hash_id], new_entry))
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:07:40 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/18 14:15:13 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 18:01:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void			ft_error(t_env *e)
 {
 	if (e)
 		free_env(e);
-	write(2, "ERROR\n", 6);
+	write(1, "ERROR\n", 6);
 	exit(EXIT_FAILURE);
 }

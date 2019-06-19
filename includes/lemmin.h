@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 15:39:10 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 18:10:46 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_entry
 {
 	char			*key;
 	t_data			*data;
+	int				coords[2];
 	struct s_entry	*next;
 }					t_entry;
 
@@ -122,7 +123,8 @@ void				free_hashtab(t_hashtable *map);
 void				ft_addedge(t_node **arr, t_data *start, t_data *end);
 t_data				*init_data(char *name, int index);
 int					*init_rooms(int vrt, int start_index, int ants);
-int					ft_set_htval(t_hashtable *hash_tab, const char *key, int val);
+int					ft_set_htval(t_hashtable *hash_tab, const char *key,
+													int *coor, int val);
 t_hashtable			*init_hashtab(size_t size);
 t_data				*get_entry(t_hashtable *hash_tab, const char *key);
 void				print_res(t_env *e, t_node **p_arr, t_bfs *bs);

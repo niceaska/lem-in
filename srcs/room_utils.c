@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 17:44:16 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 18:14:49 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ t_room	*get_room(char *line, t_env **env, short comm)
 	room->name = ft_strdup(line);
 	room->index = (comm) ? 4294967295U : index;
 	room->comment = comm;
-	if (!comm && !(ft_set_htval((*env)->ht, line, index)))
+	if (room->name[0] == 'L' || (!comm &&\
+	!(ft_set_htval((*env)->ht, line, room->coords, index))))
 	{
 		free(line);
 		free(room->name);
