@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 15:32:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 19:28:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,29 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 	free(rooms);
 }
 
-static void		print_rooms_links(t_list *rooms, t_list *links)
+static void		print_rooms(t_list *start, t_list *end, 
+									t_list *rooms)
 {
 	while (rooms)
 	{
 		ft_putstr(((t_room *)rooms->content)->name);
-		write(1, " ", 1);
+		if (!ft_strcmp(((t_room *)rooms->content)->name, "##start"))
+			ft_printf("\n%s %d %d", ((t_room *)start->content)->name,
+											((t_room *)start->content)->coords[0],
+											((t_room *)start->content)->coords[1]);
+		if (!ft_strcmp(((t_room *)rooms->content)->name, "##end"))
+			ft_printf("\n%s %d %d", ((t_room *)end->content)->name,
+											((t_room *)end->content)->coords[0],
+											((t_room *)end->content)->coords[1]);
 		if (!((t_room *)rooms->content)->comment)
 		{
+			write(1, " ", 1);
 			ft_putnbr(((t_room *)rooms->content)->coords[0]);
 			write(1, " ", 1);
 			ft_putnbr(((t_room *)rooms->content)->coords[1]);
 		}
 		write(1, "\n", 1);
 		rooms = rooms->next;
-	}
-	while (links)
-	{
-		ft_putendl(links->content);
-		links = links->next;
 	}
 }
 
@@ -111,15 +115,12 @@ void	print_res(t_env *e, t_node **p_arr, t_bfs *bs)
 
 	rooms = e->list;
 	links = e->links;
-	ft_putnbr(e->ants);
-	write(1, "\n", 1);
-	ft_printf("##start\n%s %d %d\n", ((t_room *)e->start->content)->name,
-									((t_room *)e->start->content)->coords[0],
-									((t_room *)e->start->content)->coords[1]);
-	ft_printf("##end\n%s %d %d\n", ((t_room *)e->end->content)->name,
-									((t_room *)e->end->content)->coords[0],
-									((t_room *)e->end->content)->coords[1]);
-	print_rooms_links(rooms, links);
+	print_rooms(e->start, e->end, rooms);
+	while (links)
+	{
+		ft_putendl(links->content);
+		links = links->next;
+	}
 	write(1, "\n", 1);
 	return (print_moves(p_arr, bs, 0, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/18 19:09:59 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 19:34:56 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_ants(char *line, t_env **env)
 	}
 	if (!((*env)->ants = ft_atoi(line)))
 		err_out(3, line, *env);
+	set_rooms(line, env, 1);
 }
 
 static void	set_soe(t_env **env, char c)
@@ -56,9 +57,15 @@ static void	set_soe(t_env **env, char c)
 void	parser_comment(char *line, t_env **env)
 {
 	if (line && !ft_strcmp(line, "##start"))
+	{
 		set_soe(env, 's');
+		set_rooms(line, env, 1);
+	}
 	else if (line && !ft_strcmp(line, "##end"))
+	{
 		set_soe(env, 'e');
+		set_rooms(line, env, 1);
+	}
 	else
 		set_rooms(line, env, 1);
 

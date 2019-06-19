@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/19 18:00:40 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 19:36:45 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,15 @@ static void		check_line(char *line, t_env **env)
 
 	if (line && count == 0 && line[0] != '#' && (count = 1))
 		set_ants(line, env);
-	else if (line && line[0] == '#')
+	else if (line && line[0] == '#' && count < 2)
 		parser_comment(line, env);
-	else if (line && ft_strchr(line, '-'))
+	else if (line && (ft_strchr(line, '-') || count == 2))
+	{
+		if (!ft_strchr(line, '-') && line[0] != '#')
+			err_out(2, line, *env);
 		set_links(line, env);
+		count = 2;
+	}
 	else if (line && count == 1)
 		set_rooms(line, env, 0);
 	else
