@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 17:27:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 22:33:10 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 22:34:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ unsigned int	list_size(t_node *list)
 	return (i);
 }
 
-void	push_back(t_node **node, t_data *data)
+int		push_back(t_node **node, t_data *data, short graph)
 {
 	t_node *list;
 	t_node *new;
@@ -38,17 +38,22 @@ void	push_back(t_node **node, t_data *data)
 	list = *node;
 	new = 0;
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
-		return ;
+		return (0);
 	new->data = data;
 	new->next = 0;
 	if (!*node)
 	{
 		*node = new;
-		return ;
+		return (1);
 	}
 	while (list->next)
+	{
+		if (graph && !(ft_strcmp(list->data->name, new->data->name)))
+			return (0);
 		list = list->next;
+	}
 	list->next = new;
+	return (1);
 }
 
 void	list_push(t_node **node, t_data *data)

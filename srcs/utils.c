@@ -6,16 +6,19 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 14:56:02 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 22:15:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-void ft_addedge(t_node **arr, t_data *start, t_data *end) 
+int ft_addedge(t_node **arr, t_data *start, t_data *end) 
 { 
-	push_back(&(arr[start->index]), end); 
-	push_back(&(arr[end->index]), start); 
+	if (!(push_back(&(arr[start->index]), end, 1)))
+		return (0);
+	if (!(push_back(&(arr[end->index]), start, 1)))
+		return (0);
+	return (1); 
 }
 
 t_data	*init_data(char *name, int index)

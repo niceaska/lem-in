@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 17:55:46 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 22:30:46 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	ft_find_path(t_node **p_arr, t_bfs *bs, int i)
 
 	path = 0;
 	crawl = bs->end->index; 
-	push_back(&path, bs->end);
+	push_back(&path, bs->end, 0);
 	while (bs->p[crawl] != NULL)
 	{ 
 		list_push(&path, bs->p[crawl]); 
 		crawl = bs->p[crawl]->index; 
 	}
 	while (!list_empty(path))
-		push_back(&p_arr[i], list_pop(&path));
+		push_back(&p_arr[i], list_pop(&path), 0);
 	free_list(path);
 }
 

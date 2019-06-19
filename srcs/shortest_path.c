@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 15:02:20 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 22:27:13 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,32 @@ static int		link_free_onerr(char *link1, char *link2)
 	return (-1);
 }
 
-static int		process_links(t_node **arr, t_list *links, t_hashtable *ht)
+static int		process_links(t_node **arr, char *link1,
+								t_list *links, t_hashtable *ht)
 {
-	char	*link1;
 	char	*link2;
 	t_data	*l1;
 	t_data	*l2;
 
-	link1 = NULL;
 	link2 = NULL;
 	while (links)
 	{
-		link2 = ft_strdup(ft_strchr(links->content, '-') + 1);
-		link1 = ft_strdup(links->content);
-		*(ft_strchr(link1, '-')) = '\0';
-		if (!(l1 = get_entry(ht, link1))\
-			|| !(l2 = get_entry(ht, link2)))
-			return (link_free_onerr(link1, link2));
-		if (!ft_strcmp(l1->name, l2->name))
-			return (0);
-		ft_addedge(arr, l1, l2);
-		ft_memdel((void *)&link2);
-		ft_memdel((void *)&link1);
-		links = links->next; 
+		if (((char *)links->content)[0] != '#')
+		{
+			link2 = ft_strdup(ft_strchr(links->content, '-') + 1);
+			link1 = ft_strdup(links->content);
+			*(ft_strchr(link1, '-')) = '\0';
+			if (!(l1 = get_entry(ht, link1))\
+				|| !(l2 = get_entry(ht, link2)))
+				return (link_free_onerr(link1, link2));
+			if (!ft_strcmp(l1->name, l2->name))
+				return (0);
+			if (!ft_addedge(arr, l1, l2))
+				return (link_free_onerr(link1, link2));
+			ft_memdel((void *)&link2);
+			ft_memdel((void *)&link1);
+		}
+		links = links->next;
 	}
 	return (1);
 }
@@ -99,7 +102,7 @@ void	bfs_controller(t_env *e, t_node **arr,
 											e->ht->curr_size, e->ants);
 	size = bs->vrt;
 	arr = init_nodes_arr(bs->vrt);
-	if (((process_links(arr, e->links, e->ht)) <= 0)\
+	if (((process_links(arr, 0, e->links, e->ht)) <= 0)\
 		|| !arr[bs->end->index] || !arr[bs->start->index])
 	{
 		free_bfs(bs);
@@ -111,6 +114,7 @@ void	bfs_controller(t_env *e, t_node **arr,
 		print_res(e, p_arr, bs);
 	free_bfs(bs);
 	free_list_arr(arr, size, 0);
+	(!p_arr[0]) ? ft_memdel((void *)&p_arr) : 0;
 	(p_arr) ? free_list_arr(p_arr, size, 1) : 0;
 	(!p_arr) ? ft_error(e) : 0;
 }

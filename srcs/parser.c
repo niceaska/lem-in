@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/19 19:36:45 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/19 20:46:44 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void		read_data(int fd, t_env **env)
 	char	*line;
 	int		rd;
 
+	line = NULL;
 	while ((rd = get_next_line(fd, &line)) > 0)
 	{
 		if (!line || !*line)
@@ -66,7 +67,7 @@ static void		read_data(int fd, t_env **env)
 			ft_error(*env);
 		}
 		check_line(line, env);
-		free(line);
+		ft_memdel((void *)&line);
 	}
 	(line) ? free(line) : 0;
 	if (rd < 0)
