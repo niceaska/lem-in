@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 18:22:53 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 14:51:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_hashtable		*init_hashtab(size_t size)
 ** http://www.partow.net/programming/hashfunctions/#PJWHashFunction
 */
 
-static unsigned int		get_hash(t_hashtable *hash_tab, const char *key)
+static unsigned int		get_hash(t_hashtable *hash_tab, int *coor, const char *key)
 {
 	size_t	hash;
 	char	*str;
@@ -51,11 +51,16 @@ static unsigned int		get_hash(t_hashtable *hash_tab, const char *key)
 
 	str = (char *)key;
 	hash = 5381;
-    while (*str)
+    while (*str && coor == NULL)
 	{
 		c = *str;
 		hash = ((hash << 5) + hash) + c;
 		str++;
+	}
+	if (coor)
+	{
+		hash = ((hash << 5) + hash) + coor[0];
+		hash = ((hash << 5) + hash) + coor[1];
 	}
 	return (hash % hash_tab->size);
 }
@@ -99,7 +104,8 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int *coor, int val)
 
 	if (!key || !hash_tab)
 		return (0);
-	hash_id = get_hash(hash_tab, key);
+	hash_id = (val == -42) ? get_hash(hash_tab, coor, key)\
+							: get_hash(hash_tab, 0, key);
 	if (!(new_entry = (t_entry *)malloc(sizeof(t_entry))))
 		return (0);
 	if (!(new_entry->data = init_data((char *)key, val)))
@@ -124,7 +130,7 @@ t_data		*get_entry(t_hashtable *hash_tab, const char *key)
 
 	if (!key)
 		return (0);
-	entry = hash_tab->tab[get_hash(hash_tab, key)];
+	entry = hash_tab->tab[get_hash(hash_tab, 0, key)];
 	if (!entry || !entry->key)
 		return (0);
 	while (entry && ft_strcmp(entry->key, key))

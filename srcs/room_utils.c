@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 18:14:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 14:51:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ t_room	*get_room(char *line, t_env **env, short comm)
 	room->index = (comm) ? 4294967295U : index;
 	room->comment = comm;
 	if (room->name[0] == 'L' || (!comm &&\
-	!(ft_set_htval((*env)->ht, line, room->coords, index))))
+	!(ft_set_htval((*env)->ht, line, room->coords, index)))\
+	|| (((*env)->f & CHECK_FL) &&\
+	ft_set_htval((*env)->ht, line, room->coords, -42)))
 	{
 		free(line);
 		free(room->name);

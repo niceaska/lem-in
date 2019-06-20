@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/19 19:34:56 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 14:34:34 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	set_soe(t_env **env, char c)
 	char	*line;
 	t_room	*room;
 
-	get_next_line(0, &line);
+	get_next_line((*env)->fd, &line);
 	if (c == 's')
 	{
 		if ((*env)->start != NULL)

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/19 20:46:44 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 14:33:37 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,13 @@ static void		read_data(int fd, t_env **env)
 		ft_error(*env);
 }
 
-t_env			*parser(char *file)
+t_env			*parser(int ac, char **argv)
 {
 	t_env   *env;
-	//int		fd;
 
-	if (file)
-		file  = 0;
-	env = env_init();
-	// if ((fd = open(file, O_RDONLY)) == -1)
-	// 	err_out(1);
-	read_data(0, &env);
-	// close(fd);
+	env = env_init(ac, argv);
+	read_data(env->fd, &env);
+//	if (env->f & FILE_FL)
+//		close(env->fd);
 	return (env);
 }

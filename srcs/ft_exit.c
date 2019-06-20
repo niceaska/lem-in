@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:07:40 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 18:01:25 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 14:54:17 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ void			free_env(t_env *e)
 		ft_lstdel(&(e->links), list_del);
 	if (e->ht)
 		free_hashtab(e->ht);
+	if ((e->f & CHECK_FL) && e->coor_ht)
+		free_hashtab(e->coor_ht);
 	free(e);
 }
 
 void			ft_error(t_env *e)
 {
+	if (e && (e->f & FILE_FL))
+		close(e->fd);
 	if (e)
 		free_env(e);
 	write(1, "ERROR\n", 6);
