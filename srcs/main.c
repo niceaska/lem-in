@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:49:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:19:32 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 15:21:53 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static char	*parse_argv(short *f, int ac, char **argv)
 	}
 	return (file);
 }
-
-
 
 t_env	*env_init(int ac, char **argv)
 {

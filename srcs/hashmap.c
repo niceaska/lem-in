@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 14:51:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 15:39:12 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,12 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int *coor, int val)
 	new_entry->coords[1] = coor[1];
 	new_entry->next = NULL;
 	if (!set_value(&hash_tab->tab[hash_id], new_entry))
+	{
+		free(new_entry->data->name);
+		free(new_entry->data);
+		free(new_entry);
 		return (0);
+	}
 	hash_tab->curr_size++;
 	return (1);
 }
