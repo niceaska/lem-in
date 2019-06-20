@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:49:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:21:53 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 21:40:04 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@ static void		print_usage(void)
 static char	*parse_argv(short *f, int ac, char **argv)
 {
 	int		i;
-	char	*file;
 
 	i = 1;
-	file = NULL;
 	while (i < ac)
 	{
 		if (!(ft_strcmp("-c", argv[i])))
 			*f |= CHECK_FL;
+		else if (!(ft_strcmp("--debug", argv[i])))
+			*f |= DEBUG_FL;
+		else if (!(ft_strcmp("--debug=ht", argv[i])))
+			*f |= DEBUG_HT;
 		else if (!(ft_strcmp("-f", argv[i])))
 		{
 			*f |= FILE_FL;
-			file = argv[i + 1];
-			break ;
+			return  (argv[i + 1]);
 		}
 		else
 		{
@@ -46,7 +47,7 @@ static char	*parse_argv(short *f, int ac, char **argv)
 		}
 		i++;
 	}
-	return (file);
+	return (NULL);
 }
 
 t_env	*env_init(int ac, char **argv)
@@ -83,13 +84,13 @@ int		main(int ac, char **argv)
 {
 	t_env	*env;
 
-	if (ac > 4 || (argv[1] &&!ft_strcmp("--help", argv[1])))
+	if (ac > 5 || (argv[1] &&!ft_strcmp("--help", argv[1])))
 	{
 		print_usage();
 		exit(EXIT_FAILURE);
 	}
 	env = parser(ac, argv);
-	bfs_controller(env, NULL, NULL, 0);
+	bfs_controller(env, NULL, NULL, (int)env->ants);
 	//print_hash_val(env->ht);
 	free_env(env);
 	exit(EXIT_SUCCESS);

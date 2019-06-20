@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 18:00:30 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 21:36:27 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,9 @@ void	bfs_controller(t_env *e, t_node **arr,
 	bs = init_bfs(get_entry(e->ht, ((t_room*)e->start->content)->name),
 					get_entry(e->ht, ((t_room*)e->end->content)->name),
 											e->ht->curr_size, e->ants);
-	size = bs->vrt;
 	arr = init_nodes_arr(bs->vrt);
+	if ((e->f & DEBUG_FL) || (e->f & DEBUG_HT))
+		bs->debug = init_nodes_arr(bs->vrt);
 	if (((process_links(arr, e->f, e->links, e->ht)) <= 0)\
 		|| !arr[bs->end->index] || !arr[bs->start->index])
 	{

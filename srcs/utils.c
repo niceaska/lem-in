@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 18:05:07 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 21:42:23 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ int		*init_rooms(int vrt, int start_index, int ants)
 	return (rooms);
 }
 
+static void		add_to_debug_arr(t_node *list, t_bfs **bs, int i)
+{
+	t_data	*d;
+
+	if (!list->next)
+		return ;
+	d = init_data(list->next->data->name, NXTIND(list));
+	push_back(&((*bs)->debug[i]), d, 0);
+}
+
 int			st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
 {
 	int		j;
@@ -68,5 +78,7 @@ int			st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
 		ants[j] = temp;
 		*i = j;
 	}
+	if (bs->debug)
+		add_to_debug_arr(ants[*i], &bs, *i);
 	return (1);
 }

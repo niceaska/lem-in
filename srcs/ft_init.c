@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/14 17:50:07 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 21:31:07 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_bfs	*init_bfs(t_data *start, t_data *end, int v, int ants)
 	bfs->end = end;
 	bfs->vrt = v;
 	bfs->ants = ants;
+	bfs->debug = NULL;
 	bfs->d = NULL;
 	bfs->p = NULL;
 	bfs->v = NULL;

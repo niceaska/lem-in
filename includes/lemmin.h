@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/19 18:10:46 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/20 21:45:17 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 # define FT_LEMMIN_H
 
 # define HT_SIZE 10000
-# define CURRIND(list)(list->data->index)
-# define NXTIND(list)(list->next->data->index)
+# define CURRIND(list) (list->data->index)
+# define NXTIND(list) (list->next->data->index)
 # define START bs->start->index
 # define END bs->end->index
+
+# define CHECK_FL (1 << 0)
+# define FILE_FL (1 << 1)
+# define ERROR_FL (1 << 2)
+# define DEBUG_FL (1 << 3)
+# define DEBUG_HT (1 << 4)
 
 # define unint unsigned int
 
 # include <libft.h>
-# include <stdlib.h>
 # include <limits.h>
+# include <fcntl.h>
 
 typedef struct		s_data
 {
@@ -51,6 +57,7 @@ typedef struct		s_bfs
 	int				ants;
 	int				*v;
 	t_data			**p;
+	t_node			**debug;
 	int				*d;
 }					t_bfs;
 
@@ -79,22 +86,25 @@ typedef struct		s_room
 
 typedef struct		s_env
 {
+	int				fd;
+	short			f;
 	unint			ants;
 	t_list			*list;
 	t_list			*start;
 	t_list			*end;
 	t_list			*links;
 	t_hashtable		*ht;
+	t_hashtable		*coor_ht;
 }					t_env;
 
 void				err_out(int e, char *line, t_env *env);
-t_env				*parser(char *file);
+t_env				*parser(int ac, char **argv);
 void				set_rooms(char *line, t_env **env, short fl);
 void				parser_comment(char *line, t_env **env);
 void				set_ants(char *line, t_env **env);
 void				set_links(char *line, t_env **env);
 t_room				*get_room(char *line, t_env **env, short comm);
-t_env				*env_init(void);
+t_env				*env_init(int ac, char **argv);
 t_bfs				*init_bfs(t_data *start, t_data *end, int v, int ants);
 int					*init_arr(int vert, char c);
 void				init_bfs_arr(t_bfs **bs);
@@ -112,7 +122,7 @@ int					is_empty_q(t_queue *queue);
 t_queue				*init_queue(void);
 t_queue				*init_queue_bfs(t_data *start);
 int					list_empty(t_node *list);
-void				push_back(t_node **node, t_data *data);
+int					push_back(t_node **node, t_data *data, short graph);
 t_data				*list_pop(t_node **list);
 void				list_push(t_node **node, t_data *data);
 unsigned int		list_size(t_node *list);
@@ -120,7 +130,7 @@ void				free_list(t_node *list);
 void				free_list_arr(t_node **arr, int size, short fl);
 void				free_queue(t_queue *q);
 void				free_hashtab(t_hashtable *map);
-void				ft_addedge(t_node **arr, t_data *start, t_data *end);
+int					ft_addedge(t_node **arr, t_data *start, t_data *end);
 t_data				*init_data(char *name, int index);
 int					*init_rooms(int vrt, int start_index, int ants);
 int					ft_set_htval(t_hashtable *hash_tab, const char *key,
@@ -132,12 +142,13 @@ void				print_moves(t_node **p_arr, t_bfs *bs, int i, int j);
 void				free_env(t_env *e);
 void				ft_error(t_env *e);
 void				bfs_controller(t_env *e, t_node **arr, t_node **p_arr, int size);
+int					st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i);
 
 /*
 ** Debug functions
 */
 
 void				print_hash_val(t_hashtable *hash);
-void				print_paths(t_node **p_arr);
+void				print_paths(t_node **p_arr, short fl);
 
 #endif
