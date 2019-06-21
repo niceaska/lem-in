@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 21:47:50 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/21 17:46:22 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 		while (++i < bs->ants)
 			if (ants[i] && ants[i]->next && rooms[CURRIND(ants[i])] && \
 			(!rooms[NXTIND(ants[i])] || (NXTIND(ants[i]) == END)))
-				if (st_moves_ch(ants, rooms, bs, &i) &&\
+				if (st_moves_ch(ants, rooms, bs, &i) &&
 					print_ant_move(rooms, ants, i, j) && ants[i] &&\
 					!ants[i]->next && NXTIND(ants[i + 1]) == END)
 					break;
@@ -125,8 +125,5 @@ void	print_res(t_env *e, t_node **p_arr, t_bfs *bs)
 	write(1, "\n", 1);
 	print_moves(p_arr, bs, 0, 0);
 	if (bs->debug)
-	{
-		print_paths(p_arr, 0);
-		print_paths(bs->debug, 1);
-	}
+		debug_controller(bs, e->ht, p_arr, e->f);
 }

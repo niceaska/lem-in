@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 21:45:17 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/21 17:56:18 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,11 @@ int					st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i);
 ** Debug functions
 */
 
+void				free_debug_arr(t_node **debug);
+int					check_moves(t_node **moves, t_node **p_arr, int i, int j);
 void				print_hash_val(t_hashtable *hash);
 void				print_paths(t_node **p_arr, short fl);
+void				debug_controller(t_bfs *bs, t_hashtable *ht,
+										t_node **p_arr, short fl);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/20 14:33:37 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/21 18:04:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_env			*parser(int ac, char **argv)
 
 	env = env_init(ac, argv);
 	read_data(env->fd, &env);
-//	if (env->f & FILE_FL)
-//		close(env->fd);
+	if (env->f & FILE_FL)
+		close(env->fd);
 	return (env);
 }

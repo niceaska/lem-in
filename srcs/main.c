@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:49:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 21:40:04 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/21 18:16:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void		print_usage(void)
 	write(1, "[-flags] [:file]\n", 17);
 	write(1, "flags:\n-f [:file] ", 18);
 	write(1, "-- Read data from file\n", 23);
-	write(1, "-c -- Strict checking. ", 23);
+	write(1, "--debug[=ht] -- Print debug information\n", 40);
+	write(1, "-c -- Strict checking. ", 24);
 	write(1, "Checks coords and pipes dublicates.\n", 36);
 }
 
@@ -50,6 +51,18 @@ static char	*parse_argv(short *f, int ac, char **argv)
 	return (NULL);
 }
 
+void	init_values(t_env **e)
+{
+	(*e)->f = 0;
+	(*e)->fd = 0;
+	(*e)->start = NULL;
+	(*e)->end = NULL;
+	(*e)->list = NULL;
+	(*e)->links = NULL;
+	(*e)->ht = NULL;
+	(*e)->coor_ht = NULL;
+}
+
 t_env	*env_init(int ac, char **argv)
 {
 	t_env	*env;
@@ -57,7 +70,7 @@ t_env	*env_init(int ac, char **argv)
 
 	if (!(env = (t_env *)malloc(sizeof(t_env))))
 		err_out(0, 0, 0);
-	env->f = 0;
+	init_values(&env);
 	if (ac > 1)
 	{
 		file = parse_argv(&(env->f), ac, argv);
@@ -67,13 +80,8 @@ t_env	*env_init(int ac, char **argv)
 	env->fd = ((env->f & FILE_FL)) ? open(file, O_RDONLY) : 0;
 	if (env->fd < 0)
 		ft_error(env);
-	env->start = NULL;
-	env->end = NULL;
-	env->list = NULL;
-	env->links = NULL;
 	if (!(env->ht = init_hashtab(HT_SIZE)))
 		ft_error(env);
-	env->coor_ht = NULL;
 	if (env->f & CHECK_FL)
 		if (!(env->coor_ht = init_hashtab(HT_SIZE)))
 			ft_error(env);
@@ -84,13 +92,13 @@ int		main(int ac, char **argv)
 {
 	t_env	*env;
 
-	if (ac > 5 || (argv[1] &&!ft_strcmp("--help", argv[1])))
+	if (ac > 5 || (argv[1] && !ft_strcmp("--help", argv[1])))
 	{
 		print_usage();
 		exit(EXIT_FAILURE);
 	}
 	env = parser(ac, argv);
-	bfs_controller(env, NULL, NULL, (int)env->ants);
+	bfs_controller(env, NULL, NULL, (int)env->ht->curr_size);
 	//print_hash_val(env->ht);
 	free_env(env);
 	exit(EXIT_SUCCESS);

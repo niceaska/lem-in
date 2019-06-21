@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:07:40 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:35:41 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/21 18:03:32 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			free_env(t_env *e)
 
 void			ft_error(t_env *e)
 {
-	if (e && (e->f & FILE_FL))
+	if (e && e->fd > 0 && (e->f & FILE_FL))
 		close(e->fd);
 	if (e)
 		free_env(e);
