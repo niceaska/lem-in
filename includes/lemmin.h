@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:56:18 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/22 20:28:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERROR_FL (1 << 2)
 # define DEBUG_FL (1 << 3)
 # define DEBUG_HT (1 << 4)
+# define CHECK_NEG_FL (1 << 5)
 
 # define unint unsigned int
 

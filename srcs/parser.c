@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/21 18:04:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/22 20:16:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void			err_out(int e, char *line, t_env *env)
 {
 	(line) ? free(line) : 0;
 	if (e == 0)
-		write(2, "Error! Don't have memory\n", 25);
-/*	if (e == 1)
-		write(2, "Error! Don't open file\n", 23);
+		write(1, "Error! Don't have memory\n", 25);
+	if (e == 1)
+		write(1, "Error! Don't open file\n", 23);
 	if (e == 2)
-		write(2, "Error! Can not open file\n", 25);
+		write(1, "Error! Can not open file\n", 25);
 	if (e == 3)
-		write(2, "Error! Numbers of ants have invalid symbol\n", 43);
+		write(1, "Error! Numbers of ants have invalid symbol\n", 43);
 	if (e == 4)
-		write(2, "Error! Dublicate Start/End\n", 27);
+		write(1, "Error! Dublicate Start/End\n", 27);
 	if (e == 4)
-		write(2, "Error! Bad symbol\n", 18);*/
+		write(1, "Error! Bad symbol\n", 18);
 	return (ft_error(env));
 }
 

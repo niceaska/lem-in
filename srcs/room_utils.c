@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:33:58 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/22 20:35:38 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	check_coords(char *coords)
 		return (0);
 	if (*coords == '#')
 		return (0);
+	if (*coords && *coords == '-')
+		coords++;
 	while (*coords)
 	{
 		if (!ft_isspace(*coords)\
@@ -49,7 +51,8 @@ static t_room		*get_room_coord(char *line, t_room *room,
 	parse = parse + 1;
 	while (i < 2)
 	{
-		if ((room->coords[i] = ft_atoi(parse)) < 0)
+		if (((room->coords[i] = ft_atoi(parse)) < 0)\
+			&& ((*env)->f & CHECK_NEG_FL))
 		{
 			free(room);
 			(line) ? free(line) : 0;

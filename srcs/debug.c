@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:40:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:56:01 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/22 20:57:01 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	debug_controller(t_bfs *bs, t_hashtable *ht,
 	ft_printf("\n---------------\n");
 	ft_printf("Do you want to print paths and moves?\n");
 	read(0, &r, 1);
-	if (r == 'y' || r == 'Y')
+	if (r == 'y' || r == 'Y' || !r)
 	{
 		print_paths(p_arr, 0);
 		print_paths(bs->debug, 1);

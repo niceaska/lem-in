@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 18:00:43 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/22 20:56:01 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ t_node	**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
 		ft_find_path(p_arr, bs, i);
 		i++;
 	}
-	//print_paths(p_arr);
 	return (p_arr);
 }
