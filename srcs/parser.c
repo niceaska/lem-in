@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/22 20:16:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:19:43 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "lemmin.h"
-#include <fcntl.h>
 
 void			err_out(int e, char *line, t_env *env)
 {
@@ -34,7 +32,7 @@ void			err_out(int e, char *line, t_env *env)
 
 static void		check_line(char *line, t_env **env)
 {
-	static unint	count = 0;
+	static t_unint	count = 0;
 
 	if (line && count == 0 && line[0] != '#' && (count = 1))
 		set_ants(line, env);
@@ -76,7 +74,7 @@ static void		read_data(int fd, t_env **env)
 
 t_env			*parser(int ac, char **argv)
 {
-	t_env   *env;
+	t_env	*env;
 
 	env = env_init(ac, argv);
 	read_data(env->fd, &env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/22 20:28:25 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:19:12 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define DEBUG_HT (1 << 4)
 # define CHECK_NEG_FL (1 << 5)
 
-# define unint unsigned int
-
 # include <libft.h>
 # include <limits.h>
 # include <fcntl.h>
+
+typedef unsigned int	t_unint;
 
 typedef struct		s_data
 {
@@ -42,7 +42,7 @@ typedef struct		s_node
 {
 	t_data			*data;
 	struct s_node	*next;
-} 					t_node;
+}					t_node;
 
 typedef struct		s_queue
 {
@@ -74,13 +74,13 @@ typedef struct		s_hashtable
 {
 	size_t			size;
 	size_t			curr_size;
-	struct s_entry	**tab;	
+	struct s_entry	**tab;
 }					t_hashtable;
 
 typedef struct		s_room
 {
 	char			*name;
-	unint			index;
+	t_unint			index;
 	int				coords[2];
 	short			comment;
 }					t_room;
@@ -89,7 +89,7 @@ typedef struct		s_env
 {
 	int				fd;
 	short			f;
-	unint			ants;
+	t_unint			ants;
 	t_list			*list;
 	t_list			*start;
 	t_list			*end;
@@ -112,8 +112,10 @@ void				init_bfs_arr(t_bfs **bs);
 t_node				**init_nodes_arr(int size);
 void				refresh_bfs(t_node **p_arr, t_bfs **bs);
 void				ft_find_path(t_node **p_arr, t_bfs *bs, int i);
-t_node				**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs);
-t_node				**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j);
+t_node				**get_all_paths(t_node **p_arr, int i,
+									t_node **arr, t_bfs *bs);
+t_node				**get_paths_controller(t_node **arr, t_bfs *bs,
+													int i, int j);
 void				free_bfs(t_bfs *bs);
 int					bfs(t_node **arr, t_bfs *bs);
 void				ft_enqueue(t_queue *queue, t_data *data);
@@ -142,7 +144,8 @@ void				print_res(t_env *e, t_node **p_arr, t_bfs *bs);
 void				print_moves(t_node **p_arr, t_bfs *bs, int i, int j);
 void				free_env(t_env *e);
 void				ft_error(t_env *e);
-void				bfs_controller(t_env *e, t_node **arr, t_node **p_arr, int size);
+void				bfs_controller(t_env *e, t_node **arr,
+									t_node **p_arr, int size);
 int					st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i);
 
 /*

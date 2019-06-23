@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 17:27:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:49:37 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:02:11 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-int		list_empty(t_node *list)
+int				list_empty(t_node *list)
 {
 	return (list ? 0 : 1);
 }
@@ -30,10 +30,10 @@ unsigned int	list_size(t_node *list)
 	return (i);
 }
 
-int		push_back(t_node **node, t_data *data, short graph)
+int				push_back(t_node **node, t_data *data, short graph)
 {
-	t_node *list;
-	t_node *new;
+	t_node	*list;
+	t_node	*new;
 	int		ret;
 
 	list = *node;
@@ -57,7 +57,7 @@ int		push_back(t_node **node, t_data *data, short graph)
 	return (ret);
 }
 
-void	list_push(t_node **node, t_data *data)
+void			list_push(t_node **node, t_data *data)
 {
 	t_node *new;
 
@@ -71,7 +71,7 @@ void	list_push(t_node **node, t_data *data)
 	*node = new;
 }
 
-t_data		*list_pop(t_node **list)
+t_data			*list_pop(t_node **list)
 {
 	t_data	*ret;
 	t_node	*tmp;

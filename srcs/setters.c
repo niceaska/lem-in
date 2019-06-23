@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   setters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/20 14:34:34 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:19:27 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "lemmin.h"
 
-void	set_ants(char *line, t_env **env)
+void			set_ants(char *line, t_env **env)
 {
-	unint	i;
+	t_unint	i;
 
 	i = 0;
 	while (line[i])
@@ -29,7 +28,7 @@ void	set_ants(char *line, t_env **env)
 	set_rooms(line, env, 1);
 }
 
-static void	set_soe(t_env **env, char c)
+static void		set_soe(t_env **env, char c)
 {
 	char	*line;
 	t_room	*room;
@@ -54,7 +53,7 @@ static void	set_soe(t_env **env, char c)
 	(line) ? free(line) : 0;
 }
 
-void	parser_comment(char *line, t_env **env)
+void			parser_comment(char *line, t_env **env)
 {
 	if (line && !ft_strcmp(line, "##start"))
 	{
@@ -68,13 +67,12 @@ void	parser_comment(char *line, t_env **env)
 	}
 	else
 		set_rooms(line, env, 1);
-
 }
 
-void	set_rooms(char *line, t_env **env, short fl)
+void			set_rooms(char *line, t_env **env, short fl)
 {
-	t_list	*ptr;
-	t_room	*room;
+	t_list			*ptr;
+	t_room			*room;
 	static size_t	i = 2;
 
 	if ((*env)->list == NULL)
@@ -93,7 +91,7 @@ void	set_rooms(char *line, t_env **env, short fl)
 	++i;
 }
 
-void	set_links(char *line, t_env **env)
+void			set_links(char *line, t_env **env)
 {
 	t_list	*ptr;
 

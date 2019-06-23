@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 12:07:40 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 18:03:32 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 12:56:42 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void		list_del(void *data, size_t size)
 	size += 0;
 }
 
-static void 	free_env_list(t_list *list)
+static void		free_env_list(t_list *list)
 {
-	t_list *temp;
+	t_list	*temp;
 	char	*tmp;
 
 	while (list)

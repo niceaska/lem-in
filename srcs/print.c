@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:46:22 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:06:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int		print_ant_move(int *rooms, t_node **ants, int i, int j)
 		&& CURRIND(ants[i]) == CURRIND(ants[i + 1]))
 		ret = 1;
 	rooms[CURRIND(ants[i])]--;
-	ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);		
+	ft_printf("L%d-%s", i + 1, ants[i]->next->data->name);
 	rooms[NXTIND(ants[i])]++;
 	ants[i] = ants[i]->next;
 	return (ret);
@@ -76,27 +76,27 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 				if (st_moves_ch(ants, rooms, bs, &i) &&
 					print_ant_move(rooms, ants, i, j) && ants[i] &&\
 					!ants[i]->next && NXTIND(ants[i + 1]) == END)
-					break;
+					break ;
 		ft_printf("\n");
 	}
 	free(ants);
 	free(rooms);
 }
 
-static void		print_rooms(t_list *start, t_list *end, 
-									t_list *rooms)
+static void		print_rooms(t_list *start, t_list *end,
+										t_list *rooms)
 {
 	while (rooms)
 	{
 		ft_putstr(((t_room *)rooms->content)->name);
 		if (!ft_strcmp(((t_room *)rooms->content)->name, "##start"))
 			ft_printf("\n%s %d %d", ((t_room *)start->content)->name,
-											((t_room *)start->content)->coords[0],
-											((t_room *)start->content)->coords[1]);
+									((t_room *)start->content)->coords[0],
+									((t_room *)start->content)->coords[1]);
 		if (!ft_strcmp(((t_room *)rooms->content)->name, "##end"))
 			ft_printf("\n%s %d %d", ((t_room *)end->content)->name,
-											((t_room *)end->content)->coords[0],
-											((t_room *)end->content)->coords[1]);
+									((t_room *)end->content)->coords[0],
+									((t_room *)end->content)->coords[1]);
 		if (!((t_room *)rooms->content)->comment)
 		{
 			write(1, " ", 1);
@@ -109,7 +109,7 @@ static void		print_rooms(t_list *start, t_list *end,
 	}
 }
 
-void	print_res(t_env *e, t_node **p_arr, t_bfs *bs)
+void			print_res(t_env *e, t_node **p_arr, t_bfs *bs)
 {
 	t_list *rooms;
 	t_list *links;

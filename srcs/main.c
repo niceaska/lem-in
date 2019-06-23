@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:49:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/22 20:54:10 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:02:59 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		print_usage(void)
 {
-	write(1, "usage:\n./lem-in ", 16); 
+	write(1, "usage:\n./lem-in ", 16);
 	write(1, "[-flags] [:file]\n", 17);
 	write(1, "flags:\n-f [:file] ", 18);
 	write(1, "-- Read data from file\n", 23);
@@ -23,7 +23,7 @@ static void		print_usage(void)
 	write(1, "Checks coords and pipes dublicates.\n", 36);
 }
 
-static char	*parse_argv(short *f, int ac, char **argv, int i)
+static char		*parse_argv(short *f, int ac, char **argv, int i)
 {
 	while (++i < ac)
 	{
@@ -49,7 +49,7 @@ static char	*parse_argv(short *f, int ac, char **argv, int i)
 	return (NULL);
 }
 
-void	init_values(t_env **e)
+void			init_values(t_env **e)
 {
 	(*e)->f = 0;
 	(*e)->fd = 0;
@@ -61,7 +61,7 @@ void	init_values(t_env **e)
 	(*e)->coor_ht = NULL;
 }
 
-t_env	*env_init(int ac, char **argv)
+t_env			*env_init(int ac, char **argv)
 {
 	t_env	*env;
 	char	*file;
@@ -86,7 +86,7 @@ t_env	*env_init(int ac, char **argv)
 	return (env);
 }
 
-int		main(int ac, char **argv)
+int				main(int ac, char **argv)
 {
 	t_env	*env;
 

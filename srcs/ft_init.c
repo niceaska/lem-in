@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 21:31:07 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 12:57:40 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		*set_start_val(int *ar, char c, int vert)
 	return (ar);
 }
 
-void	init_bfs_arr(t_bfs **bs)
+void			init_bfs_arr(t_bfs **bs)
 {
 	int i;
 
@@ -45,7 +45,7 @@ void	init_bfs_arr(t_bfs **bs)
 		(*bs)->v = set_start_val((*bs)->v, 'v', (*bs)->vrt);
 	if ((*bs)->p != NULL)
 		while (i < (*bs)->vrt)
-			(*bs)->p[i++] = NULL; 
+			(*bs)->p[i++] = NULL;
 	if ((*bs)->d != NULL)
 		(*bs)->d = set_start_val((*bs)->d, 'd', (*bs)->vrt);
 	(*bs)->v[(*bs)->start->index] = 1;
@@ -53,17 +53,17 @@ void	init_bfs_arr(t_bfs **bs)
 	(*bs)->d[(*bs)->start->index] = 0;
 }
 
-t_queue	*init_queue_bfs(t_data *start)
+t_queue			*init_queue_bfs(t_data *start)
 {
 	t_queue *q;
 
 	if (!(q = init_queue()))
 		return (NULL);
-	ft_enqueue(q, start); 
+	ft_enqueue(q, start);
 	return (q);
 }
 
-t_bfs	*init_bfs(t_data *start, t_data *end, int v, int ants)
+t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants)
 {
 	t_bfs *bfs;
 
@@ -80,7 +80,7 @@ t_bfs	*init_bfs(t_data *start, t_data *end, int v, int ants)
 	return (bfs);
 }
 
-t_node	**init_nodes_arr(int size)
+t_node			**init_nodes_arr(int size)
 {
 	t_node	**arr;
 	int		i;

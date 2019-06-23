@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:31:57 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:13:27 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-int ft_addedge(t_node **arr, t_data *start, t_data *end) 
+int				ft_addedge(t_node **arr, t_data *start, t_data *end)
 {
 	int ret;
 
@@ -21,10 +21,10 @@ int ft_addedge(t_node **arr, t_data *start, t_data *end)
 		ret--;
 	if (!(push_back(&(arr[end->index]), start, 1)))
 		ret--;
-	return ((ret < 0) ? 0 : ret); 
+	return ((ret < 0) ? 0 : ret);
 }
 
-t_data	*init_data(char *name, int index)
+t_data			*init_data(char *name, int index)
 {
 	t_data *data;
 
@@ -35,7 +35,7 @@ t_data	*init_data(char *name, int index)
 	return (data);
 }
 
-int		*init_rooms(int vrt, int start_index, int ants)
+int				*init_rooms(int vrt, int start_index, int ants)
 {
 	int		i;
 	int		*rooms;
@@ -59,7 +59,7 @@ static void		add_to_debug_arr(t_node *list, t_bfs **bs, int i)
 	push_back(&((*bs)->debug[i]), d, 0);
 }
 
-int			st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
+int				st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
 {
 	int		j;
 	t_node	*temp;
@@ -69,10 +69,9 @@ int			st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
 		while (ants[j] && j != *i && (CURRIND(ants[j]) != START\
 				|| !rooms[NXTIND(ants[j])] || \
 				!ants[j]->next || NXTIND(ants[j]) == END))
-				j++;
+			j++;
 	if (j < *i && ants[j] && j != 0)
 	{
-		
 		temp = ants[*i];
 		ants[*i] = ants[j];
 		ants[j] = temp;

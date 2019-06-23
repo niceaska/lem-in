@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hashmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/20 15:39:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:01:13 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Init hashtable
 */
 
-t_hashtable		*init_hashtab(size_t size)
+t_hashtable				*init_hashtab(size_t size)
 {
 	t_hashtable		*hash_tab;
 	size_t			i;
@@ -43,7 +43,8 @@ t_hashtable		*init_hashtab(size_t size)
 ** http://www.partow.net/programming/hashfunctions/#PJWHashFunction
 */
 
-static unsigned int		get_hash(t_hashtable *hash_tab, int *coor, const char *key)
+static unsigned int		get_hash(t_hashtable *hash_tab, int *coor,
+												const char *key)
 {
 	size_t	hash;
 	char	*str;
@@ -51,7 +52,7 @@ static unsigned int		get_hash(t_hashtable *hash_tab, int *coor, const char *key)
 
 	str = (char *)key;
 	hash = 5381;
-    while (*str && coor == NULL)
+	while (*str && coor == NULL)
 	{
 		c = *str;
 		hash = ((hash << 5) + hash) + c;
@@ -69,7 +70,7 @@ static unsigned int		get_hash(t_hashtable *hash_tab, int *coor, const char *key)
 ** Create and insert a new key-value into table.
 */
 
-static int		set_value(t_entry **entry, t_entry *new_entry)
+static int				set_value(t_entry **entry, t_entry *new_entry)
 {
 	t_entry *traverse;
 
@@ -97,7 +98,8 @@ static int		set_value(t_entry **entry, t_entry *new_entry)
 	return (1);
 }
 
-int		ft_set_htval(t_hashtable *hash_tab, const char *key, int *coor, int val)
+int						ft_set_htval(t_hashtable *hash_tab, const char *key,
+														int *coor, int val)
 {
 	unsigned int	hash_id;
 	t_entry			*new_entry;
@@ -129,7 +131,7 @@ int		ft_set_htval(t_hashtable *hash_tab, const char *key, int *coor, int val)
 ** Get entry from table
 */
 
-t_data		*get_entry(t_hashtable *hash_tab, const char *key)
+t_data					*get_entry(t_hashtable *hash_tab, const char *key)
 {
 	t_entry			*entry;
 

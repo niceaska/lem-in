@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   room_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/22 20:35:38 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:20:15 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-static int	check_coords(char *coords)
+static int			check_coords(char *coords)
 {
-	unint spaces;
+	t_unint spaces;
 
-	spaces = 0; 
+	spaces = 0;
 	if (!coords)
 		return (0);
 	if (*coords == '#')
@@ -36,7 +36,7 @@ static int	check_coords(char *coords)
 }
 
 static t_room		*get_room_coord(char *line, t_room *room,
-									t_env **env, int i)
+										t_env **env, int i)
 {
 	char	*parse;
 
@@ -64,10 +64,10 @@ static t_room		*get_room_coord(char *line, t_room *room,
 	return (room);
 }
 
-t_room	*get_room(char *line, t_env **env, short comm)
+t_room				*get_room(char *line, t_env **env, short comm)
 {
 	t_room			*room;
-	static unint	index = 0;
+	static t_unint	index = 0;
 
 	if (!(room = (t_room*)malloc(sizeof(t_room))))
 		err_out(0, line, *env);

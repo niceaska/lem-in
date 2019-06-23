@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_queue.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 11:55:11 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/13 22:46:47 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 12:58:19 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-t_queue		*init_queue(void)
+t_queue			*init_queue(void)
 {
 	t_queue *q;
 
@@ -23,7 +23,7 @@ t_queue		*init_queue(void)
 	return (q);
 }
 
-void		ft_enqueue(t_queue *queue, t_data *data)
+void			ft_enqueue(t_queue *queue, t_data *data)
 {
 	t_node *temp;
 
@@ -65,7 +65,7 @@ t_data			*ft_peek_q(t_queue *queue)
 	return (ret);
 }
 
-int			is_empty_q(t_queue *queue)
+int				is_empty_q(t_queue *queue)
 {
 	return (queue->first) ? 0 : 1;
 }

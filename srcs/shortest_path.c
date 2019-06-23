@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:34:28 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 13:11:29 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
 	t_node	*list;
 	t_data	*u;
-	
+
 	u = ft_dequeue(queue);
 	list = arr[u->index];
 	while (list)
-	{ 
+	{
 		if ((*bs)->v[list->data->index] == 0)
-		{ 
-			(*bs)->v[list->data->index] = 1; 
-			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1; 
-			(*bs)->p[list->data->index] = u; 
-			ft_enqueue(queue, list->data);  
+		{
+			(*bs)->v[list->data->index] = 1;
+			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1;
+			(*bs)->p[list->data->index] = u;
+			ft_enqueue(queue, list->data);
 			if (list->data->index == (*bs)->end->index)
-				return (1); 
-		} 
+				return (1);
+		}
 		list = list->next;
 	}
 	return (0);
-} 
+}
 
-int				bfs(t_node **arr, t_bfs *bs) 
-{ 
+int				bfs(t_node **arr, t_bfs *bs)
+{
 	t_queue		*queue;
 
 	(bs->v == NULL) ? init_bfs_arr(&bs) : 0;
@@ -50,7 +50,7 @@ int				bfs(t_node **arr, t_bfs *bs)
 		}
 	}
 	free_queue(queue);
-	return (0); 
+	return (0);
 }
 
 static int		link_free_onerr(char *link1, char *link2)
@@ -90,8 +90,8 @@ static int		process_links(t_node **arr, short f,
 	return (1);
 }
 
-void	bfs_controller(t_env *e, t_node **arr,
-						t_node **p_arr, int size)
+void			bfs_controller(t_env *e, t_node **arr,
+									t_node **p_arr, int size)
 {
 	t_bfs	*bs;
 
