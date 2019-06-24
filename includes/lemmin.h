@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:19:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/24 17:59:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define NXTIND(list) (list->next->data->index)
 # define START bs->start->index
 # define END bs->end->index
+# define MIN_PATH ((int)list_size(p_arr[0]))
 
 # define CHECK_FL (1 << 0)
 # define FILE_FL (1 << 1)

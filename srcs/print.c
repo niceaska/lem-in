@@ -3,31 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:06:25 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/24 17:54:55 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-static t_node	**init_ants_arr(t_node **p_arr, int ants)
+static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	t_node	**ants_arr;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
-	if (!(ants_arr = init_nodes_arr(ants)))
+	if (!(ants_arr = init_nodes_arr(bs->ants)))
 		return (NULL);
-	while (i < ants)
+	while (i < bs->ants)
 	{
 		if (p_arr[j])
-		{
 			ants_arr[i] = p_arr[j++];
-		}
 		else
 		{
 			j = 0;
@@ -62,7 +56,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 	t_node	**ants;
 
 	rooms = init_rooms(bs->vrt, START, bs->ants);
-	ants = init_ants_arr(p_arr, bs->ants);
+	ants = init_ants_arr(p_arr, bs, 0, 0);
 	while (rooms[END] != bs->ants)
 	{
 		j = 0;

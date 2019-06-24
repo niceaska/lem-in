@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 12:55:26 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/24 17:58:41 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
 			bs->v[p_arr[j]->next->data->index] = 1;
 		if (!bfs(arr, bs) && !fl)
 			fl = try_get_more_paths(p_arr, arr, &bs);
-		if (fl || bs->d[bs->end->index] > (int)list_size(p_arr[0]) + 1)
+		if (fl || (bs->d[END] > MIN_PATH + 1 && bs->ants < 10) ||\
+		(bs->d[END] > MIN_PATH + (bs->ants <= 80 ? 3 : 7)))
 			break ;
 		ft_find_path(p_arr, bs, i);
 		i++;
