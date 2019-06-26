@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 21:24:08 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 22:30:37 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 	{
 		if ((p_arr[j] && !count) \
 		|| (count && p_arr[j] &&\
-		list_size(p_arr[j]) < list_size(p_arr[0]) + ((bs->ants <= 75) ? 3 : 6)))
+		list_size(p_arr[j]) < list_size(p_arr[0]) * 2))
 			ants_arr[i] = p_arr[j++];
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 21:12:57 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 22:35:56 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			set_is_hold(t_node *list,
 	}
 }
 
-void				list_cmp(t_node *list1, t_node *list2, t_node **arr)
+void				list_cmp(t_node *list1, t_node *list2)
 {
 	t_node *trav;
 
@@ -94,7 +94,9 @@ void				list_cmp(t_node *list1, t_node *list2, t_node **arr)
 			if (CURRIND(list1) == NXTIND(trav)\
 			&& CURRIND(trav) == NXTIND(list1))
 			{
-				t_node *node = arr[CURRIND(list1)];
+				list2 = 0;
+				return ;
+				/*t_node *node = arr[CURRIND(list1)];
 				while (node)
 				{
 					if (CURRIND(node) == CURRIND(trav))
@@ -107,7 +109,7 @@ void				list_cmp(t_node *list1, t_node *list2, t_node **arr)
 					if (CURRIND(node) == CURRIND(list1))
 						node->is_hold = 2;
 					node = node->next;
-				}
+				}*/
 			}
 			trav = trav->next;
 		}
@@ -115,24 +117,51 @@ void				list_cmp(t_node *list1, t_node *list2, t_node **arr)
 	}
 }
 
-void			find_crosses(t_node **arr, t_node **p_arr)
+t_node 			**find_crosses(t_node **p_arr, t_bfs *bs)
 {
 	int		i;
 	int		j;
+	t_node **n;
 
 
 	i = 0;
+	n = init_nodes_arr(bs->ants);
 	while (p_arr[i])
 	{
 		j = i + 1;
 		while (p_arr[j])
 		{
-			list_cmp(p_arr[i], p_arr[j], arr);
-
+			list_cmp(p_arr[i], p_arr[j]);
 			j++;
 		}
 		i++;
 	}
+	i = 0;
+	j = 0;
+	while (i < bs->ants)
+	{
+		if (p_arr[i])
+			n[j++] = p_arr[i];
+		i++;
+	}
+	i = 0;
+	t_node *t;
+	while (n[i])
+	{
+		j = i + 1;
+		while (n[j])
+		{
+			if (list_size(n[i]) > list_size(n[j]))
+			{
+				t = n[i];
+				n[i] = n[j];
+				n[j] = t;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (n);
 }
 
 t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
@@ -144,18 +173,12 @@ t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
 	p_arr = init_nodes_arr(100000);
 	while (bfs(arr, bs))
 	{
-		if (i >= bs->ants)
-			break ;
 		ft_find_path(p_arr, bs, i);
 		set_is_hold(p_arr[i], arr, 1);
 		init_bfs_arr(&bs);
 		i++;
 	}
-	find_crosses(arr, p_arr);
-	bs->stage++;
-	init_bfs_arr(&bs);
-	free_list_arr(p_arr, bs->ants, 0);
-	p_arr = init_nodes_arr(bs->ants);
-	p_arr = get_all_paths(p_arr, 0, arr, bs);
+	p_arr = find_crosses(p_arr, bs);
+
 	return (p_arr);
 }
