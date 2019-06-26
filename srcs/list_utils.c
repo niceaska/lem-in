@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 17:27:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:02:11 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 17:57:23 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				push_back(t_node **node, t_data *data, short graph)
 	if (!(new = (t_node *)malloc(sizeof(t_node))))
 		return (0);
 	new->data = data;
+	new->is_hold = 0;
 	new->next = 0;
 	if (!*node)
 	{

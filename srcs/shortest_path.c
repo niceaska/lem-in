@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:11:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 21:16:45 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
+static int		find_min_val(t_bfs *bs, t_node *list)
+{
+	int min;
+
+	while (list)
+	{
+		if (bs->v[list->data->index] == 0 && list->data->w < min &&\
+		((!bs->stage && !list->is_hold) || (bs->stage && list->is_hold < 2)))
+		{
+			min = list->data->w;
+		}
+		list = list->next;
+	}
+	return min;
+}
 static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
 	t_node	*list;
@@ -19,9 +34,11 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 
 	u = ft_dequeue(queue);
 	list = arr[u->index];
+	int min = find_min_val(*bs, list);
 	while (list)
 	{
-		if ((*bs)->v[list->data->index] == 0)
+		if ((*bs)->v[list->data->index] == 0 &&\
+		((!(*bs)->stage && !list->is_hold && (list->data->w <= min || min == 10000)) || ((*bs)->stage && list->is_hold < 2)))
 		{
 			(*bs)->v[list->data->index] = 1;
 			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1;

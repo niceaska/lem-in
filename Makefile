@@ -6,13 +6,13 @@
 #    By: lgigi <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 18:28:17 by lgigi             #+#    #+#              #
-#    Updated: 2019/06/19 15:43:22 by lgigi            ###   ########.fr        #
+#    Updated: 2019/06/26 19:19:39 by lgigi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 NAME = lem-in
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 LIBFT_DIR = ./libft/
 INC = includes/
 SRC_DIR = ./srcs/

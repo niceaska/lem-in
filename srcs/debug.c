@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:40:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 12:52:03 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 21:10:27 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ void	print_paths(t_node **p_arr, short fl)
 		list = p_arr[i];
 		while (list)
 		{
+
 			ft_printf("%s ", list->data->name);
+			ft_printf("%d ", list->data->w);
 			list = list->next;
 		}
 		ft_printf("\n---------------\n");

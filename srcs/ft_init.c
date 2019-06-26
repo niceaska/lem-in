@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/24 17:58:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 10:43:19 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants)
 	if (!(bfs = (t_bfs *)malloc(sizeof(t_bfs))))
 		return (NULL);
 	bfs->start = start;
+	bfs->stage = 0;
 	bfs->end = end;
 	bfs->vrt = v;
 	bfs->ants = ants;

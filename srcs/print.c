@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/24 17:54:55 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 21:24:08 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	t_node	**ants_arr;
+	int count = 0;
 
 	if (!(ants_arr = init_nodes_arr(bs->ants)))
 		return (NULL);
 	while (i < bs->ants)
 	{
-		if (p_arr[j])
+		if ((p_arr[j] && !count) \
+		|| (count && p_arr[j] &&\
+		list_size(p_arr[j]) < list_size(p_arr[0]) + ((bs->ants <= 75) ? 3 : 6)))
 			ants_arr[i] = p_arr[j++];
 		else
 		{
 			j = 0;
 			ants_arr[i] = p_arr[j++];
+			if (i > bs->ants / 2)
+				count = 1;
 		}
 		i++;
 	}
@@ -67,7 +72,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 		while (++i < bs->ants)
 			if (ants[i] && ants[i]->next && rooms[CURRIND(ants[i])] && \
 			(!rooms[NXTIND(ants[i])] || (NXTIND(ants[i]) == END)))
-				if (st_moves_ch(ants, rooms, bs, &i) &&
+				if (st_moves_ch(ants, rooms, bs, &i) && 
 					print_ant_move(rooms, ants, i, j) && ants[i] &&\
 					!ants[i]->next && NXTIND(ants[i + 1]) == END)
 					break ;
@@ -103,7 +108,7 @@ static void		print_rooms(t_list *start, t_list *end,
 	}
 }
 
-void			print_res(t_env *e, t_node **p_arr, t_bfs *bs)
+void			print_res(t_env *e,t_node **p_arr, t_bfs *bs)
 {
 	t_list *rooms;
 	t_list *links;

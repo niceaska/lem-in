@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/24 17:59:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/26 20:57:20 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef unsigned int	t_unint;
 typedef struct		s_data
 {
 	char			*name;
+	int				w;
 	int				index;
 }					t_data;
 
 typedef struct		s_node
 {
+	int				is_hold;
 	t_data			*data;
 	struct s_node	*next;
 }					t_node;
@@ -55,6 +57,7 @@ typedef struct		s_bfs
 {
 	t_data			*start;
 	t_data			*end;
+	int				stage;
 	int				vrt;
 	int				ants;
 	int				*v;
