@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 14:08:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 17:01:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 		paths[min_ind]++;
 		j++;
 	}
+	free(paths);
 	return (ants_arr);
 }
 

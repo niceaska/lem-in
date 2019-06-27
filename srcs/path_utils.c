@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:48:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 16:54:03 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 17:02:43 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,12 @@ void			list_cmp(t_node *list1, t_node *list2, t_node **arr)
 	}
 }
 
-void			find_crosses(t_node **p_arr, t_bfs *bs, t_node **arr)
+void			find_crosses(t_node **p_arr, t_node **arr)
 {
 	int		i;
 	int		j;
-	t_node **n;
-
 
 	i = 0;
-	n = init_nodes_arr(bs->ants);
 	while (p_arr[i])
 	{
 		j = i + 1;

@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 16:49:41 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 17:04:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,18 @@ t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
 
 	bs->stage = 0;
 	j++;
-	p_arr = init_nodes_arr(100000);
+	p_arr = init_nodes_arr(bs->ants * 2);
 	while (bfs(arr, bs))
 	{
 		ft_find_path(p_arr, bs, i);
+		if (bs->ants == 1)
+			return (p_arr);
 		set_is_hold(p_arr[i], arr, 1);
 		init_bfs_arr(&bs);
 		i++;
 	}
-	find_crosses(p_arr, bs, arr);
+	find_crosses(p_arr, arr);
+	free_list_arr(p_arr, bs->ants * 2, 0);
 	bs->stage++;
 	p_arr = init_nodes_arr(bs->ants);
 	p_arr = get_all_paths(p_arr, 0, arr, bs);
