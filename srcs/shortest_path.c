@@ -6,27 +6,11 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 16:35:39 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 16:53:43 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
-
-static int		find_unvisit(t_bfs *bs, t_node *list)
-{
-	int ind;
-
-	ind = -1;
-	while (list)
-	{
-		if ((bs)->v[list->data->index] == 0 &&\
-		((!(bs)->stage && !list->is_hold && !list->data->v)\
-		|| ((bs)->stage && list->is_hold < 2)))
-			ind = list->data->index;
-		list = list->next;
-	}
-	return (ind);
-}
 
 static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
