@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:48:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 17:02:43 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 17:13:33 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ int				find_unvisit(t_bfs *bs, t_node *list)
 	while (list)
 	{
 		if ((bs)->v[list->data->index] == 0 &&\
-		((!(bs)->stage && !list->is_hold && !list->data->v)\
-		|| ((bs)->stage && list->is_hold < 2)))
+		((!(bs)->stage && !list->is_hold && !list->data->v)))
 			ind = list->data->index;
 		list = list->next;
 	}

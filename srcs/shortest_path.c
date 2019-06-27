@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 16:53:43 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 17:21:11 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 	while (list)
 	{
 		if ((*bs)->v[list->data->index] == 0 &&\
-		((!(*bs)->stage && !list->is_hold && (list->data->index == ind || ind == -1)) || ((*bs)->stage && list->is_hold < 2)))
+		((!(*bs)->stage && !list->is_hold &&\
+		(((*bs)->ants > 1 && list->data->index == ind) || ind == -1))\
+		|| ((*bs)->stage && list->is_hold < 2)))
 		{
 			(*bs)->v[list->data->index] = 1;
 			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1;
