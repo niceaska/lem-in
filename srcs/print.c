@@ -3,36 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 22:30:37 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 14:08:54 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
+
+static int 		find_min_index(int *paths, int p_count)
+{
+	int	min_ind;
+	int	min;
+	int	i;
+
+	i = 0;
+	min_ind = 0;
+	min = 2147483647;
+	while (i < p_count)
+	{
+		if (paths[i] < min)
+		{
+			min = paths[i];
+			min_ind = i;
+		}
+		i++;
+	}
+	return (min_ind);
+}
+
 static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	t_node	**ants_arr;
-	int count = 0;
+	int		min_ind;
+	int		p_count;
+	int		*paths;
 
+	p_count = 0;
+	while (p_arr[p_count])
+		p_count++;
+	if (!(paths = (int *)malloc(sizeof(int) * p_count)))
+		return (NULL);
 	if (!(ants_arr = init_nodes_arr(bs->ants)))
 		return (NULL);
-	while (i < bs->ants)
+	i = 0;
+	while (p_arr[i])
 	{
-		if ((p_arr[j] && !count) \
-		|| (count && p_arr[j] &&\
-		list_size(p_arr[j]) < list_size(p_arr[0]) * 2))
-			ants_arr[i] = p_arr[j++];
-		else
-		{
-			j = 0;
-			ants_arr[i] = p_arr[j++];
-			if (i > bs->ants / 2)
-				count = 1;
-		}
+		paths[i] = list_size(p_arr[i]);
 		i++;
+	}
+	while (j < bs->ants)
+	{
+		min_ind = find_min_index(paths, p_count);
+		ants_arr[j] = p_arr[min_ind];
+		paths[min_ind]++;
+		j++;
 	}
 	return (ants_arr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:40:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 21:10:27 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 15:44:05 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	print_paths(t_node **p_arr, short fl)
 		{
 
 			ft_printf("%s ", list->data->name);
-			ft_printf("%d ", list->data->w);
 			list = list->next;
 		}
 		ft_printf("\n---------------\n");
@@ -136,7 +135,7 @@ void	print_hash_val(t_hashtable *hash)
 		if (hash->tab[i])
 		{
 			ft_printf("Hashtable array index is %d\n", i);
-			ft_printf("Hahtable values:\n");
+			ft_printf("Hashtable values:\n");
 			entr = hash->tab[i];
 			while (entr)
 			{

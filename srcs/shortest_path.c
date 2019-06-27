@@ -3,42 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 21:16:45 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 16:35:39 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-static int		find_min_val(t_bfs *bs, t_node *list)
+static int		find_unvisit(t_bfs *bs, t_node *list)
 {
-	int min;
+	int ind;
 
+	ind = -1;
 	while (list)
 	{
-		if (bs->v[list->data->index] == 0 && list->data->w < min &&\
-		((!bs->stage && !list->is_hold) || (bs->stage && list->is_hold < 2)))
-		{
-			min = list->data->w;
-		}
+		if ((bs)->v[list->data->index] == 0 &&\
+		((!(bs)->stage && !list->is_hold && !list->data->v)\
+		|| ((bs)->stage && list->is_hold < 2)))
+			ind = list->data->index;
 		list = list->next;
 	}
-	return min;
+	return (ind);
 }
+
 static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
 	t_node	*list;
 	t_data	*u;
+	int ind;
 
 	u = ft_dequeue(queue);
 	list = arr[u->index];
-	int min = find_min_val(*bs, list);
+	ind = find_unvisit(*bs, list);
 	while (list)
 	{
 		if ((*bs)->v[list->data->index] == 0 &&\
-		((!(*bs)->stage && !list->is_hold && (list->data->w <= min || min == 10000)) || ((*bs)->stage && list->is_hold < 2)))
+		((!(*bs)->stage && !list->is_hold && (list->data->index == ind || ind == -1)) || ((*bs)->stage && list->is_hold < 2)))
 		{
 			(*bs)->v[list->data->index] = 1;
 			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1;

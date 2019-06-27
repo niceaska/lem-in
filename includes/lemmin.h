@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 20:57:20 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/27 16:22:06 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef unsigned int	t_unint;
 typedef struct		s_data
 {
 	char			*name;
-	int				w;
+	int				v;
 	int				index;
 }					t_data;
 
