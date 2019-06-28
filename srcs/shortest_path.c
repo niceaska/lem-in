@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 18:04:51 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/28 19:42:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 	while (list)
 	{
 		if ((*bs)->v[list->data->index] == 0 &&\
-		((!(*bs)->stage && !list->is_hold &&\
-		(((*bs)->ants > 1 && list->data->v == 0) || ind == -1))\
+		(((!(*bs)->stage && !list->is_hold) &&\
+		(((*bs)->ants > 1 && (list->data->v == 0 || ind == -1))))\
 		|| ((*bs)->stage && list->is_hold < 2)))
 		{
 			(*bs)->v[list->data->index] = 1;
