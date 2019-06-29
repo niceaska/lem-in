@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 15:13:38 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 21:02:50 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef unsigned int	t_unint;
 typedef struct		s_data
 {
 	char			*name;
-	int				v;
 	int				index;
 }					t_data;
 
@@ -154,7 +153,6 @@ void				set_is_hold(t_node *list, t_node **arr, int hold);
 void				set_unaval(t_node *node, t_node *trav);
 void				list_cmp(t_node *list1, t_node *list2, t_node **arr);
 void				find_crosses(t_node **p_arr, t_node **arr);
-int					find_unvisit(t_bfs *bs, t_node *list);
 int					find_min_index(int *paths, int p_count);
 
 /*

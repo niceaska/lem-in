@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:48:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 15:10:39 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 21:01:59 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void			set_is_hold(t_node *list, t_node **arr, int hold)
 			if (CURRIND(trav) == NXTIND(list))
 			{
 				trav->is_hold = hold;
-				trav->data->v = 1;
 			}
 			trav = trav->next;
 		}
@@ -79,19 +78,4 @@ void			find_crosses(t_node **p_arr, t_node **arr)
 		}
 		i++;
 	}
-}
-
-int				find_unvisit(t_bfs *bs, t_node *list)
-{
-	int ind;
-
-	ind = -1;
-	while (list)
-	{
-		if ((bs)->v[list->data->index] == 0 &&\
-		((!(bs)->stage && !list->is_hold && !list->data->v)))
-			ind = list->data->index;
-		list = list->next;
-	}
-	return (ind);
 }
