@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 14:15:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 15:13:38 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct		s_room
 {
 	char			*name;
 	t_unint			index;
-	int				coords[2];
+	long			coords[2];
 	short			comment;
 }					t_room;
 
@@ -118,8 +118,7 @@ void				refresh_bfs(t_node **p_arr, t_bfs **bs);
 void				ft_find_path(t_node **p_arr, t_bfs *bs, int i);
 t_node				**get_all_paths(t_node **p_arr, int i,
 									t_node **arr, t_bfs *bs);
-t_node				**get_paths_controller(t_node **arr, t_bfs *bs,
-													int i, int j);
+t_node				**get_paths_controller(t_node **arr, t_bfs *bs, int i);
 void				free_bfs(t_bfs *bs);
 int					bfs(t_node **arr, t_bfs *bs);
 void				ft_enqueue(t_queue *queue, t_data *data);
@@ -141,7 +140,7 @@ int					ft_addedge(t_node **arr, t_data *start, t_data *end);
 t_data				*init_data(char *name, int index);
 int					*init_rooms(int vrt, int start_index, int ants);
 int					ft_set_htval(t_hashtable *hash_tab, const char *key,
-													int *coor, int val);
+													long *coor, int val);
 t_hashtable			*init_hashtab(size_t size);
 t_data				*get_entry(t_hashtable *hash_tab, const char *key);
 void				print_res(t_env *e, t_node **p_arr, t_bfs *bs);
@@ -156,7 +155,7 @@ void				set_unaval(t_node *node, t_node *trav);
 void				list_cmp(t_node *list1, t_node *list2, t_node **arr);
 void				find_crosses(t_node **p_arr, t_node **arr);
 int					find_unvisit(t_bfs *bs, t_node *list);
-int 				find_min_index(int *paths, int p_count);
+int					find_min_index(int *paths, int p_count);
 
 /*
 ** Debug functions

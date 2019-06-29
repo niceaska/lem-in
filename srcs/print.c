@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 14:14:36 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 15:10:18 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 		return (NULL);
 	if (!(ants_arr = init_nodes_arr(bs->ants)))
 		return (NULL);
-	i = 0;
-	while (p_arr[i])
-	{
+	i = -1;
+	while (p_arr[++i])
 		paths[i] = list_size(p_arr[i]);
-		i++;
-	}
 	while (j < bs->ants)
 	{
 		min_ind = find_min_index(paths, p_count);
@@ -78,7 +75,7 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 		while (++i < bs->ants)
 			if (ants[i] && ants[i]->next && rooms[CURRIND(ants[i])] && \
 			(!rooms[NXTIND(ants[i])] || (NXTIND(ants[i]) == END)))
-				if (st_moves_ch(ants, rooms, bs, &i) && 
+				if (st_moves_ch(ants, rooms, bs, &i) &&
 					print_ant_move(rooms, ants, i, j) && ants[i] &&\
 					!ants[i]->next && NXTIND(ants[i + 1]) == END)
 					break ;
@@ -114,7 +111,7 @@ static void		print_rooms(t_list *start, t_list *end,
 	}
 }
 
-void			print_res(t_env *e,t_node **p_arr, t_bfs *bs)
+void			print_res(t_env *e, t_node **p_arr, t_bfs *bs)
 {
 	t_list *rooms;
 	t_list *links;

@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:40:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 15:44:05 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 15:11:07 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	print_paths(t_node **p_arr, short fl)
 		list = p_arr[i];
 		while (list)
 		{
-
 			ft_printf("%s ", list->data->name);
 			list = list->next;
 		}

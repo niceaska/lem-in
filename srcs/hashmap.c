@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hashmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 14:07:56 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/26 20:59:55 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 14:33:25 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_hashtable				*init_hashtab(size_t size)
 ** http://www.partow.net/programming/hashfunctions/#PJWHashFunction
 */
 
-static unsigned int		get_hash(t_hashtable *hash_tab, int *coor,
+static unsigned int		get_hash(t_hashtable *hash_tab, long *coor,
 												const char *key)
 {
 	size_t	hash;
@@ -99,7 +99,7 @@ static int				set_value(t_entry **entry, t_entry *new_entry)
 }
 
 int						ft_set_htval(t_hashtable *hash_tab, const char *key,
-														int *coor, int val)
+														long *coor, int val)
 {
 	unsigned int	hash_id;
 	t_entry			*new_entry;

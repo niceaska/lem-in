@@ -6,13 +6,13 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 14:14:55 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 15:12:28 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-int 			find_min_index(int *paths, int p_count)
+int				find_min_index(int *paths, int p_count)
 {
 	int		min_ind;
 	int		min;
@@ -80,12 +80,11 @@ t_node			**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 	return (get_all_paths(p_arr, i + 1, arr, bs));
 }
 
-t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i, int j)
+t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i)
 {
 	t_node	**p_arr;
 
 	bs->stage = 0;
-	j++;
 	p_arr = init_nodes_arr(bs->ants * 2);
 	while (bfs(arr, bs))
 	{
