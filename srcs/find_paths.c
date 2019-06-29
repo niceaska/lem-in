@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/28 19:44:05 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 14:00:08 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ void			ft_find_path(t_node **p_arr, t_bfs *bs, int i)
 t_node			**get_all_paths(t_node **p_arr, int i, t_node **arr, t_bfs *bs)
 {
 	if (!bfs(arr, bs) || i >= bs->ants)
-	{
-		ft_printf("HERE");
 		return (p_arr);
-
-	}
 	ft_find_path(p_arr, bs, i);
 	refresh_bfs(p_arr, &bs);
 	return (get_all_paths(p_arr, i + 1, arr, bs));
