@@ -6,7 +6,11 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2019/06/28 19:42:21 by lgigi            ###   ########.fr       */
+=======
+/*   Updated: 2019/06/27 18:16:37 by lgigi            ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +20,7 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 {
 	t_node	*list;
 	t_data	*u;
-	int ind;
+	int		ind;
 
 	u = ft_dequeue(queue);
 	list = arr[u->index];
