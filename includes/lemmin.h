@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/27 17:02:55 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 14:15:12 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void				set_unaval(t_node *node, t_node *trav);
 void				list_cmp(t_node *list1, t_node *list2, t_node **arr);
 void				find_crosses(t_node **p_arr, t_node **arr);
 int					find_unvisit(t_bfs *bs, t_node *list);
+int 				find_min_index(int *paths, int p_count);
 
 /*
 ** Debug functions

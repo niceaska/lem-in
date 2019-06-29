@@ -6,11 +6,40 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:20:15 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 14:28:22 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
+
+static long			ft_atol(const char *str)
+{
+	unsigned long	res;
+	long			sign;
+	char			*s;
+	unsigned long	cutoff;
+
+	res = 0;
+	s = (char *)str;
+	while (*s == ' ' || *s == '\t' || *s == '\n' \
+			|| *s == '\r' || *s == '\v' || *s == '\f')
+		s++;
+	cutoff = 922337203685477580L;
+	sign = (*s == '-') ? -1 : 1;
+	s += (*s == '-' || *s == '+') ? 1 : 0;
+	while (*s >= '0' && *s <= '9')
+	{
+		if (res >= cutoff || (res == cutoff && (((*s - '0') > 7 && sign == 1) \
+						|| ((*s - '0') > 8 && sign == -1))))
+		{
+			res = (sign == -1) ? -9223372036854775808U : 9223372036854775807L;
+			return ((long)res);
+		}
+		res = res * 10 + *s - '0';
+		s++;
+	}
+	return ((long)res * sign);
+}
 
 static int			check_coords(char *coords)
 {
@@ -36,13 +65,12 @@ static int			check_coords(char *coords)
 }
 
 static t_room		*get_room_coord(char *line, t_room *room,
-										t_env **env, int i)
+											t_env **env, int i)
 {
 	char	*parse;
 
 	parse = ft_strchr(line, ' ');
-	if (!parse || !*(parse + 1) \
-		|| !(check_coords(parse + 1)))
+	if (!parse || !*(parse + 1) || !(check_coords(parse + 1)))
 	{
 		free(room);
 		(line) ? free(line) : 0;
@@ -51,8 +79,9 @@ static t_room		*get_room_coord(char *line, t_room *room,
 	parse = parse + 1;
 	while (i < 2)
 	{
-		if (((room->coords[i] = ft_atoi(parse)) < 0)\
-			&& ((*env)->f & CHECK_NEG_FL))
+		room->coords[i] = ft_atol(parse);
+		if (((room->coords[i] < 0) && ((*env)->f & CHECK_NEG_FL))\
+		|| room->coords[i] > 2147483647 || room->coords[i] < -2147483648)
 		{
 			free(room);
 			(line) ? free(line) : 0;

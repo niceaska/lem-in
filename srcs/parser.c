@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:50:45 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/23 13:19:43 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/23 16:13:38 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void		check_line(char *line, t_env **env)
 		set_ants(line, env);
 	else if (line && line[0] == '#' && count < 2)
 		parser_comment(line, env);
-	else if (line && (ft_strchr(line, '-') || count == 2))
+	else if (line && ((ft_strchr(line, '-') &&\
+		*(ft_strchr(line, '-') - 1) != ' ') || count == 2))
 	{
 		if (!ft_strchr(line, '-') && line[0] != '#')
 			err_out(2, line, *env);

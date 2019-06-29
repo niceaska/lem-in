@@ -6,11 +6,32 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 14:01:20 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/29 14:14:55 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
+
+int 			find_min_index(int *paths, int p_count)
+{
+	int		min_ind;
+	int		min;
+	int		i;
+
+	i = 0;
+	min_ind = 0;
+	min = 2147483647;
+	while (i < p_count)
+	{
+		if (paths[i] < min)
+		{
+			min = paths[i];
+			min_ind = i;
+		}
+		i++;
+	}
+	return (min_ind);
+}
 
 void			refresh_bfs(t_node **p_arr, t_bfs **bs)
 {
