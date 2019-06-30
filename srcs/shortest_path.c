@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/30 15:39:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/30 23:22:31 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ void			bfs_controller(t_env *e, t_node **arr,
 	p_arr = get_paths_controller(arr, bs, 0);
 	if (p_arr && p_arr[0])
 		print_res(e, p_arr, bs);
-	free_bfs(bs);
 	free_list_arr(arr, size, 0);
-	//(!p_arr[0]) ? ft_memdel((void *)&p_arr) : 0;
-	//(p_arr) ? free_list_arr(p_arr, size, 1) : 0;
+	(!p_arr[0]) ? ft_memdel((void *)&p_arr) : 0;
+	(p_arr) ? free_list_arr(p_arr, bs->ants, 0) : 0;
+	free_bfs(bs);
 	(!p_arr) ? ft_error(e) : 0;
 }

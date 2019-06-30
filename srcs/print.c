@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/30 15:39:44 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/30 22:17:49 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void			print_moves(t_node **p_arr, t_bfs *bs, int i, int j)
 					break ;
 		ft_printf("\n");
 	}
-//	free(ants);
-//	free(rooms);
+	free(ants);
+	free(rooms);
 }
 
 static void		print_rooms(t_list *start, t_list *end,

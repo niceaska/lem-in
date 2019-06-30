@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/30 21:45:14 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/06/30 23:28:50 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int		*check_unused_paths(t_node **p_arr, t_bfs *bs, int i, int j)
 		return (NULL);
 	while (p_arr[++i])
 		ways[i] = 0;
-	ways[i] = 0;
 	i = -1;
 	while (p_arr[++i])
 		paths[i] = list_size(p_arr[i]);
@@ -145,28 +144,45 @@ t_node			**realloc_paths(t_bfs *bs, t_node **p_arr)
 	while (++i < bs->ants)
 		if (p_arr[i])
 			n[j++] = p_arr[i];
+	n[j] = NULL;
 	free(p_arr);
+	return (n);
+}
+
+
+t_node			*list_cpy(t_node *l)
+{
+	t_node *n;
+
+	n = NULL;
+	while (l)
+	{
+		push_back(&n, l->data, 0);
+		l = l->next;
+	}
 	return (n);
 }
 
 t_node			**remove_unused_paths(t_bfs *bs, t_node **p_arr)
 {
 	int		*ways;
+	t_node	**n;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	ways = check_unused_paths(p_arr, bs, -1, 0);
+	n = init_nodes_arr(bs->ants);
 	while (p_arr[i])
 	{
-		if (!ways[i])
-		{
-			free_list(p_arr[i]);
-			p_arr[i] = 0;
-		}
+		if (ways[i] != 0)
+			n[j++] = list_cpy(p_arr[i]);
 		i++;
 	}
 	free(ways);
-	return (realloc_paths(bs, p_arr));
+	free_list_arr(p_arr, bs->ants, 0);
+	return (n);
 }
 
 t_node 			**find_doubles(t_bfs *bs, t_node **p_arr)
@@ -192,6 +208,7 @@ t_node 			**find_doubles(t_bfs *bs, t_node **p_arr)
 	return (realloc_paths(bs, p_arr));
 }
 
+
 t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 {
 	int		i;
@@ -214,11 +231,15 @@ t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 			j++;
 		}
 		if (count == 1 && list_size(p1[i]) < list_size(p2[ind]))
-			p2[ind] = p1[i];
+		{
+			free_list(p2[ind]);
+			p2[ind] = list_cpy(p1[i]);
+		}
 		else if (count == 0)
-			p2[j] = p1[i];
+			p2[j] = list_cpy(p1[i]);
 		i++;
 	}
+	free_list_arr(p1, bs->ants, 0);
 	return (p2);
 }
 t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i)
@@ -242,8 +263,7 @@ t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i)
 	init_bfs_arr(&bs);
 	p = init_nodes_arr(bs->ants);
 	p = get_all_paths(p, 0, arr, bs);
-	n = find_doubles(bs, p_arr);
 	p = remove_unused_paths(bs, p);
-	n = choose_best_paths(bs, n, p);
-	return (n);
+	n = find_doubles(bs, p_arr);
+	return (choose_best_paths(bs, n, p));
 }
