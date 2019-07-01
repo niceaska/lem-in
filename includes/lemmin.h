@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 21:02:50 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 12:37:07 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,14 @@ void				set_unaval(t_node *node, t_node *trav);
 void				list_cmp(t_node *list1, t_node *list2, t_node **arr);
 void				find_crosses(t_node **p_arr, t_node **arr);
 int					find_min_index(int *paths, int p_count);
+int					compare_double(t_bfs *bs, t_node *list1, t_node *list2);
+t_node 				**find_doubles(t_bfs *bs, t_node **p_arr);
+int					*check_unused_paths(t_node **p_arr, t_bfs *bs, int i, int j);
+t_node				**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2);
+t_node				**remove_unused_paths(t_bfs *bs, t_node **p_arr);
+t_node				**realloc_paths(t_bfs *bs, t_node **p_arr);
+t_node				*list_cpy(t_node *l);
+
 
 /*
 ** Debug functions

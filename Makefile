@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+         #
+#    By: lgigi <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 18:28:17 by lgigi             #+#    #+#              #
-#    Updated: 2019/06/27 16:56:22 by lgigi            ###   ########.fr        #
+#    Updated: 2019/07/01 12:32:47 by lgigi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -g -Wall -Werror -Wextra
 LIBFT_DIR = ./libft/
 INC = includes/
 SRC_DIR = ./srcs/
-FILES =  debug.c path_utils.c main.c room_utils.c ft_exit.c utils.c parser.c setters.c print.c hashmap.c find_paths.c  ft_free.c  ft_init.c  ft_queue.c  list_utils.c  shortest_path.c
+FILES =  best_paths.c best_paths_help.c debug.c path_utils.c main.c room_utils.c ft_exit.c utils.c parser.c setters.c print.c hashmap.c find_paths.c  ft_free.c  ft_init.c  ft_queue.c  list_utils.c  shortest_path.c
 SRCS = $(addprefix $(SRC_DIR), $(FILES))
 OBJS = $(FILES:.c=.o)
 
