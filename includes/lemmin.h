@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 12:37:07 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 15:45:36 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define START bs->start->index
 # define END bs->end->index
 # define MIN_PATH ((int)list_size(p_arr[0]))
+# define MIN(a, b) (((a) < (b)) ? (a) : (b))
 
 # define CHECK_FL (1 << 0)
 # define FILE_FL (1 << 1)
@@ -42,6 +43,8 @@ typedef struct		s_data
 typedef struct		s_node
 {
 	int				is_hold;
+	int				flow;
+	int				cap;
 	t_data			*data;
 	struct s_node	*next;
 }					t_node;
@@ -61,7 +64,9 @@ typedef struct		s_bfs
 	int				ants;
 	int				*v;
 	t_data			**p;
+	int				*curr_f;
 	t_node			**debug;
+	t_node			**graph;
 	int				*d;
 }					t_bfs;
 
@@ -111,7 +116,7 @@ t_room				*get_room(char *line, t_env **env, short comm);
 t_env				*env_init(int ac, char **argv);
 t_bfs				*init_bfs(t_data *start, t_data *end, int v, int ants);
 int					*init_arr(int vert, char c);
-void				init_bfs_arr(t_bfs **bs);
+void				init_bfs_arr(t_bfs **bs, int i);
 t_node				**init_nodes_arr(int size);
 void				refresh_bfs(t_node **p_arr, t_bfs **bs);
 void				ft_find_path(t_node **p_arr, t_bfs *bs, int i);

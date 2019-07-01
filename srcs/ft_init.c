@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/30 21:39:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 16:12:58 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ static int		*set_start_val(int *ar, char c, int vert)
 	return (ar);
 }
 
-void			init_bfs_arr(t_bfs **bs)
+void			init_bfs_arr(t_bfs **bs, int i)
 {
-	int i;
-
-	i = 0;
 	if (!(*bs)->v)
 		if (!((*bs)->v = (int *)malloc(sizeof(int) * (*bs)->vrt)))
 			return ;
@@ -40,6 +37,9 @@ void			init_bfs_arr(t_bfs **bs)
 			return ;
 	if (!(*bs)->d)
 		if (!((*bs)->d = (int *)malloc(sizeof(int) * (*bs)->vrt)))
+			return ;
+	if (!(*bs)->curr_f)
+		if (!((*bs)->curr_f = (int *)malloc(sizeof(int) * (*bs)->vrt)))
 			return ;
 	if ((*bs)->v != NULL)
 		(*bs)->v = set_start_val((*bs)->v, 'v', (*bs)->vrt);
@@ -78,6 +78,8 @@ t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants)
 	bfs->d = NULL;
 	bfs->p = NULL;
 	bfs->v = NULL;
+	bfs->curr_f = NULL;
+	bfs->graph = NULL;
 	return (bfs);
 }
 

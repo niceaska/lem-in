@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 13:03:36 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/30 23:22:31 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:13:19 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 	while (list)
 	{
 		if ((*bs)->v[list->data->index] == 0 &&\
-		(((!(*bs)->stage && !list->is_hold))\
+		(((!(*bs)->stage && (list->cap - list->flow) > 0))\
 		|| ((*bs)->stage && list->is_hold < 2)))
 		{
 			(*bs)->v[list->data->index] = 1;
 			(*bs)->d[list->data->index] = (*bs)->d[u->index] + 1;
 			(*bs)->p[list->data->index] = u;
+			(*bs)->curr_f[CURRIND(list)] = MIN((*bs)->curr_f[u->index], (list->cap - list->flow));
 			ft_enqueue(queue, list->data);
 			if (list->data->index == (*bs)->end->index)
 				return (1);
@@ -40,9 +41,17 @@ static int		process_bfs(t_bfs **bs, t_node **arr, t_queue *queue)
 int				bfs(t_node **arr, t_bfs *bs)
 {
 	t_queue		*queue;
+	int			i;
 
-	(bs->v == NULL) ? init_bfs_arr(&bs) : 0;
+	i = 0;
+	(bs->v == NULL) ? init_bfs_arr(&bs, 0) : 0;
 	queue = init_queue_bfs(bs->start);
+	if (!(bs->curr_f))
+		if (!(bs->curr_f = (int *)malloc(sizeof(int) * bs->vrt)))
+				return (-1);
+	while (i < bs->vrt)
+		bs->curr_f[i++] = 0;
+	bs->curr_f[START] = 2147483647;
 	while (!is_empty_q(queue))
 	{
 		if (process_bfs(&bs, arr, queue))

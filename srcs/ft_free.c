@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:20:13 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/21 17:57:18 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:15:23 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	free_bfs(t_bfs *bs)
 		ft_memdel((void *)&bs->p);
 	if (bs->d)
 		free(bs->d);
+	if (bs->curr_f)
+		free(bs->curr_f);
 	if (bs->debug)
 		free_debug_arr(bs->debug);
 	free(bs);

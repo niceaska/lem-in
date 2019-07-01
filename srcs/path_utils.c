@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:48:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 21:01:59 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 16:57:51 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void			set_is_hold(t_node *list, t_node **arr, int hold)
 		{
 			if (CURRIND(trav) == NXTIND(list))
 			{
-				trav->is_hold = hold;
+				trav->is_hold = 1;
+				trav->flow += hold;
 			}
 			trav = trav->next;
 		}
@@ -50,8 +51,10 @@ void			list_cmp(t_node *list1, t_node *list2, t_node **arr)
 		trav = list2;
 		while (trav->next)
 		{
-			if (CURRIND(list1) == NXTIND(trav)\
-			&& CURRIND(trav) == NXTIND(list1))
+			if ((CURRIND(list1) == NXTIND(trav)\
+			&& CURRIND(trav) == NXTIND(list1))\
+			|| (CURRIND(list1) == CURRIND(trav)\
+			&& NXTIND(trav) == NXTIND(list1)))
 			{
 				set_unaval(arr[CURRIND(list1)], trav);
 				set_unaval(arr[CURRIND(trav)], list1);

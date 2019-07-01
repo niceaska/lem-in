@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 12:21:19 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:11:29 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			refresh_bfs(t_node **p_arr, t_bfs **bs)
 	int		i;
 	t_node	*list;
 
-	init_bfs_arr(bs);
+	init_bfs_arr(bs, 0);
 	i = 0;
 	while (p_arr[i])
 	{
@@ -53,16 +53,33 @@ void			refresh_bfs(t_node **p_arr, t_bfs **bs)
 	(*bs)->v[(*bs)->end->index] = 0;
 }
 
+void			update_flow(t_bfs *bs, int index, int to, int flow)
+{
+	t_node *list;
+
+	list = bs->graph[index];
+	if (!list)
+		return ;
+	while (list)
+	{
+		if (CURRIND(list) == to)
+			list->flow -= flow;
+		list = list->next;
+	}
+}
 void			ft_find_path(t_node **p_arr, t_bfs *bs, int i)
 {
 	t_node	*path;
 	int		crawl;
+	int		flow;
 
 	path = 0;
 	crawl = bs->end->index;
+	flow = bs->curr_f[END];
 	push_back(&path, bs->end, 0);
 	while (bs->p[crawl] != NULL)
 	{
+		update_flow(bs, crawl, bs->p[crawl]->index, flow);
 		list_push(&path, bs->p[crawl]);
 		crawl = bs->p[crawl]->index;
 	}
@@ -87,18 +104,21 @@ t_node			**get_paths_controller(t_node **arr, t_bfs *bs, int i)
 	t_node	**p;
 
 	p_arr = init_nodes_arr(bs->ants);
+	bs->graph = arr;
 	while (bfs(arr, bs))
 	{
+		if (i >= bs->ants)
+			break ;
 		ft_find_path(p_arr, bs, i);
-		if (bs->ants == 1 || i >= bs->ants)
+		if (bs->ants == 1)
 			return (p_arr);
-		set_is_hold(p_arr[i], arr, 1);
-		init_bfs_arr(&bs);
+		set_is_hold(p_arr[i], arr, bs->curr_f[END]);
+		init_bfs_arr(&bs, 0);
 		i++;
 	}
 	find_crosses(p_arr, arr);
 	bs->stage++;
-	init_bfs_arr(&bs);
+	init_bfs_arr(&bs, 0);
 	p = init_nodes_arr(bs->ants);
 	p = get_all_paths(p, 0, arr, bs);
 	p = remove_unused_paths(bs, p);
