@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 16:06:48 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 18:11:29 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:19:12 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,6 @@ void			refresh_bfs(t_node **p_arr, t_bfs **bs)
 	(*bs)->v[(*bs)->end->index] = 0;
 }
 
-void			update_flow(t_bfs *bs, int index, int to, int flow)
-{
-	t_node *list;
-
-	list = bs->graph[index];
-	if (!list)
-		return ;
-	while (list)
-	{
-		if (CURRIND(list) == to)
-			list->flow -= flow;
-		list = list->next;
-	}
-}
 void			ft_find_path(t_node **p_arr, t_bfs *bs, int i)
 {
 	t_node	*path;

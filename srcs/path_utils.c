@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:48:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 16:57:51 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:19:03 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,20 @@ void			find_crosses(t_node **p_arr, t_node **arr)
 			j++;
 		}
 		i++;
+	}
+}
+
+void			update_flow(t_bfs *bs, int index, int to, int flow)
+{
+	t_node *list;
+
+	list = bs->graph[index];
+	if (!list)
+		return ;
+	while (list)
+	{
+		if (CURRIND(list) == to)
+			list->flow -= flow;
+		list = list->next;
 	}
 }

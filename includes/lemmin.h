@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 15:45:36 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/01 18:19:38 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ t_node				**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2);
 t_node				**remove_unused_paths(t_bfs *bs, t_node **p_arr);
 t_node				**realloc_paths(t_bfs *bs, t_node **p_arr);
 t_node				*list_cpy(t_node *l);
+void				update_flow(t_bfs *bs, int index, int to, int flow);
 
 
 /*
