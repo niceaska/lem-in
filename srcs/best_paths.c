@@ -6,7 +6,7 @@
 /*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:19:00 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 18:06:44 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/02 19:13:12 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static void		compare_cross_paths(t_bfs *bs, t_node **p2, t_node *p1)
 t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 {
 	int		i;
+	int		j;
 
 	i = 0;
 	while (p1[i])
@@ -121,6 +122,15 @@ t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 		compare_cross_paths(bs, p2, p1[i]);
 		i++;
 	}
-	free_list_arr(p1, bs->ants, 0);
-	return (p2);
+	i = 0;
+	j = 0;
+	while (p1[i])
+		i++;
+	while (p2[j])
+		j++;
+	if (i <= j)
+		free_list_arr(p1, bs->ants, 0);
+	else
+		free_list_arr(p2, bs->ants, 0);
+	return ((i <= j) ? p2 : p1);
 }
