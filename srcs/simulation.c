@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 15:46:57 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/03 17:06:19 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 17:34:48 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				fake_print_ant_move(int *rooms, t_node **ants, int i)
 	return (ret);
 }
 
-int				count_way(t_bfs *bs, t_node **p_arr, int i, int j)
+int				count_way(t_bfs *bs, t_node **p_arr, int i)
 {
 	int		*rooms;
 	t_node	**ants;
@@ -37,8 +37,7 @@ int				count_way(t_bfs *bs, t_node **p_arr, int i, int j)
 	ants = init_ants_arr(p_arr, bs, 0, 0);
 	while (rooms[END] != bs->ants)
 	{
-		j = 0;
-		i = j - 1;
+		i = -1;
 		while (++i < bs->ants)
 			if (ants[i] && ants[i]->next && rooms[CURRIND(ants[i])] && \
 			(!rooms[NXTIND(ants[i])] || (NXTIND(ants[i]) == END)))
@@ -62,8 +61,8 @@ int				best_way(t_bfs *bs, t_node **p1, t_node **p2)
 	w1 = 0;
 	w2 = 0;
 	bs->stage = 2;
-	w1 = count_way(bs, p1, 0, 0);
-	w2 = count_way(bs, p2, 0, 0);
+	w1 = count_way(bs, p1, -1);
+	w2 = count_way(bs, p2, -1);
 	if (w1 > w2)
 		return (1);
 	return (0);

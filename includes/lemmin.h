@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/03 17:10:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 17:34:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ t_node				*list_cpy(t_node *l);
 void				update_flow(t_bfs *bs, int index, int to, int flow);
 t_node				**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j);
 int					best_way(t_bfs *bs, t_node **p1, t_node **p2);
-int					count_way(t_bfs *bs, t_node **p_arr, int i, int j);
+int					count_way(t_bfs *bs, t_node **p_arr, int i);
 int					fake_print_ant_move(int *rooms, t_node **ants, int i);
 t_node				**cpy_path_arr(t_bfs *bs, t_node **arr);
 void				cmp_best(t_bfs *bs, t_node **cpy1, t_node **cpy2);
