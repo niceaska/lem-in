@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:19:00 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/03 13:26:23 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 16:46:00 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,23 +114,25 @@ static void		compare_cross_paths(t_bfs *bs, t_node **p2, t_node *p1)
 t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 {
 	int		i;
-	int		j;
+	t_node	**p3;
+	t_node	**p4;
+	t_node	**ret;
 
 	i = 0;
+	p4 = 0;
+	p3 = try_find_best(bs, p1, p2);
 	while (p1[i])
 	{
 		compare_cross_paths(bs, p2, p1[i]);
 		i++;
 	}
-	i = 0;
-	j = 0;
-	while (p1[i])
-		i++;
-	while (p2[j])
-		j++;
-	if (i < j)
-		free_list_arr(p1, bs->ants, 0);
-	else
-		free_list_arr(p2, bs->ants, 0);
-	return ((i < j) ? p2 : p1);
+	p1 = realloc_paths(bs, p1);
+	p2 = realloc_paths(bs, p2);
+	p4 = compare_paths(bs, p1, p2);
+	p4 = compare_paths(bs, p3, p4);
+	ret = cpy_path_arr(bs, p4);
+	free_list_arr(p1, bs->ants, 0);
+	free_list_arr(p2, bs->ants, 0);
+	free_list_arr(p3, bs->ants, 0);
+	return (ret);
 }

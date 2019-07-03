@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 18:15:21 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 16:12:58 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 14:04:39 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_bfs			*init_bfs(t_data *start, t_data *end, int v, int ants)
 		return (NULL);
 	bfs->start = start;
 	bfs->stage = 0;
+	bfs->w_count = 0;
 	bfs->end = end;
 	bfs->vrt = v;
 	bfs->ants = ants;

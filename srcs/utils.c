@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 22:32:55 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/23 13:13:27 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:58:10 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				st_moves_ch(t_node **ants, int *rooms, t_bfs *bs, int *i)
 		ants[j] = temp;
 		*i = j;
 	}
-	if (bs->debug)
+	if (bs->debug && bs->stage != 2)
 		add_to_debug_arr(ants[*i], &bs, *i);
 	return (1);
 }

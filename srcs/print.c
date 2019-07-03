@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 14:49:43 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/02 18:22:54 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 17:08:55 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-static t_node	**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
+t_node			**init_ants_arr(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	t_node	**ants_arr;
 	int		min_ind;
