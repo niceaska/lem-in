@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:19:00 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/03 13:09:13 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:26:23 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 		i++;
 	while (p2[j])
 		j++;
-	if (i <= j)
+	if (i < j)
 		free_list_arr(p1, bs->ants, 0);
 	else
 		free_list_arr(p2, bs->ants, 0);
-	return ((i <= j) ? p2 : p1);
+	return ((i < j) ? p2 : p1);
 }
