@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   best_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:19:00 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/02 19:13:12 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:09:13 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
 
-int			compare_double(t_bfs *bs, t_node *list1, t_node *list2)
+int				compare_double(t_bfs *bs, t_node *list1, t_node *list2)
 {
 	t_node *trav;
 
@@ -34,7 +34,7 @@ int			compare_double(t_bfs *bs, t_node *list1, t_node *list2)
 	return (0);
 }
 
-int			*check_unused_paths(t_node **p_arr, t_bfs *bs, int i, int j)
+int				*check_unused_paths(t_node **p_arr, t_bfs *bs, int i, int j)
 {
 	int		min_ind;
 	int		*ways;

@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   list_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 17:27:31 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 15:43:50 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:15:03 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemmin.h"
-
-int				list_empty(t_node *list)
-{
-	return (list ? 0 : 1);
-}
 
 unsigned int	list_size(t_node *list)
 {
@@ -30,6 +25,20 @@ unsigned int	list_size(t_node *list)
 	return (i);
 }
 
+static t_node	*init_new_list_el(t_data *data)
+{
+	t_node *new;
+
+	if (!(new = (t_node *)malloc(sizeof(t_node))))
+		return (0);
+	new->data = data;
+	new->is_hold = 0;
+	new->cap = 1;
+	new->flow = 0;
+	new->next = 0;
+	return (new);
+}
+
 int				push_back(t_node **node, t_data *data, short graph)
 {
 	t_node	*list;
@@ -38,13 +47,8 @@ int				push_back(t_node **node, t_data *data, short graph)
 
 	list = *node;
 	ret = 1;
-	if (!(new = (t_node *)malloc(sizeof(t_node))))
+	if (!(new = init_new_list_el(data)))
 		return (0);
-	new->data = data;
-	new->is_hold = 0;
-	new->cap = 1;
-	new->flow = 0;
-	new->next = 0;
 	if (!*node)
 	{
 		*node = new;

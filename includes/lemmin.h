@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemmin.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 12:22:16 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/01 18:19:38 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:17:10 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,14 +160,14 @@ void				list_cmp(t_node *list1, t_node *list2, t_node **arr);
 void				find_crosses(t_node **p_arr, t_node **arr);
 int					find_min_index(int *paths, int p_count);
 int					compare_double(t_bfs *bs, t_node *list1, t_node *list2);
-t_node 				**find_doubles(t_bfs *bs, t_node **p_arr);
-int					*check_unused_paths(t_node **p_arr, t_bfs *bs, int i, int j);
+t_node				**find_doubles(t_bfs *bs, t_node **p_arr);
+int					*check_unused_paths(t_node **p_arr, t_bfs *bs,
+														int i, int j);
 t_node				**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2);
 t_node				**remove_unused_paths(t_bfs *bs, t_node **p_arr);
 t_node				**realloc_paths(t_bfs *bs, t_node **p_arr);
 t_node				*list_cpy(t_node *l);
 void				update_flow(t_bfs *bs, int index, int to, int flow);
-
 
 /*
 ** Debug functions

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   best_paths_help.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgigi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:24:02 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/02 19:23:49 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:08:36 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_node			**realloc_paths(t_bfs *bs, t_node **p_arr)
 	free(p_arr);
 	return (n);
 }
-
 
 t_node			*list_cpy(t_node *l)
 {
@@ -54,7 +53,8 @@ static int		ch_cr(t_node **cr, t_node *l)
 	return (1);
 }
 
-static void		check_crossed_paths(t_node **crosses, t_node **p_arr, t_bfs *bs, int i)
+static void		check_crossed_paths(t_node **crosses, t_node **p_arr,
+													t_bfs *bs, int i)
 {
 	t_node *l;
 
@@ -73,7 +73,7 @@ static void		check_crossed_paths(t_node **crosses, t_node **p_arr, t_bfs *bs, in
 				free_list(p_arr[l->cap]);
 				p_arr[l->cap] = 0;
 				l = l->next;
-			}		
+			}
 		}
 		else if (crosses[i] && list_size(crosses[i]) == 1)
 		{
@@ -83,7 +83,7 @@ static void		check_crossed_paths(t_node **crosses, t_node **p_arr, t_bfs *bs, in
 	}
 }
 
-t_node 			**find_doubles(t_bfs *bs, t_node **p_arr)
+t_node			**find_doubles(t_bfs *bs, t_node **p_arr)
 {
 	int		i;
 	int		j;

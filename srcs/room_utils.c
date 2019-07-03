@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:54:37 by lgigi             #+#    #+#             */
-/*   Updated: 2019/06/29 14:28:22 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/03 13:15:21 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,9 @@ t_room				*get_room(char *line, t_env **env, short comm)
 	}
 	index += (comm) ? 0 : 1;
 	return (room);
+}
+
+int					list_empty(t_node *list)
+{
+	return (list ? 0 : 1);
 }
