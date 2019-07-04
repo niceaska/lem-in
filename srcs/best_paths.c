@@ -6,7 +6,7 @@
 /*   By: lgigi <lgigi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 12:19:00 by lgigi             #+#    #+#             */
-/*   Updated: 2019/07/03 16:46:00 by lgigi            ###   ########.fr       */
+/*   Updated: 2019/07/04 17:07:07 by lgigi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int				compare_double(t_bfs *bs, t_node *list1, t_node *list2)
 
 	if (!list1 || !list2)
 		return (0);
+	if (list_size(list1) == list_size(list2) &&\
+		CURRIND(list1) == START && CURRIND(list2) == START\
+		&& list1->next && NXTIND(list1) == END)
+		return (1);
 	while (list1->next)
 	{
 		trav = list2;
@@ -107,8 +111,8 @@ static void		compare_cross_paths(t_bfs *bs, t_node **p2, t_node *p1)
 		free_list(p2[ind]);
 		p2[ind] = list_cpy(p1);
 	}
-	else if (count == 0)
-		p2[j] = list_cpy(p1);
+	else if (p2[j] == NULL && count == 0)
+		p2[j++] = list_cpy(p1);
 }
 
 t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
@@ -119,7 +123,7 @@ t_node			**choose_best_paths(t_bfs *bs, t_node **p1, t_node **p2)
 	t_node	**ret;
 
 	i = 0;
-	p4 = 0;
+	p4 = NULL;
 	p3 = try_find_best(bs, p1, p2);
 	while (p1[i])
 	{
