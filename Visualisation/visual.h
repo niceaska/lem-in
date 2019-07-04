@@ -6,22 +6,22 @@
 /*   By: jschille <jschille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 17:11:11 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/23 17:14:38 by jschille         ###   ########.fr       */
+/*   Updated: 2019/07/03 19:13:55 by jschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VISUAL_H
 # define VISUAL_H
-
-#define HIGHT 1080
-# define WIDTH 1920
-
 # include "libft.h"
 # include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>
+# define HIGHT 1080
+# define WIDTH 1920
+# define SCALE 1.5
+# define RADIUS 10
 
-# define unint unsigned int
+typedef unsigned int	t_unint;
 
 typedef struct	s_point
 {
@@ -29,50 +29,98 @@ typedef struct	s_point
 	int		y;
 }				t_point;
 
-
-typedef struct		s_room
+typedef struct	s_room
 {
 	char			*name;
-	unint			index;
+	t_unint			index;
 	t_list			*links;
 	int				coords[2];
-	unint			clr;
-}					t_room;
+	t_unint			clr;
+	char			soe;
+}				t_room;
 
-typedef struct		s_env
+typedef struct	s_ant
 {
-	unint			ants;
+	t_unint	name;
+	t_room	*room;
+}				t_ant;
+
+typedef struct	s_env
+{
+	t_unint			ants;
 	t_list			*list;
 	t_list			*start;
 	t_list			*end;
-}					t_env;
+	t_list			*lants;
+}				t_env;
 
 typedef struct	s_mlx
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
-	unint	*img_data;
+	char	*line;
+	t_unint	*img_data;
 	t_env	*env;
 	int		bpp;
 	int		size_line;
 	int		alpha;
-	/*
-	**	x_min x_max y_min y_max
-	*/
+	int		half_y;
+	int		half_x;
+	float	scale;
+	int		pres_m;
+	int		pres_x;
+	int		pres_y;
 	int		extrem[4];
 }				t_mlx;
+
+t_mlx			*set_data(t_env *env);
 t_env			*parser(void);
 void			ft_error(t_env *e);
-t_room	*get_room(char *line, t_env **env, short comm);
-void	set_links(char *line, t_env **env);
-void	set_ants(char *line, t_env **env);
-void	parser_comment(char *line, t_env **env);
-void	set_rooms(char *line, t_env **env, unint clr);
+t_room			*get_room(char *line, t_env **env, short comm);
+void			set_links(char *line, t_env **env);
+void			put_link(t_env *env, t_room **room, char *name);
+void			set_ants(char *line, t_env **env);
+void			set_lants(t_env **env);
+void			parser_comment(char *line, t_env **env);
+void			set_rooms(char *line, t_env **env, t_unint clr);
 void			err_out(int e, char *line, t_env *env);
-void	display_out(t_env *env);
-void			draw_line(unint *data, t_point a, t_point b);
-void	hooker(t_mlx *mlx);
+void			display_out(t_env *env);
+void			draw_line(t_unint *data, t_point a, t_point b);
+void			hooker(t_mlx *mlx);
 void			trace_point(t_env *env, t_mlx *mlx);
+
+void			set_mid(t_mlx *mlx, t_env *env);
+void			scale_d(t_mlx *img, t_env *env, float scale);
+
+void			move_mid(t_mlx *img, t_env *env);
+void			move_back(t_mlx *img, t_env *env);
+void			scale_up(t_mlx *img, t_env *env);
+void			scale_down(t_mlx *img, t_env *env);
+void			next_step(t_mlx *img, t_env *env);
+void			scale_h_up(t_mlx *img, t_env *env);
+void			scale_h_down(t_mlx *img, t_env *env);
+void			scale_w_up(t_mlx *img, t_env *env);
+void			scale_w_down(t_mlx *img, t_env *env);
+
+void			move_left(t_mlx *img, t_env *env);
+void			move_right(t_mlx *img, t_env *env);
+void			move_up(t_mlx *img, t_env *env);
+void			move_down(t_mlx *img, t_env *env);
+void			move_img(t_mlx *img, t_env *env, int x, int y);
+
+int				key_press(int keycode, t_mlx *img);
+int				mouse_move(int x, int y, t_mlx *img);
+int				mouse_pres(int btn, int x, int y, t_mlx *img);
+int				mouse_releas(int btn, int x, int y, t_mlx *img);
+
+int				clean(t_mlx *mlx);
+int				clean_env(t_env *env);
+void			destroy(t_mlx *mlx);
+void			re_draw(t_mlx *mlx);
+void			do_it(int keycode, t_mlx *img, t_env *env);
+
+void			set_extrem(t_mlx *mlx, int	*max_min);
+void			set_arr(int x, int y, int *max_min);
 
 #endif

@@ -6,24 +6,16 @@
 /*   By: jschille <jschille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/15 16:22:55 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/23 17:19:48 by jschille         ###   ########.fr       */
+/*   Updated: 2019/07/03 07:59:10 by jschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "visual.h"
 
-void			ft_error(t_env *e)
+void		set_ants(char *line, t_env **env)
 {
-	if (e)
-		free(e);
-	write(2, "ERROR\n", 6);
-	exit(EXIT_FAILURE);
-}
-
-void	set_ants(char *line, t_env **env)
-{
-	unint	i;
+	t_unint	i;
 
 	i = 0;
 	while (line[i])
@@ -63,7 +55,7 @@ static void	set_soe(t_env **env, char c)
 	(line) ? free(line) : 0;
 }
 
-void	parser_comment(char *line, t_env **env)
+void		parser_comment(char *line, t_env **env)
 {
 	if (line && !ft_strcmp(line, "##start"))
 		set_soe(env, 's');
@@ -71,15 +63,17 @@ void	parser_comment(char *line, t_env **env)
 		set_soe(env, 'e');
 	else
 		set_rooms(line, env, 1);
-
 }
 
-void	set_rooms(char *line, t_env **env, unint clr)
+void		set_rooms(char *line, t_env **env, t_unint clr)
 {
-	t_list	*ptr;
-	t_room	*room;
+	t_list			*ptr;
+	t_room			*room;
 	static size_t	i = 2;
 
+	if (*line == '#' && ft_strcmp(line, "##start")\
+		&& ft_strcmp(line, "##end"))
+		return ;
 	if ((*env)->list == NULL)
 	{
 		room = get_room(line, env, 0);
@@ -98,27 +92,14 @@ void	set_rooms(char *line, t_env **env, unint clr)
 	++i;
 }
 
-void 	put_link(t_env *env, t_room **room, char *name)
-{
-	t_list	*lst;
-
-	lst = env->list;
-	while (lst)
-	{
-		if (ft_strcmp(((t_room*)lst->content)->name, name) == 0)
-		{
-			return (ft_lstadd(&(*room)->links, ft_lstnew(lst->content, sizeof(**room))));
-		}
-		lst = lst->next;
-	}
-}
-
-void	set_links(char *line, t_env **env)
+void		set_links(char *line, t_env **env)
 {
 	char	*ln;
 	char	*name;
 	t_list	*lst;
 
+	if (*line == '#')
+		return ;
 	if (!(*env)->start || !(*env)->end)
 	{
 		free(line);
@@ -133,9 +114,7 @@ void	set_links(char *line, t_env **env)
 	while (lst)
 	{
 		if (ft_strcmp(((t_room*)lst->content)->name, name) == 0)
-		{
 			return (put_link(*env, (t_room**)&lst->content, ln));
-		}
 		lst = lst->next;
 	}
 }

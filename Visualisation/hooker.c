@@ -6,140 +6,85 @@
 /*   By: jschille <jschille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 03:19:21 by jschille          #+#    #+#             */
-/*   Updated: 2019/06/23 18:34:53 by jschille         ###   ########.fr       */
+/*   Updated: 2019/07/03 07:55:31 by jschille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual.h"
 
-static void	move(t_mlx *mlx)
+int			key_press(int keycode, t_mlx *img)
 {
-	t_list	*lst;
-
-	lst = mlx->env->list;
-	while (mlx->env->list)
-	{
-		((t_room*)mlx->env->list->content)->coords[0] -= (mlx->extrem[1] - mlx->extrem[0]) / 2 - HIGHT / 2;
-		((t_room*)mlx->env->list->content)->coords[1] -= (mlx->extrem[3] - mlx->extrem[2]) / 2 - WIDTH / 2;
-		mlx->env->list = mlx->env->list->next;
-	}
-	mlx->env->list =lst;
-}
-
-static void	move_back(t_mlx *mlx)
-{
-	t_list	*lst;
-
-	lst = mlx->env->list;
-	while (mlx->env->list)
-	{
-		((t_room*)mlx->env->list->content)->coords[0] += (mlx->extrem[1] - mlx->extrem[0]) / 2 - HIGHT / 2;
-		((t_room*)mlx->env->list->content)->coords[1] += (mlx->extrem[3] - mlx->extrem[2]) / 2 - WIDTH / 2;
-		if (((t_room*)mlx->env->list->content)->coords[0] > mlx->extrem[1])
-				mlx->extrem[1] = ((t_room*)mlx->env->list->content)->coords[0];
-			if (((t_room*)mlx->env->list->content)->coords[0] < mlx->extrem[0])
-				mlx->extrem[0] = ((t_room*)mlx->env->list->content)->coords[0];
-			if (((t_room*)mlx->env->list->content)->coords[1] > mlx->extrem[3])
-				mlx->extrem[3] = ((t_room*)mlx->env->list->content)->coords[1];
-			if (((t_room*)mlx->env->list->content)->coords[1] < mlx->extrem[2])
-				mlx->extrem[2] = ((t_room*)mlx->env->list->content)->coords[1];
-		mlx->env->list = mlx->env->list->next;
-	}
-	mlx->env->list =lst;
-}
-
-int		key_press(int keycode, t_mlx *img)
-{
-	t_list	*lst;
-	t_list	*tmp;
-	t_env	*env;
-	char	*line;
-	char	**split;
-	char	*name;
+	t_env			*env;
 
 	env = img->env;
 	mlx_destroy_image(img->mlx_ptr, img->img_ptr);
 	img->img_ptr = mlx_new_image(img->mlx_ptr, WIDTH, HIGHT);
-	img->img_data = (unsigned int*)mlx_get_data_addr(img->img_ptr, &img->bpp, &img->size_line, &img->alpha);
-	if (keycode == 53)
-		exit(0);
-	if (keycode == 2)
-	{
-		lst = img->env->list;
-		//move(img);
-		while (env->list)
-		{
-			printf("name %s\n", ((t_room*)env->list->content)->name);
-			//((t_room*)env->list->content)->coords[0] += 2;
-			((t_room*)env->list->content)->coords[1] += 2;
-			tmp = ((t_room*)env->list->content)->links;
-			while (tmp)
-			{
-				//((t_room*)tmp->content)->coords[0] += 2;
-				((t_room*)tmp->content)->coords[1] += 2;
-				tmp = tmp->next;
-			}
-			env->list = env->list->next;
-		}
-		env->list = lst;
-		//move_back(img);
-		trace_point(img->env, img);
-	}
-	if (keycode == 0)
-	{
-		lst = img->env->list;
-		//move(img);
-		while (env->list)
-		{
-			//((t_room*)env->list->content)->coords[0] -= 2;
-			((t_room*)env->list->content)->coords[1] -= 2;
-			tmp = ((t_room*)env->list->content)->links;
-			while (tmp)
-			{
-				//((t_room*)tmp->content)->coords[0] -= 2;
-				((t_room*)tmp->content)->coords[1] -= 2;
-				tmp = tmp->next;
-			}
-			env->list = env->list->next;
-		}
-		env->list = lst;
-		//move_back(img);
-		trace_point(img->env, img);
-	}
-	if (keycode == 1)
-	{
-		get_next_line(0, &line);
-		{
-			printf("Line %s\n", line);
-			lst = img->env->list;
-			int	i = 0;
-			split = ft_strsplit(line, ' ');
-			while (lst)
-				{
-					((t_room*)lst->content)->clr = 0xFFFFFF;
-					lst = lst->next;
-				}
-			lst = img->env->list;
-			while (split[i])
-			{
-				name = ft_strdup((char*)(ft_strchr(split[i], '-') + 1));
-				while (lst)
-				{
-					if (ft_strcmp(((t_room*)lst->content)->name, name) == 0)
-						((t_room*)lst->content)->clr =0xFF00;
-					lst = lst->next;
-				}
-				++i;
-			}
-		}
-		trace_point(img->env, img);
-	}
+	img->img_data = (t_unint*)mlx_get_data_addr(img->img_ptr, &img->bpp,
+		&img->size_line, &img->alpha);
+	do_it(keycode, img, env);
 	mlx_put_image_to_window(img->mlx_ptr, img->win_ptr, img->img_ptr, 0, 0);
+	if (img->line)
+		mlx_string_put(img->mlx_ptr, img->win_ptr, 10, 10, 0xFFFFFF, img->line);
 	return (0);
 }
 
-void	hooker(t_mlx *mlx)
+int			mouse_move(int x, int y, t_mlx *img)
 {
-	printf("Xuk\n");
+	t_env			*env;
+
+	env = img->env;
+	if (img->pres_m == 1)
+	{
+		destroy(img);
+		move_img(img, env, x - img->pres_x, y - img->pres_y);
+		img->pres_y = y;
+		img->pres_x = x;
+		re_draw(img);
+	}
+	return (0);
+}
+
+int			mouse_pres(int btn, int x, int y, t_mlx *img)
+{
+	t_env			*env;
+
+	env = img->env;
+	if (btn == 1)
+	{
+		img->pres_m = 1;
+		img->pres_x = x;
+		img->pres_y = y;
+	}
+	if (btn == 4)
+	{
+		destroy(img);
+		scale_up(img, env);
+		re_draw(img);
+	}
+	if (btn == 5)
+	{
+		destroy(img);
+		scale_down(img, env);
+		re_draw(img);
+	}
+	return (0);
+}
+
+int			mouse_releas(int btn, int x, int y, t_mlx *img)
+{
+	t_env			*env;
+
+	env = img->env;
+	x = y;
+	if (btn == 1)
+		img->pres_m = 0;
+	return (0);
+}
+
+void		hooker(t_mlx *mlx)
+{
 	mlx_hook(mlx->win_ptr, 2, 0, key_press, mlx);
+	mlx_hook(mlx->win_ptr, 4, 0, mouse_pres, mlx);
+	mlx_hook(mlx->win_ptr, 5, 0, mouse_releas, mlx);
+	mlx_hook(mlx->win_ptr, 6, 0, mouse_move, mlx);
 }
